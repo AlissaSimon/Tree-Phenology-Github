@@ -1,5 +1,5 @@
 #1 + 2
-library(chillR)
+library(chillR) 
 data(Winters_hours_gaps)
 hours_over_25 <- sum(Winters_hours_gaps$Temp > 25, na.rm = TRUE)
 print(paste("Total hours over 25 degrees:", hours_over_25))
