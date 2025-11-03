@@ -10,4 +10,4 @@ output:
 # Introduction
 
 Welcome to my Tree Phenology project.  
-This book combines multiple RMarkdown files (chapters) into one report.
+This book combines multiple RMarkdown files (chapters) into one report. 
