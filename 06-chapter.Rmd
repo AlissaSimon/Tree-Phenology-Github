@@ -1,0 +1,37 @@
+---
+title: "06-chapter"
+output: html_document
+date: "2025-11-03"
+---
+
+## Short code:
+
+# Exercise 1 & 2 – Calculate all warm hours (\>25°C)
+
+```{r}
+library(chillR)
+data(Winters_hours_gaps)
+
+hours_over_25 <- sum(Winters_hours_gaps$Temp > 25, na.rm = TRUE)
+print(paste("Total hours over 25°C:", hours_over_25))
+
+```
+
+# Exercise 3 – Function with start and end dates 
+
+```{r}
+calculate_warm_hours <- function(data, start_date, end_date) {
+  data$Date <- as.Date(paste(data$Year, data$Month, data$Day, sep = "-"))
+
+  data_filtered <- data[data$Date >= as.Date(start_date) & data$Date <= as.Date(end_date), ]
+
+  warm_hours <- sum(data_filtered$Temp > 25, na.rm = TRUE)
+  return(warm_hours)
+}
+
+start <- "2008-06-01"
+end <- "2008-09-28"
+
+result <- calculate_warm_hours(Winters_hours_gaps, start, end)
+print(paste("Warm hours between", start, "and", end, ":", result))
+```

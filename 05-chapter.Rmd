@@ -1,0 +1,42 @@
+---
+title: "05-chapter"
+output: html_document
+date: "2025-11-03"
+---
+
+## `Exercises` on past chill projections
+
+1.  ***Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology***
+    -   **Data availability and size**
+        -   Early climate models were hard to access and distributed as large global datasets (hundreds of MB per variable), making them difficult to process on normal computers
+        -   Researchers needed location-specific, manageable data (solved later with platforms like *ClimateWizard* and *AFRICLIM*)
+    -   **Lack of hourly temperature data**
+        -   Chill models (especially the Dynamic Model) need hourly temperature inputs, but most climate projections provide only daily minimum and maximum values
+        -   Converting daily data to hourly series required developing interpolation algorithms and weather generators
+    -   **Automation and reproducibility**
+        -   Each study included many stations, multiple models, and several emission scenarios
+        -   Researchers had to automate workflows for data cleaning, model running, and visualization using programming (e.g. in *R*), otherwise the workload would be unmanageable
+2.  ***Outline, in your understanding, the basic steps that are necessary to make such projections***
+    1.  **Collect climate data**
+
+        Get temperature data from weather stations or climate models for both past and future time periods. Usually, these are daily minimum and maximum temperatures
+
+    2.  **Convert to hourly data**
+
+        Because chill models need hourly temperatures, you have to estimate hourly values from the daily data (using a formula or weather generator)
+
+    3.  **Calculate chill**
+
+        Use a chill model (for example, the Dynamic Model) to calculate how much chill trees get at each location
+
+    4.  **Compare current and future scenarios**
+
+        Do the same calculation for future temperature data and compare how much chill will be lost or gained
+
+    5.  **Summarize and visualize the results**
+
+        Show the results in tables or maps (like Safe Winter Chill maps) to see which areas might lose enough chill for fruit trees in the future
+
+    6.  **Interpret the results**
+
+        Explain what this means for growers — for example, if they might need to change cultivars or move production to cooler areas
