@@ -1,0 +1,13 @@
+---
+title: "Tree Phenology Report"
+author: "Alissa Sophie Simon"
+site: bookdown::bookdown_site
+output:
+  bookdown::pdf_document2:
+    toc: true
+---
+
+# Introduction
+
+Welcome to my Tree Phenology project.  
+This book combines multiple RMarkdown files (chapters) into one report.

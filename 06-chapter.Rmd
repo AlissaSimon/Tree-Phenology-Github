@@ -17,7 +17,7 @@ print(paste("Total hours over 25°C:", hours_over_25))
 
 ```
 
-# Exercise 3 – Function with start and end dates 
+# Exercise 3 – Function with start and end dates
 
 ```{r}
 calculate_warm_hours <- function(data, start_date, end_date) {
@@ -34,4 +34,66 @@ end <- "2008-09-28"
 
 result <- calculate_warm_hours(Winters_hours_gaps, start, end)
 print(paste("Warm hours between", start, "and", end, ":", result))
+```
+
+# or
+
+### Exercise 1 – Write a basic function that calculates warm hours (\>25°C)
+
+First, I loaded the `chillR` package and used the included dataset `Winters_hours_gaps`, which contains hourly temperature records from a walnut orchard near Winters, California (2008).
+
+```{r}
+library(chillR)
+data(Winters_hours_gaps)
+```
+
+Then I calculated how many hours had temperatures greater than 25°C:
+
+```{r}
+hours_over_25 <- sum(Winters_hours_gaps$Temp > 25, na.rm = TRUE)
+print(paste("Total hours over 25 degrees:", hours_over_25))
+```
+
+### Exercise 2 – Apply this function to the dataset
+
+I applied this calculation directly to the dataset `Winters_hours_gaps`, giving a total of **1275 warm hours** throughout the recorded period.
+
+This means there were 1275 hours in 2008 where the temperature went above 25°C.
+
+### Exercise 3 – Extend the function to allow start and end dates
+
+I extended the code to define a reusable function that calculates warm hours between **two specific dates**.
+
+```{r}
+calculate_warm_hours_final_filter <- function(data, start_date_char, end_date_char) {
+  start_date_obj <- as.Date(start_date_char)
+  end_date_obj <- as.Date(end_date_char)
+
+  data$Date <- as.Date(paste(data$Year, data$Month, data$Day, sep = "-"))
+
+  filtered_data <- data[data$Date >= start_date_obj & data$Date <= end_date_obj, ]
+
+  print(paste("Number of hourly records in filtered data:", nrow(filtered_data)))
+
+  hours_over_25 <- sum(filtered_data$Temp > 25, na.rm = TRUE)
+
+  return(hours_over_25)
+}
+
+start_date_input_user <- "2008-06-01"
+end_date_input_user <- "2008-09-28"
+
+total_warm_hours_user <- calculate_warm_hours_final_filter(
+  Winters_hours_gaps,
+  start_date_input_user,
+  end_date_input_user
+)
+
+print(paste(
+  "Total hours over 25 degrees between",
+  start_date_input_user, "and", end_date_input_user, ":",
+  total_warm_hours_user
+))
+
+
 ```
