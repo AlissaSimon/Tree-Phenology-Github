@@ -1,12 +1,10 @@
----
-title: "03-chapter"
-output: html_document
-date: "2025-11-03"
----
+# Chapter 3 — Tree Dormancy
 
-## `Exercises` on tree dormancy
+This chapter focuses on understanding dormancy in temperate fruit trees.
 
-1.  ***Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.***
+
+## Exercise 1
+**Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer**
 
     -\> Statistical method
 
@@ -17,7 +15,8 @@ date: "2025-11-03"
         -   periods with negative coefficients → forcing phase
     -   statistical method provides an objective, data-driven estimation of temperature requirements, can be updated with new years of data and allows to model cultivar response under climate-change scenarios
 
-2.  ***Which are the advantages (2) of the BBCH scale compared with earlier scales?***
+## Exercise 2
+**Which are the advantages (2) of the BBCH scale compared with earlier scales?**
 
     -   Universality and standardization
         -   BBCH scale provides a single coding system that can describe the growth stages of most crops
@@ -27,7 +26,8 @@ date: "2025-11-03"
         -   BBCH distinguishes principal (0–9) and secondary growth stages, allowing a precise description of development
         -   Earlier systems had only a few broad stages and missed intermediate steps
 
-3.  ***Classify the following phenological stages of sweet cherry according to the BBCH scale:***
+## Exercise 3
+**Classify the following phenological stages of sweet cherry according to the BBCH scale:**
 
 ![](https://hortibonn.github.io/Tree-Phenology/pictures/pheno_stages.png)
 
