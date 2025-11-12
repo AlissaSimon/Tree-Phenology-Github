@@ -1,12 +1,9 @@
----
-title: "05-chapter"
-output: html_document
-date: "2025-11-03"
----
+# Chapter 5 — Winter Chill Projections
 
-## `Exercises` on past chill projections
+In this section, we simulate chill accumulation using temperature data and explore potential future reductions due to climate change.
 
-### 1. ***Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology***
+## Exercise 1
+**Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology**
 
 -  Data availability and size
     - Early climate models were hard to access and distributed as large global datasets (hundreds of MB per variable), making them difficult to process on normal computers
@@ -19,13 +16,9 @@ date: "2025-11-03"
             -   Researchers had to automate workflows for data cleaning, model running, and visualization using programming (e.g. in *R*), otherwise the workload would be unmanageable
         ```
 
-        </div>
+## Exercise 2
+**Outline, in your understanding, the basic steps that are necessary to make such projections**
 
-    </div>
-
-### 2. ***Outline, in your understanding, the basic steps that are necessary to make such projections***
-
-```         
 1.  Collect climate data
 
     Get temperature data from weather stations or climate models for both past and future time periods. Usually, these are daily minimum and maximum temperatures

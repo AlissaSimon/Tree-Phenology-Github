@@ -1,12 +1,13 @@
----
-title: "06-chapter"
-output: html_document
-date: "2025-11-03"
----
+# Chapter 6 — Manual chill analysis
 
-## Short code:
+In this chapter, we calculate warm hours above 25°C using the `chillR` package.
 
-# Exercise 1 & 2 – Calculate all warm hours (\>25°C)
+
+## Short code
+
+### Exercise 1 & 2
+**Write a basic function that calculates warm hours (>25°C) & Apply this function to the Winters_hours_gaps dataset**
+
 
 ```{r}
 library(chillR)
@@ -17,7 +18,8 @@ print(paste("Total hours over 25°C:", hours_over_25))
 
 ```
 
-# Exercise 3 – Function with start and end dates
+### Exercise 3 
+**Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
 
 ```{r}
 calculate_warm_hours <- function(data, start_date, end_date) {
@@ -36,31 +38,31 @@ result <- calculate_warm_hours(Winters_hours_gaps, start, end)
 print(paste("Warm hours between", start, "and", end, ":", result))
 ```
 
-# or
+## Longer code
 
-### Exercise 1 – Write a basic function that calculates warm hours (\>25°C)
-
-First, I loaded the `chillR` package and used the included dataset `Winters_hours_gaps`, which contains hourly temperature records from a walnut orchard near Winters, California (2008).
+### Exercise 1
+**Write a basic function that calculates warm hours (>25°C)**
 
 ```{r}
 library(chillR)
 data(Winters_hours_gaps)
 ```
 
-Then I calculated how many hours had temperatures greater than 25°C:
 
 ```{r}
 hours_over_25 <- sum(Winters_hours_gaps$Temp > 25, na.rm = TRUE)
 print(paste("Total hours over 25 degrees:", hours_over_25))
 ```
 
-### Exercise 2 – Apply this function to the dataset
+### Exercise 2 
+**Apply this function to the Winters_hours_gaps dataset**
 
 I applied this calculation directly to the dataset `Winters_hours_gaps`, giving a total of **1275 warm hours** throughout the recorded period.
 
 This means there were 1275 hours in 2008 where the temperature went above 25°C.
 
-### Exercise 3 – Extend the function to allow start and end dates
+### Exercise 3 
+**Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
 
 I extended the code to define a reusable function that calculates warm hours between **two specific dates**.
 
