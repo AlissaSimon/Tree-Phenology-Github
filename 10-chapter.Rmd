@@ -1,0 +1,51 @@
+# Chapter 10 — Getting temperature data
+
+In this chapter,
+
+
+## Exercise 1 
+**Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
+
+Why did I choose my location?
+In general I wanted to use the Lake Constance region, as its a big fruit production area in Germany.
+To be fair I wanted to use the same location Gottmadingen in Baden-Württemberg which I have used for my bachelors thesis, but quickly realized that there is no weather station near it.
+Then came the idea to use Konstanz, but the data went only till 2003
+The next station with good data is Schaffhausen, but I found the mild Lake constance climate more interesting and thought it would be better for analyzing it.
+The next weather station with a near completeness is Güttingen (Thurghau) in Switzerland, also right by lake constance.
+A mild, warm autumn is typical for the Lake Constance region. This is also very favorable for viticulture and allows the fruit to ripen optimally. The large day-night temperature differences are a key factor. (https://www.genusserbe.bayern.de/355028/index.php)
+The city also has an agricultural experimental farm “Schul- und Versuchsbetrieb in Güttingen” which is used to experiment with fruit and berry cultivation. They cultivate over 10 types of fruit and berries and over 100 different varieties. https://arenenberg.tg.ch/beratung/versuche/obstbau-guettingen.html/654
+In general the swiss Thurghau region is the biggest fruit-growing canton with a gross income of approximately 80 million Swiss francs.(https://arenenberg.tg.ch/beratung/obst.html/342)
+Like most locations the Thurgau region is also affected by climate change. Since the meterological records in 1864 data shows signs of climatic changes. Extreme weather events are becoming more frequent, with recent examples of heatwaves in 2018 and heavy rainfalls in 2021. The region is disproportionately affected by climate change and since 1864, the temperature in Thurgau has increased by 1.9 °C. (https://klima.tg.ch/klima-im-thurgau.html/16119)
+As a result I think that this location, with its many fruit trees and climatic conditions affected by climate change, is well suited for further studies in this module.
+
+```{r cars}
+library(chillR)
+station_list<-handle_gsod(action="list_stations",
+                          location=c( 8.77, 47.73),
+                          time_interval=c(1990,2024))
+head(station_list)
+```
+
+## Exercise 2 
+**Download weather data for the most promising station on the list**
+
+```{r cars}
+weather<-handle_gsod(action="download_weather",
+                     location=station_list$chillR_code[14],
+                     time_interval=c(1990,2024))
+head(weather[[1]])
+```
+
+## Exercise 3 
+**Convert the weather data into chillR format**
+
+```{r cars}
+cleaned_weather<-handle_gsod(weather)
+güttingen_weather <- cleaned_weather[[1]]
+
+dir.create('data_güttingen')
+
+write.csv(station_list,"data_güttingen/station_list.csv",row.names=FALSE)
+write.csv(weather[[1]],"data_güttingen/Güttingen_raw_weather.csv",row.names=FALSE)
+write.csv(cleaned_weather[[1]],"data_güttingen/Güttingen_chillR_weather.csv",row.names=FALSE)
+```
