@@ -1,13 +1,40 @@
 ---
-title: "Tree Phenology Report"
+title: "Tree Phenology Logbook"
 author: "Alissa Sophie Simon"
 site: bookdown::bookdown_site
+date: "2025-11-03"
+bibliography: 
+  - diss.bib
+  - Exported Items.bib
+biblio-style: "apalike"
+link-citations: true
 output:
-  bookdown::pdf_document2:
-    toc: true
+  bookdown::gitbook:
+    css: style.css
+    config:
+      toc:
+        collapse: subsection
+        scroll_highlight: true
+      toolbar:
+        position: fixed
+      search:
+        engine: lunr
+      fontsettings:
+        theme: white
+        family: sans
+        size: 2
+      sharing:
+        facebook: true
+        twitter: true
+        linkedin: false
 ---
 
-# Introduction
+# Willkommen zu meinem Tree Phenology Logbook
 
-Welcome to my Tree Phenology project.  
-This book combines multiple RMarkdown files (chapters) into one report. 
+**Autor:** Alissa Sophie Simon  
+**Datum:** 2025-11-03  
+
+![https://hortibonn.github.io/Tree-Phenology/chillR_hexSticker.png](https://hortibonn.github.io/Tree-Phenology/chillR_hexSticker.png)
+
+---
+
