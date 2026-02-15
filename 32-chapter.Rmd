@@ -1,0 +1,28 @@
+# Chapter 32 - Can we improve the performance of PhenoFlex?
+
+In this chapter, we explore whether the PhenoFlex model can be improved by changing the way it is calibrated, and what role extreme seasons play in model performance.
+
+## Objective of the analysis
+
+**What was the objective of this work?**
+
+- To check whether the performance of the   PhenoFlex model can be improved
+- To see how the choice of calibration     data influences model results
+- To test the effect of including very     warm (“marginal”) seasons in the         calibration
+  
+
+## Main conclusion
+
+**What was the main conclusion?**
+
+- The model performed worse when very      warm, marginal seasons were included
+- Removing these seasons led to better     predictions
+- The temperature response of the model    looked more realistic without the        marginal seasons
+
+## Future experimental tests
+
+**What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?**
+
+- Experiments where trees are exposed to   different winter temperature conditions
+- Especially experiments focusing on       unusually warm winters
+- Studies that look more closely at how    dormancy is affected under extreme       conditions

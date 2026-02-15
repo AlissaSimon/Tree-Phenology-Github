@@ -1,0 +1,39 @@
+# Chapter 27 - The relative importance of chill and heat
+
+In this chapter, we explored how the effects of chilling and forcing temperatures on tree phenology vary across different climates, and why warming does not always lead to earlier spring events.
+
+## Temperature response hypothesis
+
+**Describe the temperature response hypothesis outlined in this chapter.**
+  
+**General idea:**
+
+- The chapter suggests that the            importance of chilling and forcing       temperatures changes depending on the    climate
+- Phenology does not always respond to     temperature in the same way everywhere
+
+**Cold-winter climates:**
+
+- In cold climates, trees usually get      enough chill
+- Because chilling is not limiting,        differences in winter temperature do     not matter much
+- Bloom or leaf-out mainly depends on      spring (forcing) temperatures
+- Warmer springs usually lead to earlier   phenology
+
+**Intermediate climates:**
+
+- In moderately warm climates, chilling    may start to matter
+- Warmer winters can reduce chill          accumulation
+- This can delay phenology, even if        spring temperatures are warm
+- Both chilling and forcing seem to        influence bloom timing
+
+**Warm-winter climates:**
+
+- In warm climates, chilling requirements   may not be fulfilled
+- Temperature during the chilling phase    becomes very important
+- Further warming does not necessarily     advance phenology
+- In some cases, warming can even delay    bloom
+
+**Overall interpretation:**
+
+- The hypothesis suggests a gradual shift   from forcing control to chilling         control as winters get warmer
+- This could explain why phenology does    not always advance with climate          warming
+- The chapter presents this as a general   idea that still needs more evidence

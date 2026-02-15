@@ -1,0 +1,39 @@
+# Chapter 29 - Making valid tree phenology models
+
+In this chapter, we focus on why good model performance alone is not sufficient and why it is important to consider how phenology models work and under which conditions they can be used reliably.
+
+## Output vs. process validation
+
+**Explain the difference between output validation and process validation**
+
+- **Output validation** checks whether a   model predicts observed bloom dates      well
+- This is usually done using statistical   measures
+- **Process validation** checks whether    the model represents biological          processes realistically
+- A model can perform well in output       validation but still be biologically     unrealistic
+  
+## Validity domain
+
+**Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.**
+
+- The **validity domain** is the range of   conditions under which a model is        reliable
+- It depends on the data used to build     the model
+- Predictions outside this range are       uncertain
+- This is important for climate change     studies because future conditions may    be outside past observations
+  
+## Validation for purpose
+
+**What is validation for purpose?**
+  
+- Validation for purpose means checking    whether a model is suitable for what it   is meant to be used for
+- A model may work for current conditions   but not for future projections
+- The model should be tested under         conditions similar to those it will be   applied to
+  
+## Ensuring model suitability
+
+**How can we ensure that our model is suitable for the predictions we want to make?**
+  
+- Check that the model represents known    biological processes
+- Do not rely only on good statistical     fit
+- Identify the conditions under which the   model was developed
+- Compare these conditions with the ones   the model will be used for
+- Clearly state uncertainties and          limitations

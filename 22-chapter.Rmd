@@ -1,0 +1,38 @@
+# Chapter 22 — Successes and limitations of PLS regression analysis
+
+In this chapter, the conditions under which PLS regression can successfully identify chilling responses are discussed, along with key limitations and ways to overcome them.
+
+## When does PLS detect the chilling phase?
+
+**Briefly explain in what climatic settings we can expect PLS regression to detect the chilling phase - and in what settings this probably won’t work.**
+
+**Climatic settings where PLS is likely to work:**
+
+PLS regression can detect a chilling phase when
+
+- winter temperatures lie near the upper   effective range for chill accumulation
+- warmer winters consistently reduce       chill accumulation
+- there is a monotonic relationship        between temperature and chill            comparison
+- typical for mild winters in e.g.         California
+
+**Climatic settings where PLS is likely to fail:**
+
+PLS regression will likely fail to detect a chilling phase when
+
+- winters are frequently cold
+- temperatures often fall below the        effective chill range
+- warming sometimes increases chill (by    moving temperatures into the optimal     range
+- the relationship between temperature     and chill is non-monotonic
+- typical for cool to cold climates like   Germany and Beijing
+
+## How can these limitations be addressed?
+
+**How could we overcome this problem?**
+
+- use process-based chill models (e.g.     dynamic model) instead of relying on     temperature correlations
+- explicitly calculate chill accumulation   and and forcing accumulation before      modeling phenology
+- Separate the dormancy process into:
+  - Chill accumulation (non-linear           response to temperature)
+  - Forcing accumulation (monotonic          response to temperature)
+- Apply mechanistic phenology models that   represent biological processes rather    than the statistical patterns
+- Combine PLS with biological constraints   or use it only as an exploratory tool

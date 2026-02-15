@@ -1,0 +1,120 @@
+# Chapter 31 - The PhenoFlex model - a second look
+
+This chapter takes a second look at the PhenoFlex model by showing how chill and heat responses change with temperature for Roter Boskoop at the Güttingen site.
+
+## Chill and heat response plots
+
+**Make chill and heat response plots for the ‘Roter Boskoop’ PhenoFlex model for the location you did the earlier analyses for.**
+
+```{r}
+library(tidyverse)
+library(chillR)
+
+Roter_par_raw <- read.csv(
+  "data/PhenoFlex_parameters_Roter_Boskoop.csv",
+  header = TRUE
+)
+
+Roter_par <- as.numeric(Roter_par_raw[[1]])
+names(Roter_par) <- NULL
+
+Roter_par <- Roter_par[!is.na(Roter_par)]
+
+length(Roter_par)
+Roter_par
+```
+
+**Helper functions - Chill response**
+
+```{r}
+apply_const_temp <- function(temp, par, portions = 1200) {
+  
+  temp_vec <- rep(temp, portions)
+  
+  res <- DynModel_driver(
+    temp  = temp_vec,
+    A0    = par[7],
+    A1    = par[8],
+    E0    = par[5],
+    E1    = par[6],
+    Tf    = par[9],
+    slope = par[12],
+    deg_celsius = TRUE
+  )
+  
+  res$y[length(res$y)]
+}
+
+gen_chill_response <- function(par,
+                               temp_values = seq(-5, 20, 0.1)) {
+  sapply(temp_values, apply_const_temp, par = par)
+}
+```
+
+**Helper functions - Heat response (GDH)**
+
+```{r}
+GDH_response <- function(T, par) {
+  
+  Tb <- par[11]
+  Tu <- par[4]
+  Tc <- par[10]
+  
+  w <- rep(0, length(T))
+  
+  w[T >= Tb & T <= Tu] <-
+    0.5 * (1 + cos(pi + pi * (T[T >= Tb & T <= Tu] - Tb)/(Tu - Tb)))
+  
+  w[T > Tu & T <= Tc] <-
+    (1 + cos(pi/2 + pi/2 * (T[T > Tu & T <= Tc] - Tu)/(Tc - Tu)))
+  
+  w
+}
+```
+
+**Generate chill & heat response curve**
+
+```{r}
+temp_values <- seq(-5, 36, 0.1)
+
+response_df <- data.frame(
+  Temperature    = temp_values,
+  Chill_response = gen_chill_response(Roter_par, temp_values),
+  Heat_response  = GDH_response(temp_values, Roter_par)
+)
+
+response_long <- pivot_longer(
+  response_df,
+  cols = c(Chill_response, Heat_response),
+  names_to = "Process",
+  values_to = "Response"
+)
+```
+
+**Plot**
+
+```{r}
+ggplot(response_long,
+       aes(x = Temperature, y = Response)) +
+  geom_line(linewidth = 1.5,
+            aes(color = Process)) +
+  facet_wrap(~Process,
+             scales = "free_y",
+             labeller = labeller(
+               Process = c(
+                 Chill_response = "Chill response",
+                 Heat_response  = "Heat response"
+               )
+             )) +
+  scale_color_manual(values = c(
+    Chill_response = "blue",
+    Heat_response  = "red"
+  )) +
+  theme_bw(base_size = 15) +
+  theme(legend.position = "none") +
+  xlab("Temperature (°C)") +
+  ylab("Response (arbitrary units)") +
+  ggtitle("PhenoFlex temperature responses – Roter Boskoop (Göttingen)")
+
+```
+

@@ -1,0 +1,80 @@
+# Chapter 5 — Winter Chill Projections
+
+In this section, we simulate chill accumulation using temperature data and explore potential future reductions due to climate change.
+
+## Data access and processing challenges
+
+**Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology**
+
+**Data availability and data volume**
+
+- Early climate model outputs were         difficult to access and distributed as   large global datasets (hundreds of MB    per variable)
+- Such datasets were hard to process on    standard computers
+- Researchers required location-specific,   manageable datasets
+- This challenge was later addressed by    platforms such as ClimateWizard and      AFRICLIM
+
+**Lack of hourly temperature data**
+
+- Most climate projections provide only    daily minimum and maximum temperatures
+- Many chill models (especially the        Dynamic Model) require hourly            temperature inputs
+- This mismatch required the development   of
+  - interpolation methods
+  - weather generators to derive hourly      temperature series from daily data
+
+**Automation and reproducibility**
+
+- Chill projection studies typically       involve
+  - many locations
+  - multiple climate models
+  - several emission scenarios
+- Manual processing is infeasible at this   scale
+- Automated workflows were required for
+  - data cleaning
+  - chill calculation
+  - result visualization
+- Programming environments such as R       became essential for reproducible        analyses
+
+
+## Basic workflow for chill projections
+
+**Outline, in your understanding, the basic steps that are necessary to make such projections**
+
+**Step 1: Collect climate data**
+
+- Obtain temperature data from:
+  - weather stations (historical)
+  - climate model projections (future)
+- Data are usually available as daily      minimum and maximum temperatures
+
+**Step 2: Convert daily to hourly temperatures**
+
+- Hourly temperatures are estimated from   daily Tmin and Tmax
+- This can be done using:
+  - interpolation formulas
+  - weather generators
+
+**Step 3: Calculate chill accumulation**
+
+- Apply a chill model (e.g. the Dynamic    Model)
+- Calculate chill accumulation for each    site and year
+
+**Step 4: Compare historical and future scenarios**
+
+- Repeat chill calculations for future     climate scenarios
+- Compare results to historical reference   periods
+- Quantify potential chill losses or       gains
+
+**Step 5: Summarize and visualize results**
+
+- Present results using:
+  - tables
+  - maps (e.g. Safe Winter Chill maps)
+  - time series or boxplots
+
+**Step 6: Interpret implications**
+
+- Translate results into practical         consequences
+- For example:
+  - cultivar suitability
+  - need for cultivar replacement
+  - potential relocation of production       areas

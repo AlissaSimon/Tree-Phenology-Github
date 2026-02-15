@@ -1,0 +1,79 @@
+# Chapter 10 — Getting temperature data
+
+In this chapter, we learn how to obtain and prepare historical temperature data for a chosen location, using the Lake Constance region as an example.
+
+
+## Selecting a study location and nearby weather stations
+
+**Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
+
+**Choice of study region:**
+
+- In general, I wanted to use the Lake     Constance region because it is a major   fruit production area in Germany
+- Initially, I planned to use the same     location, Gottmadingen                   (Baden-Württemberg), as in my            bachelor’s thesis
+- I quickly realized that there is no      nearby weather station for               Gottmadingen
+- I then considered Consatnce, but the     available weather data only extend       until 2003
+- Another option was the weather station   in Schaffhausen, which has good data     coverage
+- However, I found the milder Lake         Constance climate more interesting for   the analysis
+- The next weather station with nearly     complete data is Güttingen (Thurgau),    Switzerland, which is also located       directly on Lake Constance
+
+**Climatic and agricultural relevance of the region:**
+
+- The Lake Constance region typically has   mild, warm autumns, which are very       favorable for fruit production and       especially viticulture
+- Large day–night temperature differences   are a key factor that support optimal    fruit ripening
+- Güttingen hosts an agricultural          experimental farm, the Schul- und        Versuchsbetrieb in Güttingen, which is   actively used for research in fruit and   berry cultivation
+- At this site, more than 10 fruit and     berry species and over 100 different     varieties are cultivated
+- The Swiss canton of Thurgau is the       largest fruit-growing region in          Switzerland, with a gross income of      approximately 80 million Swiss francs    from fruit production
+- Like most regions, Thurgau is affected   by climate change, with meteorological   records dating back to 1864 showing      clear signals of climatic change
+- Extreme weather events have become more   frequent, including heatwaves (e.g.      2018) and heavy rainfall events (e.g.    2021)
+- Since 1864, mean temperatures in         Thurgau have increased by about 1.9 °C.
+- Due to its importance for fruit          production and its strong exposure to    climate change, Güttingen is well        suited for further studies in this       module
+
+**Identifying nearby weather stations**
+
+```{r}
+library(chillR)
+station_list<-handle_gsod(action="list_stations",
+                          location=c( 8.77, 47.73),
+                          time_interval=c(1990,2024))
+head(station_list)
+```
+
+## Downloading historical weather data
+
+**Download weather data for the most promising station on the list**
+
+```{r}
+weather<-handle_gsod(action="download_weather",
+                     location=station_list$chillR_code[14],
+                     time_interval=c(1990,2024))
+head(weather[[1]])
+```
+
+## Preparing weather data for chillR
+
+**Convert the weather data into chillR format**
+
+```{r}
+cleaned_weather<-handle_gsod(weather)
+güttingen_weather <- cleaned_weather[[1]]
+
+dir.create('data_güttingen')
+
+write.csv(station_list,"data_güttingen/station_list.csv",row.names=FALSE)
+write.csv(weather[[1]],"data_güttingen/Güttingen_raw_weather.csv",row.names=FALSE)
+write.csv(cleaned_weather[[1]],"data_güttingen/Güttingen_chillR_weather.csv",row.names=FALSE)
+```
+
+## Sources
+Genusserbe Bayern – Lake Constance climate and viticulture
+https://www.genusserbe.bayern.de/355028/index.php
+
+Arenenberg Thurgau – Experimental fruit production in Güttingen
+https://arenenberg.tg.ch/beratung/versuche/obstbau-guettingen.html/654
+
+Arenenberg Thurgau – Fruit production in Thurgau
+https://arenenberg.tg.ch/beratung/obst.html/342
+
+Canton of Thurgau – Climate change in Thurgau
+https://klima.tg.ch/klima-im-thurgau.html/16119

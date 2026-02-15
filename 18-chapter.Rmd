@@ -1,0 +1,214 @@
+# Chapter 18 — Plotting future scenarios
+
+This chapter shows how to visualize historical and future chill scenarios using climate model projections.
+
+## Visualizing historical and future chill scenarios
+
+**Produce similar plots for the weather station you selected for earlier exercises.**
+
+```{r}
+library(chillR)
+library(tidyverse)
+library(ggpmisc)
+library(patchwork)
+library(kableExtra)
+```
+
+**Loading historical and future chill scenarios**
+
+```{r}
+chill_hist_scenario_list <- load_temperature_scenarios(
+  path   = "data_Güttingen",
+  prefix = "Guettingen_hist_chill_305_59"
+)
+
+actual_chill <- read_tab(
+  "data_Güttingen/Guettingen_observed_chill_305_59.csv"
+)
+
+chill_future_scenario_list <- load_temperature_scenarios(
+  path   = "data_Güttingen/future_climate",
+  prefix = "Guettingen_futurechill_305_59"
+)
+```
+
+**Creating and organizing climate scenario objects**
+
+```{r}
+chills <- make_climate_scenario(
+  chill_hist_scenario_list,
+  caption       = "Historic",
+  historic_data = actual_chill,
+  time_series   = TRUE
+)
+```
+
+**Identify SSPs, GCMs, and time slices**
+
+```{r}
+SSPs  <- c("ssp126", "ssp245", "ssp370", "ssp585")
+Times <- c("2050", "2085")
+
+list_ssp <- strsplit(names(chill_future_scenario_list), "\\.") %>%
+  map(2) %>% unlist()
+
+list_gcm <- strsplit(names(chill_future_scenario_list), "\\.") %>%
+  map(3) %>% unlist()
+
+list_time <- strsplit(names(chill_future_scenario_list), "\\.") %>%
+  map(4) %>% unlist()
+```
+
+**Add FUTURE scenarios to climate object**
+
+```{r}
+for(SSP in SSPs)
+  for(Time in Times)
+  {
+    chill <- chill_future_scenario_list[
+      list_ssp == SSP & list_time == Time
+    ]
+    
+    names(chill) <- list_gcm[
+      list_ssp == SSP & list_time == Time
+    ]
+    
+    if(SSP == "ssp126") SSPcaption <- "SSP1"
+    if(SSP == "ssp245") SSPcaption <- "SSP2"
+    if(SSP == "ssp370") SSPcaption <- "SSP3"
+    if(SSP == "ssp585") SSPcaption <- "SSP5"
+    
+    chills <- chill %>%
+      make_climate_scenario(
+        caption = c(SSPcaption, Time),
+        add_to  = chills
+      )
+  }
+```
+
+**Prepare HISTORIC simulated data**
+
+```{r}
+for(nam in names(chills[[1]]$data))
+{
+  ch <- chills[[1]]$data[[nam]]
+  ch$GCM  <- "none"
+  ch$SSP  <- "none"
+  ch$Year <- as.numeric(nam)
+  
+  if(nam == names(chills[[1]]$data)[1])
+    past_simulated <- ch
+  else
+    past_simulated <- rbind(past_simulated, ch)
+}
+
+past_simulated$Scenario <- "Historical"
+
+kable(head(past_simulated)) %>%
+  kable_styling("striped", font_size = 8)
+```
+
+
+**Prepare FUTURE data**
+
+```{r}
+for(i in 2:length(chills))
+  for(nam in names(chills[[i]]$data))
+  {
+    ch <- chills[[i]]$data[[nam]]
+    ch$GCM  <- nam
+    ch$SSP  <- chills[[i]]$caption[1]
+    ch$Year <- as.numeric(chills[[i]]$caption[2])
+    
+    if(i == 2 & nam == names(chills[[i]]$data)[1])
+      future_data <- ch
+    else
+      future_data <- rbind(future_data, ch)
+  }
+```
+
+**Plot settings**
+
+```{r}
+metric     <- "Chill_Portions"
+axis_label <- "Chill accumulation (Chill Portions)"
+
+rng <- range(
+  actual_chill[[metric]],
+  past_simulated[[metric]],
+  future_data[[metric]]
+)
+```
+
+**Historic plot**
+
+```{r}
+past_plot <- ggplot() +
+  geom_boxplot(
+    data = past_simulated,
+    aes(x = as.numeric(Year), y = .data[[metric]], group = Year),
+    fill = "skyblue"
+  ) +
+  geom_point(
+    data = actual_chill,
+    aes(x = End_year, y = .data[[metric]]),
+    col = "blue"
+  ) +
+  scale_y_continuous(limits = c(0, round(1.1 * rng[2]))) +
+  labs(x = "Year", y = axis_label) +
+  facet_grid(~ Scenario) +
+  theme_bw(base_size = 15) +
+  theme(
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+**Future plots (2050 & 2085)**
+```{r}
+future_plot_list <- list()
+time_points <- c(2050, 2085)
+
+for(y in time_points)
+{
+  future_plot_list[[as.character(y)]] <-
+    ggplot(future_data %>% filter(Year == y)) +
+    geom_boxplot(
+      aes(x = GCM, y = .data[[metric]], fill = GCM)
+    ) +
+    facet_wrap(vars(SSP), nrow = 1) +
+    scale_x_discrete(labels = NULL, expand = expansion(add = 1)) +
+    scale_y_continuous(limits = c(0, round(1.1 * rng[2]))) +
+    geom_text_npc(
+      aes(npcx = "center", npcy = "top", label = Year),
+      size = 5
+    ) +
+    theme_bw(base_size = 15) +
+    theme(
+      axis.text = element_blank(),
+      axis.title = element_blank(),
+      axis.ticks.y = element_blank(),
+      legend.position = "bottom",
+      strip.background = element_blank(),
+      strip.text = element_text(face = "bold")
+    )
+}
+```
+
+**Combine plots**
+
+```{r}
+final_plot <- (past_plot + future_plot_list) +
+  plot_layout(
+    guides = "collect",
+    widths = c(1, rep(2, length(future_plot_list)))
+  ) &
+  theme(
+    legend.position = "bottom",
+    legend.text = element_text(size = 8),
+    legend.title = element_text(size = 10)
+  )
+
+final_plot
+```

@@ -1,0 +1,100 @@
+# Chapter 12 — Generating temperature scenarios
+
+In this chapter, synthetic temperature scenarios are generated and compared with observed data to analyze winter chill and freezing patterns.
+
+## Generating synthetic temperature data
+
+**For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.**
+
+```{r}
+library(chillR)
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+
+Temp <- weather_final %>% 
+  temperature_generation(years=c(1990,2023),
+                         sim_years = c(2001,2100))
+
+Temp <- Temp[[1]]
+Temp$Data_source <- "simulated"
+
+Temperatures <- weather_final %>% 
+  filter(Year %in% 1990:2023) %>%
+  mutate(Data_source="observed") %>%
+  rbind(Temp[,c('Year','Month','Day','Tmin','Tmax', 'Data_source')]  ) %>%
+  mutate(Date=as.Date(ISOdate(2000,Month,Day)))
+```
+
+## Winter chill analysis of synthetic data
+
+**Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.**
+
+```{r}
+ggplot(data=Temperatures,
+       aes(x = Date,y = Tmin)) +
+  geom_smooth(aes(colour = factor(Year)), show.legend = FALSE) +
+  facet_wrap(vars(Data_source)) +
+  theme_bw(base_size = 20) +
+  scale_x_date(date_labels = "%b")
+
+ggplot(data=Temperatures,
+       aes(x = Date,y = Tmax)) +
+  geom_smooth(aes(colour = factor(Year)), show.legend = FALSE) +
+  #geom_line(aes(colour = factor(Year)), show.legend = FALSE) +
+  facet_wrap(vars(Data_source)) +
+  theme_bw(base_size = 20) +
+  scale_x_date(date_labels = "%b")
+```
+
+## Freezing hour analysis in spring or autumn
+
+**Produce similar plots for the number of freezing hours (<0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.**
+
+```{r}
+chill_observed <- Temperatures %>%
+  filter(Data_source == "observed") %>%
+  stack_hourly_temps(latitude = 47.600) %>%
+  chilling(Start_JDay = 91,
+           End_JDay = 120)
+
+chill_simulated <- Temperatures %>%
+  filter(Data_source == "simulated") %>%
+  stack_hourly_temps(latitude = 47.600) %>%
+  chilling(Start_JDay = 91,
+           End_JDay = 120)
+
+chill_comparison <-
+  cbind(chill_observed,
+        Data_source = "observed") %>%
+  rbind(cbind(chill_simulated,
+              Data_source = "simulated"))
+
+chill_comparison_full_seasons <- 
+  chill_comparison %>%
+  filter(Perc_complete == 100)
+
+ggplot(chill_comparison_full_seasons,
+       aes(x=Chill_portions)) + 
+  geom_histogram(binwidth = 1,
+                 aes(fill = Data_source)) +
+  theme_bw(base_size = 20) +
+  labs(fill = "Data source") +
+  xlab("Chill accumulation (Chill Portions)") +
+  ylab("Frequency")
+
+chill_simulations <-
+  chill_comparison_full_seasons %>%
+  filter(Data_source == "simulated")
+
+ggplot(chill_simulations,
+       aes(x = Chill_portions)) +
+  stat_ecdf(geom = "step",
+            lwd = 1.5,
+            col = "blue") +
+  ylab("Cumulative probability") +
+  xlab("Chill accumulation (in Chill Portions)") +
+  scale_y_continuous(breaks = seq(0,1, by = 0.1)) +
+  theme_bw(base_size = 20)
+
+```

@@ -1,0 +1,99 @@
+# Chapter 4 — Climate Change and Impact Projection
+
+This chapter discusses how global warming affects chill accumulation and flowering timing.
+
+## Drivers of climate change
+
+**List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.**
+
+**Main drivers at decadal to centennial scales:**
+
+- Greenhouse gases (GHGs) (CO₂, CH₄,       N₂O)
+- Aerosols
+- Surface albedo changes
+- Clouds
+- Ozone
+- Solar variability (minor role in         recent decades)
+- Volcanic activity (short-term effects)
+
+**Currently most important driver: Greenhouse gases**
+
+Greenhouse gases trap heat in the Earth’s atmosphere by absorbing long-wave radiation emitted from the Earth’s surface while also allowing short-wave solar radiation to pass through. 
+This enhances the natural greenhouse effect, increasing Earth’s mean temperature. 
+Human activities, especially fossil fuel combustion, cement production, and land-use change, have caused atmospheric CO₂ concentrations to rise faster and to higher levels than ever before in human history, making GHGs the dominant driver of recent climate change.
+
+## Recent temperature dynamics and causes for concern
+
+**Explain briefly what is special about temperature dynamics of recent decades, and why we have good reasons to be concerned.**
+
+**Characteristics of recent warming:**
+
+- Rapid and global warming since about     1901, visible almost everywhere on       earth
+- The temperature is rising faster than    ever before in human history
+- The known “hockey stick” pattern is      showing a sharp rise in recent           temperatures
+- Temperatures are rising much faster      than during past natural climate         changes
+
+**Why this is concerning:**
+
+- rapid change leave little time for       natural and human systems to adapt
+- It increases the risk of positive        feedbacks, such as:
+    - Melting ice and snow → reduced           albedo means more warming
+    - Permafrost thaw → methane release       → further warming
+- Even “moderate” warming targets          (1.5–2°C) represent extreme changes      compared to historical variability
+
+## Representative Concentration Pathways (RCPs)
+
+**What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?**
+
+**Definition:**
+
+**RCP** stands for **Representative Concentration Pathway**.
+
+- RCPs are greenhouse gas concentration    scenarios used by the IPCC
+- They are defined by the additional       radiative forcing (in W m⁻²) expected    by the year 2100
+    - Example: RCP2.6, RCP4.5, RCP6.0,        RCP8.5
+- The higher the RCP number, the greater   the expected warming
+
+**Role in climate projections:**
+
+- RCPs provide standardized future         forcing pathways
+- They serve as inputs to Global Climate   Models (GCMs)
+- They allow scientists to explore         different plausible futures rather       than predict a single outcome
+- RCPs are the starting point for          climate and impact projections
+
+## Climate impact projection methods
+
+**Briefly describe the 4 climate impact projection methods described in the fourth video.**
+
+**The four main climate impact projection methods are:**
+
+**1. Statistical impact models**
+
+- Use statistical relationships between    climate variables (e.g. temperature,     rainfall) and observed impacts (e.g.     crop yield, species presence)
+- Useful for explaining past trends and    projecting future impacts
+- Key limitation → assume relationships    remain valid in the future               (stationarity)
+
+**2. Species Distribution Models (SDMs)**
+
+- Relate species occurrence to climatic    variables
+- Used to project current and future       habitat suitability
+- Results depend strongly on the chosen    algorithm
+- Often combined in ensemble modeling to   address uncertainty
+- Limited by equilibrium assumptions and   missing non-climatic drivers
+
+**3. Process-based (mechanistic) models**
+
+- Explicitly simulate system processes     using equations
+- Common in agriculture, hydrology, and    ecology
+- Can test management and adaptation       options
+- Major limitations include:
+    - Poor understanding of some               processes
+    - High parameter uncertainty
+    - Risk of imbalance (some processes        over-modeled, others ignored)
+
+**4. Climate analogue models**
+
+- Identify locations today with climates   similar to a site’s projected future     climate
+- Use real-world systems to infer future   impacts
+- Particularly useful for participatory    learning and adaptation planning
+- Limitations include differences in       soils, management,and socio-economic     conditions

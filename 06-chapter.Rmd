@@ -1,0 +1,39 @@
+# Chapter 6 — Manual chill analysis
+
+In this chapter, we calculate warm hours above 25°C using the `chillR` package.
+
+
+## Calculating warm hours (>25 °C)
+
+**Write a basic function that calculates warm hours (>25°C) & Apply this function to the Winters_hours_gaps dataset.**
+
+```{r}
+library(chillR)
+data(Winters_hours_gaps)
+
+hours_over_25 <- sum(Winters_hours_gaps$Temp > 25, na.rm = TRUE)
+print(paste("Total hours over 25°C:", hours_over_25))
+
+```
+
+## Calculating warm hours for a defined time period
+
+**Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
+
+```{r}
+calculate_warm_hours <- function(data, start_date, end_date) {
+  data$Date <- as.Date(paste(data$Year, data$Month, data$Day, sep = "-"))
+
+  data_filtered <- data[data$Date >= as.Date(start_date) & data$Date <= as.Date(end_date), ]
+
+  warm_hours <- sum(data_filtered$Temp > 25, na.rm = TRUE)
+  return(warm_hours)
+}
+
+start <- "2008-06-01"
+end <- "2008-09-28"
+
+result <- calculate_warm_hours(Winters_hours_gaps, start, end)
+print(paste("Warm hours between", start, "and", end, ":", result))
+```
+

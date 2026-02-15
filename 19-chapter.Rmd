@@ -1,0 +1,339 @@
+# Chapter 19 — Chill model comparison
+
+This chapter compares different chill models to show how their responses and estimates of Safe Winter Chill differ under the same historical and future climate scenarios.
+
+## Chill model comparison for a selected location
+
+**Perform a similar analysis for the location you’ve chosen for your exercises**
+
+
+**Setup and model definition**
+
+```{r}
+library(chillR)
+library(dormancyR)
+library(tidyverse)
+library(colorRamps)
+library(patchwork)
+library(gganimate)
+library(gifski)
+library(transformr)
+```
+
+**Define chill models**
+
+```{r}
+hourly_models <- list(
+  Chilling_units       = chilling_units,
+  Low_chill            = low_chill_model,
+  Modified_Utah        = modified_utah_model,
+  North_Carolina       = north_carolina_model,
+  Positive_Utah        = positive_utah_model,
+  Chilling_Hours       = Chilling_Hours,
+  Utah_Chill_Units     = Utah_Model,
+  Chill_Portions       = Dynamic_Model
+)
+
+daily_models <- list(
+  Rate_of_Chill     = rate_of_chill,
+  Chill_Days        = chill_days,
+  Exponential_Chill = exponential_chill,
+  Triangular_Chill  = triangular_chill_2
+)
+
+metrics <- c(names(daily_models), names(hourly_models))
+
+model_labels <- c(
+  "Rate of Chill",
+  "Chill Days",
+  "Exponential Chill",
+  "Triangular Chill (Legave)",
+  "Chilling Units",
+  "Low-Chill Units",
+  "Modified Utah Units",
+  "North Carolina Units",
+  "Positive Utah Units",
+  "Chilling Hours",
+  "Utah Chill Units",
+  "Chill Portions"
+)
+```
+
+**Load observed weather**
+
+```{r}
+G_temps <- read_tab("data_Güttingen/Güttingen_clean_weather.csv")
+
+Start_JDay <- 305
+End_JDay   <- 59
+latitude   <- 47.7
+```
+
+**Load historical and future temperature scenarios**
+
+```{r}
+Temps_hist <- load_temperature_scenarios(
+  "data_Güttingen",
+  "Guettingen_hist_scenarios"
+)
+```
+
+**Chill for HISTORICAL scenarios**
+
+```{r}
+daily_hist <- tempResponse_list_daily(
+  Temps_hist, Start_JDay, End_JDay, daily_models
+)
+
+hourly_hist <- tempResponse_daily_list(
+  Temps_hist, latitude, Start_JDay, End_JDay,
+  hourly_models, misstolerance = 10
+)
+
+past_scenarios <- lapply(
+  names(daily_hist),
+  function(x)
+    cbind(daily_hist[[x]],
+          hourly_hist[[x]][, names(hourly_models)])
+)
+
+names(past_scenarios) <- names(daily_hist)
+
+save_temperature_scenarios(
+  past_scenarios,
+  "data_Güttingen/future_climate",
+  "Güttingen_multichill_305_59_historic"
+)
+```
+
+**Chill for OBSERVED weather**
+
+```{r}
+daily_obs <- tempResponse_daily(
+  G_temps, Start_JDay, End_JDay, daily_models
+)
+
+hourly_obs <- tempResponse_daily_list(
+  G_temps, latitude, Start_JDay, End_JDay,
+  hourly_models, misstolerance = 10
+)
+
+past_observed <- cbind(
+  daily_obs,
+  hourly_obs[[1]][, names(hourly_models)]
+)
+
+write.csv(
+  past_observed,
+  "data_Güttingen/future_climate/Güttingen_multichill_305_59_observed.csv",
+  row.names = FALSE
+)
+```
+
+**FUTURE temperature scenarios**
+```{r}
+future_temps <- load_temperature_scenarios(
+  "data_Güttingen/future_climate2",
+  "Güttingen_futuretemps"
+)
+
+SSPs  <- c("ssp126","ssp245","ssp370","ssp585")
+Times <- c(2050, 2085)
+
+list_ssp  <- strsplit(names(future_temps), "\\.") %>% map(2) %>% unlist()
+list_gcm  <- strsplit(names(future_temps), "\\.") %>% map(3) %>% unlist()
+list_time <- strsplit(names(future_temps), "\\.") %>% map(4) %>% unlist()
+
+```
+
+**Chill for FUTURE scenarios**
+
+```{r}
+for (SSP in SSPs) {
+  for (Time in Times) {
+    
+    fname <- paste0("Güttingen_multichill_305_59_", Time, "_", SSP)
+    if (length(list.files("data_Güttingen/future_climate", pattern = fname)) > 0)
+      next
+    
+    Temps <- future_temps[list_ssp == SSP & list_time == Time]
+    names(Temps) <- list_gcm[list_ssp == SSP & list_time == Time]
+    
+    daily_fut <- tempResponse_list_daily(
+      Temps, Start_JDay, End_JDay, daily_models
+    )
+    
+    hourly_fut <- tempResponse_daily_list(
+      Temps, latitude, Start_JDay, End_JDay,
+      hourly_models, misstolerance = 10
+    )
+    
+    future_chill <- lapply(
+      names(daily_fut),
+      function(x)
+        cbind(daily_fut[[x]],
+              hourly_fut[[x]][, names(hourly_models)])
+    )
+    
+    names(future_chill) <- names(daily_fut)
+    
+    save_temperature_scenarios(
+      future_chill,
+      "data_Güttingen/future_climate",
+      fname
+    )
+  }
+}
+```
+
+## Heat map of past and future Safe Winter Chill changes
+
+**Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here**
+
+**Assemble RESULTS table**
+```{r}
+chill_hist <- load_temperature_scenarios(
+  "data_Güttingen/future_climate",
+  "Güttingen_multichill_305_59_historic"
+)
+
+chill_obs <- read_tab(
+  "data_Güttingen/future_climate/Güttingen_multichill_305_59_observed.csv"
+)
+
+results <- NULL
+
+for (nam in names(chill_hist)) {
+  for (met in metrics) {
+    res <- data.frame(
+      Metric   = met,
+      GCM      = "none",
+      SSP      = "none",
+      Year     = as.numeric(nam),
+      Result   = quantile(chill_hist[[nam]][, met], 0.1),
+      Scenario = "Historical"
+    )
+    results <- rbind(results, res)
+  }
+}
+
+for (SSP in SSPs) {
+  for (Time in Times) {
+    
+    chill <- load_temperature_scenarios(
+      "data_Güttingen/future_climate",
+      paste0("Güttingen_multichill_305_59_", Time, "_", SSP)
+    )
+    
+    for (gcm in names(chill)) {
+      for (met in metrics) {
+        res <- data.frame(
+          Metric   = met,
+          GCM      = gcm,
+          SSP      = SSP,
+          Year     = Time,
+          Result   = quantile(chill[[gcm]][, met], 0.1),
+          Scenario = "Future"
+        )
+        results <- rbind(results, res)
+      }
+    }
+  }
+}
+```
+
+**NORMALIZE (baseline = first historical year, 1995)**
+```{r}
+ref_year <- min(results$Year[results$Scenario == "Historical"])
+results$SWC <- NA
+
+for (met in metrics) {
+  ref_val <- results$Result[
+    results$Metric == met &
+      results$Year == ref_year &
+      results$Scenario == "Historical"
+  ][1]
+  
+  results$SWC[results$Metric == met] <-
+    results$Result[results$Metric == met] / ref_val - 1
+}
+
+rng <- range(results$SWC, na.rm = TRUE)
+
+```
+
+**HEAT MAPS**
+```{r}
+p_future <- ggplot(
+  results[results$Scenario == "Future",],
+  aes(GCM, factor(Metric, levels = metrics), fill = SWC)
+) +
+  geom_tile() +
+  facet_grid(SSP ~ Year) +
+  scale_fill_gradientn(colours = matlab.like(15),
+                       labels = scales::percent,
+                       limits = rng) +
+  scale_y_discrete(labels = model_labels) +
+  theme_bw(14) +
+  theme(axis.text.x = element_text(angle = 75, hjust = 1))
+
+p_past <- ggplot(
+  results[results$Scenario == "Historical",],
+  aes(Year, factor(Metric, levels = metrics), fill = SWC)
+) +
+  geom_tile() +
+  scale_fill_gradientn(colours = matlab.like(15),
+                       labels = scales::percent,
+                       limits = rng) +
+  scale_y_discrete(labels = model_labels) +
+  scale_x_continuous(position = "top") +
+  theme_bw(14)
+
+(p_past + p_future + plot_layout(nrow = 2, heights = c(1,3)))
+```
+
+## Animated time series of Safe Winter Chill
+
+**Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs)**
+
+```{r, warning=FALSE}
+hist <- results[results$Scenario == "Historical",]
+hist <- do.call(rbind, lapply(
+  c("SSP1","SSP2","SSP3","SSP5"),
+  function(x) transform(hist, SSP = x)
+))
+
+future <- results[results$Scenario == "Future",]
+
+GCM_mean <- aggregate(
+  SWC ~ Metric + SSP + Year,
+  data = future,
+  FUN = mean
+)
+
+typeof(hist$SSP)
+
+GCM_mean$SSP <- factor(GCM_mean$SSP, levels = c('ssp126', 'ssp245', 'ssp370', 'ssp585'),
+                       labels = c('SSP1', 'SSP2', 'SSP3', 'SSP5'))
+
+
+TS <- rbind(
+  hist[, c("Metric","SSP","Year","SWC")],
+  GCM_mean
+)
+
+p_anim <- ggplot(
+  TS,
+  aes(Year, SWC, col = factor(Metric, levels = metrics))
+) +
+  geom_line(size = 1.2) +
+  facet_wrap(~SSP, nrow = 4) +
+  scale_color_discrete(labels = model_labels) +
+  scale_y_continuous(labels = scales::percent) +
+  theme_bw(11)
+
+animate(
+  p_anim + transition_reveal(Year),
+  fps = 10
+)
+```

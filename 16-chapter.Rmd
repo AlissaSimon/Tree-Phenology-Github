@@ -1,0 +1,144 @@
+# Chapter 16 — Making CMIP6 scenarios
+
+In this chapter, CMIP6 climate projections are used to generate future temperature scenarios and assess their impacts on agroclimatic metrics.
+
+## Generating CMIP6-based temperature scenarios
+
+**Analyze the historic and future impact of climate change on two agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.**
+
+**Study area and data sources**
+
+```{r eval=FALSE}
+library(chillR)
+library(tidyverse)
+
+location <- c(8.9, 47.7)
+area_buff <- 4
+
+area <- c(
+  ceiling(location[2]) + area_buff,   # north
+  floor(location[1]) - area_buff,     # west
+  floor(location[2]) - area_buff,     # south
+  ceiling(location[1]) + area_buff    # east
+)
+```
+
+**Scenario generation and processing**
+
+```{r eval=FALSE}
+download_cmip6_ecmwfr(
+  scenarios = c("ssp126", "ssp245", "ssp370", "ssp585"),
+  area = area,
+  model = 'default',
+  frequency = 'monthly',
+  variable = c('Tmin', 'Tmax'),
+  year_start = 2015,
+  year_end = 2100
+)
+
+download_baseline_cmip6_ecmwfr(
+  area = area,
+  model = 'match_downloaded',
+  frequency = 'monthly',
+  variable = c('Tmin', 'Tmax'),
+  year_start = 1986,
+  year_end = 2014,
+  month = 1:12
+)
+
+station <- data.frame(
+  station_name = c("Güttingen"),
+  longitude = c(8.9),
+  latitude = c(47.7)
+)
+
+summary(cars$dist)
+summary(cars$speed)
+```
+
+**Baseline adjustment and generation of future temperature scenarios**
+
+```{r eval=FALSE}
+
+source('extract_cmip6_data_mod.R')
+extracted <- extract_cmip6_data_mod(stations = station)
+
+head(extracted$`ssp126_AWI-CM-1-1-MR`)
+
+change_scenarios <- gen_rel_change_scenario(extracted, 
+                                            scenarios = c(2050, 2085), 
+                                            reference_period = c(1990:2024),
+                                            future_window_width = 30)
+
+head(change_scenarios)
+
+write.csv(change_scenarios, "data_Güttingen/all_change_scenarios.csv", row.names = FALSE)
+
+scen_list <- convert_scen_information(change_scenarios)
+
+scen_list$Güttingen$ssp126$`ACCESS-CM2`$'2050'
+
+Güttingen_temps <- read_tab("data_Güttingen/Güttingen_clean_weather.csv")
+
+temps_1996 <- temperature_scenario_from_records(Güttingen_temps, 1996)
+temps_2000 <- temperature_scenario_from_records(Güttingen_temps, 2000)
+
+base <- temperature_scenario_baseline_adjustment(
+  temps_1996, temps_2000
+)
+
+scen_list <- convert_scen_information(
+  change_scenarios,
+  give_structure = FALSE
+)
+  
+ref_year <- unique(change_scenarios$reference_year)
+
+temps_ref1 <- temperature_scenario_from_records(Güttingen_temps, ref_year)
+temps_ref2 <- temperature_scenario_from_records(Güttingen_temps, ref_year)
+
+base <- temperature_scenario_baseline_adjustment(
+  temps_ref1,
+  temps_ref2
+)
+
+adjusted_list <- temperature_scenario_baseline_adjustment(
+  base,
+  scen_list,
+  temperature_check_args =
+    list(scenario_check_thresholds = c(-5, 15))
+)
+
+temps <- temperature_generation(
+  Güttingen_temps,
+  years = c(1990, 2024),        
+  sim_years = c(2001, 2100),    
+  adjusted_list,
+  temperature_check_args = list(
+    scenario_check_thresholds = c(-5, 15)
+  )
+)
+
+save_temperature_scenarios(temps,
+                         "data_Güttingen/future_climate",
+                          "Güttingen_futuretemps")
+
+for(scen in 1:length(adjusted_list))
+{
+  if(!file.exists(paste0("data_Güttingen/future_climate2/Güttingen_futuretemps",
+                         scen,"_",
+                         names(adjusted_list)[scen],".csv")) )
+  {temp_temp <- temperature_generation(Bonn_temps,
+                                       years = c(1990, 2024),
+                                       sim_years = c(2001, 2100),
+                                       adjusted_list[scen],  
+                                       temperature_check_args = 
+                                         list( scenario_check_thresholds = c(-5, 15)))
+  write.csv(temp_temp[[1]],paste0("data_Güttingen/future_climate2/Güttingen_futuretemps",scen,"_",names(adjusted_list)[scen],".csv"),
+            row.names=FALSE)
+  print(paste("Processed object",scen,"of", length(adjusted_list)))
+  
+  }
+}
+
+```

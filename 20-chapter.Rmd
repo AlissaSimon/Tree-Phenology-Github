@@ -1,0 +1,64 @@
+# Chapter 20 — Simple phenology analysis
+
+In this chapter, basic concepts of statistical inference and phenological modeling are discussed, with a focus on causal reasoning and process-based understanding.
+
+## P-hacking and its implications
+
+**Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.**
+
+**What is p-hacking?**
+
+P-hacking is the practice of repeatedly testing different statistical models, variables, time windows, or data transformations until a statistically significant result (e.g. p < 0.05) is obtained.
+
+**Why is p-hacking problematic?**
+
+- It inflates false positives, meaning     that with enough tests, random noise     can appear statistically                 significant
+- It leads to misleading conclusions,      where statistical significance is        mistaken for meaningful causation
+- It encourages overfitting, resulting in   models that fit observed data well but   fail to generalize
+- It undermines reproducibility, as        results often cannot be replicated
+- It ignores biological processes,         focusing on correlations without         reference to underlying system dynamics
+
+## Causal relationship between temperature and bloom dates
+
+**Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.**
+
+**Conceptual understanding**
+
+Calendar time (year) does not directly cause trees to bloom earlier. Instead, bloom timing is driven by temperature-dependent physiological processes.
+
+Observed correlations between year and bloom date arise because temperatures have increased over time due to climate change. Thus, temperature is the true causal driver, while time is only indirectly related.
+
+**This relationship can be summarized as:**
+
+- Time → Climate warming → Temperature → Phenology  
+**or** 
+- Temperature (chilling + forcing) → Bloom date
+
+## Requirements for a process-based phenology model
+
+**What do we need to know to build a process-based model from this?**
+
+**Chilling phase (endodormancy):**
+
+- When chilling is effective (start and    end dates)
+- How temperature contributes to chilling   (temperature response function)
+- The chilling requirement needed to       release dormancy
+
+**Forcing phase (ecodormancy):**
+
+- When forcing begins, after the chilling   requirement is met
+- How temperature contributes to heat      accumulation
+- The forcing (heat) requirement needed    to trigger bloom
+
+**Model structure:**
+
+- Clear definition of chilling and         forcing periods
+- Mathematical descriptions of chill and   heat accumulation
+- Thresholds for dormancy release and      bloom
+- Rules governing the transition from      chilling to forcing
+
+**Calibration and validation:**
+
+- Model parameters must be fitted using    observed bloom data
+- Model structure should be guided by      ecological theory, not trial-and-error
+- Validation should be conducted using     independent datasets to avoid            overfitting

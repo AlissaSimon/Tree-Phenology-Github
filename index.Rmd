@@ -1,0 +1,17 @@
+---
+output:
+  bookdown::gitbook:
+    number_sections: false
+---
+
+# Tree Phenology Logbook {-}
+
+<div class="titlepage">
+
+<img class="title-img" src="https://hortibonn.github.io/Tree-Phenology/chillR_hexSticker.png" alt="chillR sticker">
+
+- **Author:** Alissa Sophie Simon  
+- **Date:** 08-03-2026 
+- **Course:** Tree Phenology analysis in R (Logbook)
+
+</div>

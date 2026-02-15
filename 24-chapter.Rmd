@@ -1,0 +1,62 @@
+# Chapter 24 — Examples of PLS regression with agroclimatic metrics
+
+This chapter shows how PLS regression with agroclimatic metrics works in different climates and where it can fail, especially when chilling and forcing periods overlap.
+
+## Patterns across climates
+
+**Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?**
+
+Across the examples, a clearer separation of chilling and forcing periods can be best observed in:
+
+**cold to moderately cold winter climates**
+
+- Beijing
+- Klein-Altendorf
+- Croatia
+- California
+
+**Patterns which can be observed:**
+
+- winters are consistently cold enough     for chill accumulation
+- chill metrics show a small rise in       autumn to winter
+- PLS coefficients show positive chill     effects in autumn to winter
+
+**Results:**
+
+PLS clearly identifies
+- a chilling window (often October -       January)
+- followed by a forcing window (January -   March)
+
+
+## Reasons for success and failure
+
+**Think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics. Write down your thoughts.**
+
+PLS struggled in warm winter climates:
+- Southern UK
+- Tunisia
+
+**Patterns which can be observed:**
+
+- chill accumulation is weak, fragmented,   or overlapping with heat
+- chill metrics increase slowly and        irregularly
+- forcing and chilling signals overlap     strongly in time
+
+**Results:**
+
+No clear boundary between chilling and forcing phases
+
+**Reasons for success of PLS:**
+
+- Chilling and forcing are temporally      separated -> cold winters → chill        first, heat later
+- Strong seasonal signal → clear           temperature seasonality
+- appropriate chill metric → dynamic       model performs best across the           different climates 
+- Penology is strongly temperature         controlled
+
+**Reasons for failure of PLS:**
+
+PLS performs poorly when
+- Winters are too warm
+- chilling and forcing overlap
+- metric climate mismatch → simpler        chill models fail under fluctuating      temperatures
+- biological complexity → photoperiod,     water stress, or genetic effects are     not captured by temperature alone

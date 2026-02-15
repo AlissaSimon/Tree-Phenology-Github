@@ -1,0 +1,90 @@
+# Chapter 9 — Some useful tools in R
+
+This section introduces practical R tools for handling and visualizing data, using tidyverse workflows and basic iteration to clean, transform, and plot temperature data clearly and reproducibly.
+
+## Data wrangling and visualization with tidyverse
+
+**Based on the Winters_hours_gaps dataset, use magrittr pipes and functions of the tidyverse to accomplish the following:**
+
+**Converting data to a tibble**
+```{r}
+library(tidyverse)
+Winters_tib <- as_tibble(Winters_hours_gaps)
+```
+
+**Subsetting rows**
+```{r}
+Winters_tib10 <- Winters_tib %>% slice(1:10)
+```
+
+**Reshaping data: wide to long format**
+```{r}
+Winters_long <- Winters_tib10 %>%
+  pivot_longer(cols = c(Temp_gaps, Temp),
+               names_to = "measurement",
+               values_to = "value")
+```
+
+**Faceted visualization with ggplot2**
+```{r}
+ggplot(Winters_long, aes(x = Hour, y = value)) +
+  geom_point(color = "steelblue") +
+  facet_wrap(~measurement, ncol = 1) +
+  theme_bw(base_size = 11) +
+  labs(title = "Temperature values (Temp vs Temp_gaps)",
+       x = "Hour of Day", y = "Temperature (°C)")
+```
+
+**Reshaping data: long to wide format**
+```{r}
+Winters_wide <- Winters_long %>% pivot_wider(names_from = measurement, values_from = value)
+```
+
+**Column selection**
+```{r}
+Winters_select <- Winters_wide %>% select(Year, Month, Day, Temp)
+```
+
+**Sorting data**
+```{r}
+Winters_sorted <- Winters_select %>%
+  arrange(desc(Temp))
+
+head(Winters_sorted)
+```
+
+## Using a for loop for data transformation
+
+**For the Winter_hours_gaps dataset, write a for loop to convert all temperatures (Temp column) to degrees Fahrenheit**
+
+```{r}
+Winters_for <- Winters_hours_gaps
+for (i in 1:nrow(Winters_for)) {
+  Winters_for$Temp[i] <- (Winters_for$Temp[i] * 9/5) + 32
+}
+Winters_for <- as_tibble(Winters_for)
+Winters_for
+```
+
+## Using apply-family functions
+
+**Execute the same operation with a function from the apply family**
+```{r}
+Winters_apply <- Winters_hours_gaps
+Winters_apply$Temp <- sapply(Winters_apply$Temp, function(x) (x * 9/5) + 32)
+Winters_apply <- as_tibble(Winters_apply)
+Winters_apply
+```
+
+## Vectorized operations with tidyverse
+
+**Now use the tidyverse function mutate to achieve the same outcome**
+
+```{r}
+Winters_mutate <- Winters_hours_gaps %>%
+  mutate(Temp = (Temp * 9/5) + 32)
+Winters_mutate <- as_tibble(Winters_mutate)
+Winters_mutate
+```
+
+

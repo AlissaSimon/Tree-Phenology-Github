@@ -1,0 +1,65 @@
+# Chapter 8 — Making hourly temperatures
+
+In this chapter, we will explore how to create hourly temperature data from daily records using the `chillR` package. We will use both idealized and empirical temperature curves.
+
+## Daylength and solar geometry
+
+**Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength**
+
+Here, I use **Edinburgh, Scotland (latitude = 55.95)** as the example location.
+
+```{r}
+library(chillR)
+library(ggplot2)
+library(tidyr)
+latitude <- 55.95
+Days <- chillR::daylength(latitude = 55.95, JDay = 1:365)
+Days_df <-
+  data.frame(
+    JDay = 1:365,
+    Sunrise = Days$Sunrise,
+    Sunset = Days$Sunset,
+    Daylength = Days$Daylength
+  )
+Days_df <- pivot_longer(Days_df,cols=c(Sunrise:Daylength))
+
+ggplot(Days_df, aes(JDay, value)) +
+  geom_line(lwd = 1.5, col = "darkgreen") +
+  facet_grid(cols = vars(name)) +
+  ylab("Time of Day / Daylength (Hours)") +
+  xlab("Julian Day") +
+  ggtitle("Sunrise, Sunset and Daylength Over the Year") +
+  theme_bw(base_size = 16)
+```
+
+
+## Idealized diurnal temperature curves
+
+**Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset**
+
+```{r}
+latitude <- 55.95
+KA_hourly <- stack_hourly_temps(KA_weather, latitude = latitude)$hourtemps
+head(KA_hourly, 24)
+```
+
+## Empirical reconstruction of hourly temperatures
+
+**Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures.**
+
+Sometimes the idealized curve may not reflect real conditions (e.g., topographic or local effects).
+In such cases, empirical curves are better. They are based on real hourly observations.
+
+```{r}
+empi_curve <- Empirical_daily_temperature_curve(Winters_hours_gaps)
+ggplot(data = empi_curve[1:96, ], aes(Hour, Prediction_coefficient)) +
+  geom_line(lwd = 1.3, col = "red") +
+  facet_grid(rows = vars(Month)) +
+  xlab("Hour of the Day") +
+  ylab("Prediction Coefficient") +
+  theme_bw(base_size = 10)
+Winters_daily <- make_all_day_table(Winters_hours_gaps, input_timestep = "hour")
+Winters_emp_hourly <- Empirical_hourly_temperatures(Winters_daily, empi_curve)
+head(Winters_emp_hourly, 24)
+
+```

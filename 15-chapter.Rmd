@@ -1,0 +1,41 @@
+# Chapter 15 — Future temperature scenarios
+
+In this chapter, future climate scenarios are explored using RCPs and SSPs to assess potential temperature changes and their impacts.
+
+## RCPs and SSPs: concepts and differences
+
+**Briefly describe the differences between the RCPs and the SSPs (you may have to follow some of the links provided above)**
+
+**Representative Concentration Pathways (RCPs):**
+
+- Introduced in IPCC AR5 (2014)
+- Focus on radiative forcing, so the       amount of the sun’s energy trapped by    the Earth (measured in W/m²)
+- Four original pathways: 2.6, 4.5, 6.0,   8.5 W/m², designed to explore a range    of future greenhouse 
+  gas concentrations and climate change    outcomes
+- Their purpose is to serve as inputs for   climate models to simulate the           corresponding warming and climate        impacts by the end of the century
+- A Socioeconomic context is not           explicitly included as RCPs focus on     the physical aspect rather than human    development pathways
+
+**Shared Socioeconomic Pathways (SSPs):**
+
+- Introduced in IPCC AR6 (2021)
+- Include socioeconomic narratives         describing potential futures in terms    of population growth, economic           development, urbanization, technology,   and policy
+
+**Five primary SSPs:**
+  
+**SSP1** – Sustainability: Focused on sustainable growth and equality; low challenges to mitigation and adaptation.
+
+**SSP2** – Middle of the Road: Continuation of historical trends; moderate challenges to mitigation and adaptation.
+
+**SSP3** – Regional Rivalry: Fragmented world, nationalism, high challenges to mitigation and adaptation.
+
+**SSP4** – Inequality: Increasing inequality, high adaptation challenges but low mitigation challenges.
+
+**SSP5**   – Fossil-fueled Development: Rapid growth, high emissions, low adaptation challenges but high mitigation challenges.
+
+- Their purpose is to define the           “societal stage” on which emissions      reductions or increases occur. They      are used in Integrated Assessment        Models (IAMs) to simulate possible       emissions trajectories.
+- Each SSP can correspond to multiple      RCP-like pathways, depending on          mitigation actions.
+
+**Key differences and summary:**
+
+RCPs are simpler and physics focused pathways, where as SCCPs are more narrative-driven pathways, shwoing how society might develop and how that would influence emissions. 
+SSPs allow for linking societal decisions, adaptation strategies, and climate mitigation, providing a more comprehensive framework for planning in climate change studies.

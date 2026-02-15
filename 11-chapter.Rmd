@@ -1,0 +1,126 @@
+# Chapter 11 — Filling gaps in temperature records
+
+In this chapter, we identify gaps in temperature records and fill them using nearby high-quality weather stations.
+
+## Identifying gaps in the temperature record
+
+**Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)**
+
+```{r}
+library(chillR)
+library(tidyverse)
+gut_raw <- read.csv("data_güttingen/Güttingen_raw_weather.csv")
+gut <- read.csv("data_güttingen/Güttingen_chillR_weather.csv")
+gut_qc <- fix_weather(gut)$QC
+gut_qc
+```
+
+## Identifying nearby weather stations
+
+**Create a list of the 25 closest weather stations using the handle_gsod function**
+
+```{r}
+station_list <- handle_gsod(
+  action = "list_stations",
+  location = c(9.283, 47.600),
+  time_interval = c(1990, 2024)
+)
+
+station_list[1:25,]
+```
+
+
+## Selecting suitable stations for gap filling
+
+**Identify suitable weather stations for patching gaps**
+
+**Selected patching stations** 
+
+- 4. Konstanz
+  - Distance 11.90, overlap years 35.00,     interval covered 100%
+- 6. Friedrichshafen 
+  - Distance 18.84, overlap years           35.00, interval covered 100%
+- 8. St. Gallen 
+  - Distance 20.57, overlap years 35.00,     interval covered 100%
+- 13. Aadorf-Taenikon 
+  - Distance 31.59, overlap years           34.17, interval covered 98%
+- 14. Hoernli 
+  - Distance 36.06, overlap years 30.84,     interval covered 88%
+- 15. Bregenz 
+  - Distance 36.81, overlap years 35.00,     interval covered 100%
+
+## Downloading patching station data AND Patching gaps in the temperature record
+
+**Download weather data for promising stations, convert them to chillR format and compile them in a list & Use the patch_daily_temperatures function to fill gaps**
+
+```{r}
+patch_weather<-
+  handle_gsod(action = "download_weather",
+              location = as.character(station_list$chillR_code[c(4, 6, 8, 13, 14, 15)]),
+              time_interval = c(1990,2024)) %>%
+  handle_gsod()
+  
+patched <- patch_daily_temperatures(weather = gut,
+                                    patch_weather = patch_weather)
+
+
+
+patched$statistics[[1]]
+patched$statistics[[2]]
+patched$statistics[[3]]
+
+```
+
+
+## Evaluating patching success and final gap filling and data preparation
+
+**Investigate the results - have all gaps been filled? & If necessary, repeat until you have a dataset you can work with in further analyses**
+
+```{r}
+post_patch_stats <- fix_weather(patched)$QC
+
+post_patch_stats
+
+# most of the gaps have been filled
+
+Güttingen_weather<-fix_weather(patched)
+
+patched_weather <- patched$weather
+
+weather_full <- patched_weather %>% make_all_day_table()
+
+Tmin_int <- interpolate_gaps(weather_full$Tmin)
+
+weather_full <- weather_full %>%
+  mutate(
+    Tmin = Tmin_int$interp,
+    Tmin_interpolated = Tmin_int$missing
+  )
+Tmax_int <- interpolate_gaps(weather_full$Tmax)
+Tmin_int <- interpolate_gaps(weather_full$Tmin)
+
+weather_full <- weather_full %>%
+  mutate(
+    Tmax = Tmax_int$interp,
+    Tmax_interpolated = Tmax_int$missing
+  )
+any(is.na(weather_full$Tmin))
+any(is.na(weather_full$Tmax))
+
+final_qc <- fix_weather(weather_full)$QC
+final_qc
+
+weather_final <- weather_full %>%
+  select(Year, Month, Day, Tmax, Tmin) %>% 
+  mutate(
+    Year = as.integer(Year),
+    Month = as.integer(Month),
+    Day = as.integer(Day),
+    Tmax = as.numeric(Tmax),
+    Tmin = as.numeric(Tmin)
+  )
+
+write.csv(weather_final,
+         "data_güttingen/Güttingen_clean_weather.csv",
+         row.names = FALSE)
+```
