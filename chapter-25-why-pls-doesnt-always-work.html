@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 25 — Why PLS doesn’t always work | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 25 — Why PLS doesn’t always work | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 25 — Why PLS doesn’t always work | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 25 — Why PLS doesn’t always work | _main.knit" />
+  <meta property="og:title" content="Chapter 25 — Why PLS doesn’t always work | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 25 — Why PLS doesn’t always work | _main.knit" />
+  <meta name="twitter:title" content="Chapter 25 — Why PLS doesn’t always work | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -321,190 +321,190 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Sensitivity analysis of chill and heat models<a href="chapter-25-why-pls-doesnt-always-work.html#sensitivity-analysis-of-chill-and-heat-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.</strong></p>
 <p><strong>Site definition and temperature ranges</strong></p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb152-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb152-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb152-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-4" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
-<span id="cb152-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-5" tabindex="-1"></a></span>
-<span id="cb152-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-6" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> <span class="fl">47.7</span>   </span>
-<span id="cb152-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-7" tabindex="-1"></a>month_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb152-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-8" tabindex="-1"></a></span>
-<span id="cb152-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-9" tabindex="-1"></a>Tmins <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">20</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb152-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-10" tabindex="-1"></a>Tmaxs <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">30</span></span>
-<span id="cb152-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-11" tabindex="-1"></a></span>
-<span id="cb152-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb152-12" tabindex="-1"></a>temp_model <span class="ot">&lt;-</span> Dynamic_Model </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb142-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb142-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb142-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-4" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
+<span id="cb142-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-5" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-6" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> <span class="fl">47.7</span>   </span>
+<span id="cb142-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-7" tabindex="-1"></a>month_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb142-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-8" tabindex="-1"></a></span>
+<span id="cb142-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-9" tabindex="-1"></a>Tmins <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">20</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb142-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-10" tabindex="-1"></a>Tmaxs <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb142-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-11" tabindex="-1"></a></span>
+<span id="cb142-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb142-12" tabindex="-1"></a>temp_model <span class="ot">&lt;-</span> Dynamic_Model </span></code></pre></div>
 <p><strong>Chill model sensitivity calculations</strong></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-1" tabindex="-1"></a>mins  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb153-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-2" tabindex="-1"></a>maxs  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb153-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-3" tabindex="-1"></a>CP    <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb153-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-4" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb153-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-5" tabindex="-1"></a></span>
-<span id="cb153-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-6" tabindex="-1"></a><span class="cf">for</span> (mon <span class="cf">in</span> month_range) {</span>
-<span id="cb153-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-7" tabindex="-1"></a>  </span>
-<span id="cb153-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-8" tabindex="-1"></a>  days_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(</span>
-<span id="cb153-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-9" tabindex="-1"></a>    <span class="fu">difftime</span>(</span>
-<span id="cb153-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-10" tabindex="-1"></a>      <span class="fu">ISOdate</span>(<span class="dv">2002</span>, mon <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb153-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-11" tabindex="-1"></a>      <span class="fu">ISOdate</span>(<span class="dv">2002</span>, mon, <span class="dv">1</span>)</span>
-<span id="cb153-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-12" tabindex="-1"></a>    )</span>
-<span id="cb153-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-13" tabindex="-1"></a>  )</span>
-<span id="cb153-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-14" tabindex="-1"></a>  <span class="cf">if</span> (mon <span class="sc">==</span> <span class="dv">12</span>) days_month <span class="ot">&lt;-</span> <span class="dv">31</span></span>
-<span id="cb153-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-15" tabindex="-1"></a>  </span>
-<span id="cb153-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-16" tabindex="-1"></a>  weather <span class="ot">&lt;-</span> <span class="fu">make_all_day_table</span>(</span>
-<span id="cb153-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-17" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb153-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-18" tabindex="-1"></a>      <span class="at">Year  =</span> <span class="fu">c</span>(<span class="dv">2001</span>, <span class="dv">2001</span>),</span>
-<span id="cb153-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-19" tabindex="-1"></a>      <span class="at">Month =</span> <span class="fu">c</span>(mon, mon),</span>
-<span id="cb153-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-20" tabindex="-1"></a>      <span class="at">Day   =</span> <span class="fu">c</span>(<span class="dv">1</span>, days_month),</span>
-<span id="cb153-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-21" tabindex="-1"></a>      <span class="at">Tmin  =</span> <span class="dv">0</span>,</span>
-<span id="cb153-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-22" tabindex="-1"></a>      <span class="at">Tmax  =</span> <span class="dv">0</span></span>
-<span id="cb153-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-23" tabindex="-1"></a>    )</span>
-<span id="cb153-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-24" tabindex="-1"></a>  )</span>
-<span id="cb153-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-25" tabindex="-1"></a>  </span>
-<span id="cb153-26"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-26" tabindex="-1"></a>  <span class="cf">for</span> (tmin <span class="cf">in</span> Tmins)</span>
-<span id="cb153-27"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-27" tabindex="-1"></a>    <span class="cf">for</span> (tmax <span class="cf">in</span> Tmaxs)</span>
-<span id="cb153-28"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-28" tabindex="-1"></a>      <span class="cf">if</span> (tmax <span class="sc">&gt;=</span> tmin) {</span>
-<span id="cb153-29"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-29" tabindex="-1"></a>        </span>
-<span id="cb153-30"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-30" tabindex="-1"></a>        hourtemps <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
-<span id="cb153-31"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-31" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">Tmin =</span> tmin,</span>
-<span id="cb153-32"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-32" tabindex="-1"></a>                 <span class="at">Tmax =</span> tmax) <span class="sc">%&gt;%</span></span>
-<span id="cb153-33"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-33" tabindex="-1"></a>          <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> latitude) <span class="sc">%&gt;%</span></span>
-<span id="cb153-34"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-34" tabindex="-1"></a>          <span class="fu">pluck</span>(<span class="st">&quot;hourtemps&quot;</span>, <span class="st">&quot;Temp&quot;</span>)</span>
-<span id="cb153-35"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-35" tabindex="-1"></a>        </span>
-<span id="cb153-36"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-36" tabindex="-1"></a>        CP <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb153-37"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-37" tabindex="-1"></a>          CP,</span>
-<span id="cb153-38"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-38" tabindex="-1"></a>          <span class="fu">tail</span>(<span class="fu">Dynamic_Model</span>(hourtemps), <span class="dv">1</span>) <span class="sc">/</span> days_month</span>
-<span id="cb153-39"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-39" tabindex="-1"></a>        )</span>
-<span id="cb153-40"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-40" tabindex="-1"></a>        </span>
-<span id="cb153-41"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-41" tabindex="-1"></a>        mins  <span class="ot">&lt;-</span> <span class="fu">c</span>(mins, tmin)</span>
-<span id="cb153-42"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-42" tabindex="-1"></a>        maxs  <span class="ot">&lt;-</span> <span class="fu">c</span>(maxs, tmax)</span>
-<span id="cb153-43"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-43" tabindex="-1"></a>        month <span class="ot">&lt;-</span> <span class="fu">c</span>(month, mon)</span>
-<span id="cb153-44"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-44" tabindex="-1"></a>      }</span>
-<span id="cb153-45"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-45" tabindex="-1"></a>}</span>
-<span id="cb153-46"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-46" tabindex="-1"></a></span>
-<span id="cb153-47"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-47" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb153-48"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-48" tabindex="-1"></a>  <span class="at">Month =</span> month,</span>
-<span id="cb153-49"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-49" tabindex="-1"></a>  <span class="at">Tmin  =</span> mins,</span>
-<span id="cb153-50"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-50" tabindex="-1"></a>  <span class="at">Tmax  =</span> maxs,</span>
-<span id="cb153-51"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-51" tabindex="-1"></a>  <span class="at">CP    =</span> CP</span>
-<span id="cb153-52"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-52" tabindex="-1"></a>)</span>
-<span id="cb153-53"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-53" tabindex="-1"></a></span>
-<span id="cb153-54"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-54" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month), ]</span>
-<span id="cb153-55"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-55" tabindex="-1"></a></span>
-<span id="cb153-56"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-56" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb153-57"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-57" tabindex="-1"></a>  results,</span>
-<span id="cb153-58"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-58" tabindex="-1"></a>  <span class="st">&quot;data_Güttingen/Model_sensitivity_Guettingen_CP.csv&quot;</span>,</span>
-<span id="cb153-59"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-59" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb153-60"><a href="chapter-25-why-pls-doesnt-always-work.html#cb153-60" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-1" tabindex="-1"></a>mins  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb143-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-2" tabindex="-1"></a>maxs  <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb143-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-3" tabindex="-1"></a>CP    <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb143-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-4" tabindex="-1"></a>month <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb143-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-5" tabindex="-1"></a></span>
+<span id="cb143-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-6" tabindex="-1"></a><span class="cf">for</span> (mon <span class="cf">in</span> month_range) {</span>
+<span id="cb143-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-7" tabindex="-1"></a>  </span>
+<span id="cb143-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-8" tabindex="-1"></a>  days_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb143-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-9" tabindex="-1"></a>    <span class="fu">difftime</span>(</span>
+<span id="cb143-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-10" tabindex="-1"></a>      <span class="fu">ISOdate</span>(<span class="dv">2002</span>, mon <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb143-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-11" tabindex="-1"></a>      <span class="fu">ISOdate</span>(<span class="dv">2002</span>, mon, <span class="dv">1</span>)</span>
+<span id="cb143-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-12" tabindex="-1"></a>    )</span>
+<span id="cb143-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-13" tabindex="-1"></a>  )</span>
+<span id="cb143-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-14" tabindex="-1"></a>  <span class="cf">if</span> (mon <span class="sc">==</span> <span class="dv">12</span>) days_month <span class="ot">&lt;-</span> <span class="dv">31</span></span>
+<span id="cb143-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-15" tabindex="-1"></a>  </span>
+<span id="cb143-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-16" tabindex="-1"></a>  weather <span class="ot">&lt;-</span> <span class="fu">make_all_day_table</span>(</span>
+<span id="cb143-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-17" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb143-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-18" tabindex="-1"></a>      <span class="at">Year  =</span> <span class="fu">c</span>(<span class="dv">2001</span>, <span class="dv">2001</span>),</span>
+<span id="cb143-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-19" tabindex="-1"></a>      <span class="at">Month =</span> <span class="fu">c</span>(mon, mon),</span>
+<span id="cb143-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-20" tabindex="-1"></a>      <span class="at">Day   =</span> <span class="fu">c</span>(<span class="dv">1</span>, days_month),</span>
+<span id="cb143-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-21" tabindex="-1"></a>      <span class="at">Tmin  =</span> <span class="dv">0</span>,</span>
+<span id="cb143-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-22" tabindex="-1"></a>      <span class="at">Tmax  =</span> <span class="dv">0</span></span>
+<span id="cb143-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-23" tabindex="-1"></a>    )</span>
+<span id="cb143-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-24" tabindex="-1"></a>  )</span>
+<span id="cb143-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-25" tabindex="-1"></a>  </span>
+<span id="cb143-26"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-26" tabindex="-1"></a>  <span class="cf">for</span> (tmin <span class="cf">in</span> Tmins)</span>
+<span id="cb143-27"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-27" tabindex="-1"></a>    <span class="cf">for</span> (tmax <span class="cf">in</span> Tmaxs)</span>
+<span id="cb143-28"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-28" tabindex="-1"></a>      <span class="cf">if</span> (tmax <span class="sc">&gt;=</span> tmin) {</span>
+<span id="cb143-29"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-29" tabindex="-1"></a>        </span>
+<span id="cb143-30"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-30" tabindex="-1"></a>        hourtemps <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span></span>
+<span id="cb143-31"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-31" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">Tmin =</span> tmin,</span>
+<span id="cb143-32"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-32" tabindex="-1"></a>                 <span class="at">Tmax =</span> tmax) <span class="sc">%&gt;%</span></span>
+<span id="cb143-33"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-33" tabindex="-1"></a>          <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb143-34"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-34" tabindex="-1"></a>          <span class="fu">pluck</span>(<span class="st">&quot;hourtemps&quot;</span>, <span class="st">&quot;Temp&quot;</span>)</span>
+<span id="cb143-35"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-35" tabindex="-1"></a>        </span>
+<span id="cb143-36"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-36" tabindex="-1"></a>        CP <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb143-37"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-37" tabindex="-1"></a>          CP,</span>
+<span id="cb143-38"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-38" tabindex="-1"></a>          <span class="fu">tail</span>(<span class="fu">Dynamic_Model</span>(hourtemps), <span class="dv">1</span>) <span class="sc">/</span> days_month</span>
+<span id="cb143-39"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-39" tabindex="-1"></a>        )</span>
+<span id="cb143-40"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-40" tabindex="-1"></a>        </span>
+<span id="cb143-41"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-41" tabindex="-1"></a>        mins  <span class="ot">&lt;-</span> <span class="fu">c</span>(mins, tmin)</span>
+<span id="cb143-42"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-42" tabindex="-1"></a>        maxs  <span class="ot">&lt;-</span> <span class="fu">c</span>(maxs, tmax)</span>
+<span id="cb143-43"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-43" tabindex="-1"></a>        month <span class="ot">&lt;-</span> <span class="fu">c</span>(month, mon)</span>
+<span id="cb143-44"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-44" tabindex="-1"></a>      }</span>
+<span id="cb143-45"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-45" tabindex="-1"></a>}</span>
+<span id="cb143-46"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-46" tabindex="-1"></a></span>
+<span id="cb143-47"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-47" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb143-48"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-48" tabindex="-1"></a>  <span class="at">Month =</span> month,</span>
+<span id="cb143-49"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-49" tabindex="-1"></a>  <span class="at">Tmin  =</span> mins,</span>
+<span id="cb143-50"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-50" tabindex="-1"></a>  <span class="at">Tmax  =</span> maxs,</span>
+<span id="cb143-51"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-51" tabindex="-1"></a>  <span class="at">CP    =</span> CP</span>
+<span id="cb143-52"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-52" tabindex="-1"></a>)</span>
+<span id="cb143-53"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-53" tabindex="-1"></a></span>
+<span id="cb143-54"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-54" tabindex="-1"></a>results <span class="ot">&lt;-</span> results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month), ]</span>
+<span id="cb143-55"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-55" tabindex="-1"></a></span>
+<span id="cb143-56"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-56" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
+<span id="cb143-57"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-57" tabindex="-1"></a>  results,</span>
+<span id="cb143-58"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-58" tabindex="-1"></a>  <span class="st">&quot;data_Güttingen/Model_sensitivity_Guettingen_CP.csv&quot;</span>,</span>
+<span id="cb143-59"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-59" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb143-60"><a href="chapter-25-why-pls-doesnt-always-work.html#cb143-60" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Sensitivity heat maps across winter months</strong></p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-1" tabindex="-1"></a>results<span class="sc">$</span>Month_names <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb154-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-2" tabindex="-1"></a>  results<span class="sc">$</span>Month,</span>
-<span id="cb154-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-3" tabindex="-1"></a>  <span class="at">levels =</span> month_range,</span>
-<span id="cb154-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-4" tabindex="-1"></a>  <span class="at">labels =</span> month.name[month_range]</span>
-<span id="cb154-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-5" tabindex="-1"></a>)</span>
-<span id="cb154-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-6" tabindex="-1"></a></span>
-<span id="cb154-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-7" tabindex="-1"></a>DM_sensitivity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb154-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-8" tabindex="-1"></a>  results,</span>
-<span id="cb154-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-9" tabindex="-1"></a>  <span class="fu">aes</span>(Tmin, Tmax, <span class="at">fill =</span> CP)</span>
-<span id="cb154-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-10" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb154-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-11" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb154-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-12" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
-<span id="cb154-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-13" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="fl">0.6</span>),</span>
-<span id="cb154-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-14" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Chill per day</span><span class="sc">\n</span><span class="st">(Chill Portions)&quot;</span></span>
-<span id="cb154-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb154-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
-<span id="cb154-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb154-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb154-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
-<span id="cb154-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-20" tabindex="-1"></a></span>
-<span id="cb154-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb154-21" tabindex="-1"></a>DM_sensitivity</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-1" tabindex="-1"></a>results<span class="sc">$</span>Month_names <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb144-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-2" tabindex="-1"></a>  results<span class="sc">$</span>Month,</span>
+<span id="cb144-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-3" tabindex="-1"></a>  <span class="at">levels =</span> month_range,</span>
+<span id="cb144-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-4" tabindex="-1"></a>  <span class="at">labels =</span> month.name[month_range]</span>
+<span id="cb144-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-5" tabindex="-1"></a>)</span>
+<span id="cb144-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-6" tabindex="-1"></a></span>
+<span id="cb144-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-7" tabindex="-1"></a>DM_sensitivity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb144-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-8" tabindex="-1"></a>  results,</span>
+<span id="cb144-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-9" tabindex="-1"></a>  <span class="fu">aes</span>(Tmin, Tmax, <span class="at">fill =</span> CP)</span>
+<span id="cb144-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-10" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb144-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-11" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb144-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-12" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb144-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-13" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="fl">0.6</span>),</span>
+<span id="cb144-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-14" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Chill per day</span><span class="sc">\n</span><span class="st">(Chill Portions)&quot;</span></span>
+<span id="cb144-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb144-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
+<span id="cb144-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb144-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb144-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
+<span id="cb144-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-20" tabindex="-1"></a></span>
+<span id="cb144-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb144-21" tabindex="-1"></a>DM_sensitivity</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p><strong>Comparison with observed temperature conditions</strong></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-1" tabindex="-1"></a>G_temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data_Güttingen/Güttingen_clean_weather.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb155-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-2" tabindex="-1"></a>  <span class="fu">filter</span>(Month <span class="sc">%in%</span> month_range) <span class="sc">%&gt;%</span></span>
-<span id="cb155-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb155-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-4" tabindex="-1"></a>    <span class="at">Month_names =</span> <span class="fu">factor</span>(</span>
-<span id="cb155-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-5" tabindex="-1"></a>      Month,</span>
-<span id="cb155-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-6" tabindex="-1"></a>      <span class="at">levels =</span> month_range,</span>
-<span id="cb155-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-7" tabindex="-1"></a>      <span class="at">labels =</span> month.name[month_range]</span>
-<span id="cb155-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-8" tabindex="-1"></a>    )</span>
-<span id="cb155-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-9" tabindex="-1"></a>  )</span>
-<span id="cb155-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-10" tabindex="-1"></a></span>
-<span id="cb155-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-11" tabindex="-1"></a>G_temps[G_temps<span class="sc">$</span>Tmax <span class="sc">&lt;</span> G_temps<span class="sc">$</span>Tmin, <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb155-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-12" tabindex="-1"></a></span>
-<span id="cb155-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-13" tabindex="-1"></a>DM_sensitivity <span class="sc">+</span></span>
-<span id="cb155-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-14" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb155-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-15" tabindex="-1"></a>    <span class="at">data =</span> G_temps,</span>
-<span id="cb155-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-16" tabindex="-1"></a>    <span class="fu">aes</span>(Tmin, Tmax),</span>
-<span id="cb155-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-17" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb155-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-18" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.25</span>,</span>
-<span id="cb155-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-19" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb155-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb155-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-21" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity – Güttingen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb155-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-22" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb155-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-23" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb155-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-24" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb155-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb155-25" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-1" tabindex="-1"></a>G_temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data_Güttingen/Güttingen_clean_weather.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb145-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-2" tabindex="-1"></a>  <span class="fu">filter</span>(Month <span class="sc">%in%</span> month_range) <span class="sc">%&gt;%</span></span>
+<span id="cb145-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb145-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-4" tabindex="-1"></a>    <span class="at">Month_names =</span> <span class="fu">factor</span>(</span>
+<span id="cb145-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-5" tabindex="-1"></a>      Month,</span>
+<span id="cb145-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-6" tabindex="-1"></a>      <span class="at">levels =</span> month_range,</span>
+<span id="cb145-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-7" tabindex="-1"></a>      <span class="at">labels =</span> month.name[month_range]</span>
+<span id="cb145-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-8" tabindex="-1"></a>    )</span>
+<span id="cb145-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-9" tabindex="-1"></a>  )</span>
+<span id="cb145-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-10" tabindex="-1"></a></span>
+<span id="cb145-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-11" tabindex="-1"></a>G_temps[G_temps<span class="sc">$</span>Tmax <span class="sc">&lt;</span> G_temps<span class="sc">$</span>Tmin, <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb145-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-12" tabindex="-1"></a></span>
+<span id="cb145-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-13" tabindex="-1"></a>DM_sensitivity <span class="sc">+</span></span>
+<span id="cb145-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-14" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb145-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-15" tabindex="-1"></a>    <span class="at">data =</span> G_temps,</span>
+<span id="cb145-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-16" tabindex="-1"></a>    <span class="fu">aes</span>(Tmin, Tmax),</span>
+<span id="cb145-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-17" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb145-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-18" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.25</span>,</span>
+<span id="cb145-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-19" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb145-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-20" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb145-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-21" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity – Güttingen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb145-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-22" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb145-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-23" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb145-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-24" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb145-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb145-25" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p><strong>Compare Chill vs Heat</strong></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-1" tabindex="-1"></a>Model_sensitivities_Guettingen <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb156-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-2" tabindex="-1"></a>  <span class="st">&quot;data_Güttingen/Model_sensitivity_Guettingen_CP.csv&quot;</span></span>
-<span id="cb156-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-3" tabindex="-1"></a>)</span>
-<span id="cb156-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-4" tabindex="-1"></a></span>
-<span id="cb156-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-5" tabindex="-1"></a>Chill_sensitivity_temps <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb156-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-6" tabindex="-1"></a>    chill_model_sensitivity_table,</span>
-<span id="cb156-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-7" tabindex="-1"></a>    temperatures,</span>
-<span id="cb156-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-8" tabindex="-1"></a>    temp_model,</span>
-<span id="cb156-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-9" tabindex="-1"></a>    <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb156-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-10" tabindex="-1"></a>    <span class="at">legend_label =</span> <span class="st">&quot;Chill/day&quot;</span></span>
-<span id="cb156-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-11" tabindex="-1"></a>) {</span>
-<span id="cb156-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-12" tabindex="-1"></a>  </span>
-<span id="cb156-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-13" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
-<span id="cb156-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-14" tabindex="-1"></a>  <span class="fu">library</span>(colorRamps)</span>
-<span id="cb156-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-15" tabindex="-1"></a>  </span>
-<span id="cb156-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-16" tabindex="-1"></a>  cmst <span class="ot">&lt;-</span> chill_model_sensitivity_table</span>
-<span id="cb156-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-17" tabindex="-1"></a>  cmst <span class="ot">&lt;-</span> cmst[cmst<span class="sc">$</span>Month <span class="sc">%in%</span> month_range, ]</span>
-<span id="cb156-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-18" tabindex="-1"></a>  </span>
-<span id="cb156-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-19" tabindex="-1"></a>  cmst<span class="sc">$</span>Month_names <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb156-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-20" tabindex="-1"></a>    cmst<span class="sc">$</span>Month,</span>
-<span id="cb156-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-21" tabindex="-1"></a>    <span class="at">levels =</span> month_range,</span>
-<span id="cb156-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-22" tabindex="-1"></a>    <span class="at">labels =</span> month.name[month_range]</span>
-<span id="cb156-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-23" tabindex="-1"></a>  )</span>
-<span id="cb156-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-24" tabindex="-1"></a>  </span>
-<span id="cb156-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-25" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb156-26"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-26" tabindex="-1"></a>    cmst,</span>
-<span id="cb156-27"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-27" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Tmin, <span class="at">y =</span> Tmax, <span class="at">fill =</span> .data[[temp_model]])</span>
-<span id="cb156-28"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-28" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb156-29"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-29" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb156-30"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-30" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Month_names) <span class="sc">+</span></span>
-<span id="cb156-31"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-31" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
-<span id="cb156-32"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-32" tabindex="-1"></a>      <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="fl">0.6</span>),</span>
-<span id="cb156-33"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-33" tabindex="-1"></a>      <span class="at">name =</span> legend_label</span>
-<span id="cb156-34"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-34" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb156-35"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-35" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb156-36"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-36" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tmin (°C)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tmax (°C)&quot;</span>)</span>
-<span id="cb156-37"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-37" tabindex="-1"></a>  </span>
-<span id="cb156-38"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-38" tabindex="-1"></a>  temperatures <span class="ot">&lt;-</span> temperatures[temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range, ]</span>
-<span id="cb156-39"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-39" tabindex="-1"></a>  </span>
-<span id="cb156-40"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-40" tabindex="-1"></a>  p <span class="sc">+</span></span>
-<span id="cb156-41"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-41" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
-<span id="cb156-42"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-42" tabindex="-1"></a>      <span class="at">data =</span> temperatures,</span>
-<span id="cb156-43"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-43" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> Tmin, <span class="at">y =</span> Tmax),</span>
-<span id="cb156-44"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-44" tabindex="-1"></a>      <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb156-45"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-45" tabindex="-1"></a>      <span class="at">size =</span> <span class="fl">0.3</span>,</span>
-<span id="cb156-46"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-46" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">&quot;black&quot;</span></span>
-<span id="cb156-47"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-47" tabindex="-1"></a>    )</span>
-<span id="cb156-48"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-48" tabindex="-1"></a>}</span>
-<span id="cb156-49"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-49" tabindex="-1"></a></span>
-<span id="cb156-50"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-50" tabindex="-1"></a>G_temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data_Güttingen/Güttingen_clean_weather.csv&quot;</span>)</span>
-<span id="cb156-51"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-51" tabindex="-1"></a></span>
-<span id="cb156-52"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-52" tabindex="-1"></a><span class="fu">Chill_sensitivity_temps</span>(</span>
-<span id="cb156-53"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-53" tabindex="-1"></a>  Model_sensitivities_Guettingen,</span>
-<span id="cb156-54"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-54" tabindex="-1"></a>  G_temps,</span>
-<span id="cb156-55"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-55" tabindex="-1"></a>  <span class="at">temp_model =</span> <span class="st">&quot;CP&quot;</span>,</span>
-<span id="cb156-56"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-56" tabindex="-1"></a>  <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb156-57"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-57" tabindex="-1"></a>  <span class="at">legend_label =</span> <span class="st">&quot;Chill per day</span><span class="sc">\n</span><span class="st">(Chill Portions)&quot;</span></span>
-<span id="cb156-58"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-58" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb156-59"><a href="chapter-25-why-pls-doesnt-always-work.html#cb156-59" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity at Güttingen&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-1" tabindex="-1"></a>Model_sensitivities_Guettingen <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb146-2"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-2" tabindex="-1"></a>  <span class="st">&quot;data_Güttingen/Model_sensitivity_Guettingen_CP.csv&quot;</span></span>
+<span id="cb146-3"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-3" tabindex="-1"></a>)</span>
+<span id="cb146-4"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-4" tabindex="-1"></a></span>
+<span id="cb146-5"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-5" tabindex="-1"></a>Chill_sensitivity_temps <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb146-6"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-6" tabindex="-1"></a>    chill_model_sensitivity_table,</span>
+<span id="cb146-7"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-7" tabindex="-1"></a>    temperatures,</span>
+<span id="cb146-8"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-8" tabindex="-1"></a>    temp_model,</span>
+<span id="cb146-9"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-9" tabindex="-1"></a>    <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb146-10"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-10" tabindex="-1"></a>    <span class="at">legend_label =</span> <span class="st">&quot;Chill/day&quot;</span></span>
+<span id="cb146-11"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-11" tabindex="-1"></a>) {</span>
+<span id="cb146-12"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-12" tabindex="-1"></a>  </span>
+<span id="cb146-13"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-13" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb146-14"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-14" tabindex="-1"></a>  <span class="fu">library</span>(colorRamps)</span>
+<span id="cb146-15"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-15" tabindex="-1"></a>  </span>
+<span id="cb146-16"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-16" tabindex="-1"></a>  cmst <span class="ot">&lt;-</span> chill_model_sensitivity_table</span>
+<span id="cb146-17"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-17" tabindex="-1"></a>  cmst <span class="ot">&lt;-</span> cmst[cmst<span class="sc">$</span>Month <span class="sc">%in%</span> month_range, ]</span>
+<span id="cb146-18"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-18" tabindex="-1"></a>  </span>
+<span id="cb146-19"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-19" tabindex="-1"></a>  cmst<span class="sc">$</span>Month_names <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb146-20"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-20" tabindex="-1"></a>    cmst<span class="sc">$</span>Month,</span>
+<span id="cb146-21"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-21" tabindex="-1"></a>    <span class="at">levels =</span> month_range,</span>
+<span id="cb146-22"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-22" tabindex="-1"></a>    <span class="at">labels =</span> month.name[month_range]</span>
+<span id="cb146-23"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-23" tabindex="-1"></a>  )</span>
+<span id="cb146-24"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-24" tabindex="-1"></a>  </span>
+<span id="cb146-25"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-25" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb146-26"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-26" tabindex="-1"></a>    cmst,</span>
+<span id="cb146-27"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-27" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Tmin, <span class="at">y =</span> Tmax, <span class="at">fill =</span> .data[[temp_model]])</span>
+<span id="cb146-28"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-28" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb146-29"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-29" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb146-30"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-30" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Month_names) <span class="sc">+</span></span>
+<span id="cb146-31"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-31" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb146-32"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-32" tabindex="-1"></a>      <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="fl">0.6</span>),</span>
+<span id="cb146-33"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-33" tabindex="-1"></a>      <span class="at">name =</span> legend_label</span>
+<span id="cb146-34"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-34" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb146-35"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-35" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb146-36"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-36" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tmin (°C)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tmax (°C)&quot;</span>)</span>
+<span id="cb146-37"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-37" tabindex="-1"></a>  </span>
+<span id="cb146-38"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-38" tabindex="-1"></a>  temperatures <span class="ot">&lt;-</span> temperatures[temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range, ]</span>
+<span id="cb146-39"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-39" tabindex="-1"></a>  </span>
+<span id="cb146-40"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-40" tabindex="-1"></a>  p <span class="sc">+</span></span>
+<span id="cb146-41"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-41" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb146-42"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-42" tabindex="-1"></a>      <span class="at">data =</span> temperatures,</span>
+<span id="cb146-43"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-43" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> Tmin, <span class="at">y =</span> Tmax),</span>
+<span id="cb146-44"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-44" tabindex="-1"></a>      <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb146-45"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-45" tabindex="-1"></a>      <span class="at">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb146-46"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-46" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb146-47"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-47" tabindex="-1"></a>    )</span>
+<span id="cb146-48"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-48" tabindex="-1"></a>}</span>
+<span id="cb146-49"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-49" tabindex="-1"></a></span>
+<span id="cb146-50"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-50" tabindex="-1"></a>G_temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data_Güttingen/Güttingen_clean_weather.csv&quot;</span>)</span>
+<span id="cb146-51"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-51" tabindex="-1"></a></span>
+<span id="cb146-52"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-52" tabindex="-1"></a><span class="fu">Chill_sensitivity_temps</span>(</span>
+<span id="cb146-53"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-53" tabindex="-1"></a>  Model_sensitivities_Guettingen,</span>
+<span id="cb146-54"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-54" tabindex="-1"></a>  G_temps,</span>
+<span id="cb146-55"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-55" tabindex="-1"></a>  <span class="at">temp_model =</span> <span class="st">&quot;CP&quot;</span>,</span>
+<span id="cb146-56"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-56" tabindex="-1"></a>  <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb146-57"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-57" tabindex="-1"></a>  <span class="at">legend_label =</span> <span class="st">&quot;Chill per day</span><span class="sc">\n</span><span class="st">(Chill Portions)&quot;</span></span>
+<span id="cb146-58"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-58" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb146-59"><a href="chapter-25-why-pls-doesnt-always-work.html#cb146-59" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity at Güttingen&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -562,7 +562,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });

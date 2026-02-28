@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 — Making hourly temperatures | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 8 — Making hourly temperatures | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 8 — Making hourly temperatures | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 — Making hourly temperatures | _main.knit" />
+  <meta property="og:title" content="Chapter 8 — Making hourly temperatures | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 — Making hourly temperatures | _main.knit" />
+  <meta name="twitter:title" content="Chapter 8 — Making hourly temperatures | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -342,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-19"><a href="chapter-8-making-hourly-temperatures.html#cb13-19" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Julian Day&quot;</span>) <span class="sc">+</span></span>
 <span id="cb13-20"><a href="chapter-8-making-hourly-temperatures.html#cb13-20" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sunrise, Sunset and Daylength Over the Year&quot;</span>) <span class="sc">+</span></span>
 <span id="cb13-21"><a href="chapter-8-making-hourly-temperatures.html#cb13-21" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="idealized-diurnal-temperature-curves" class="section level2 hasAnchor">
 <h2>Idealized diurnal temperature curves<a href="chapter-8-making-hourly-temperatures.html#idealized-diurnal-temperature-curves" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -388,85 +388,60 @@ In such cases, empirical curves are better. They are based on real hourly observ
 <span id="cb16-5"><a href="chapter-8-making-hourly-temperatures.html#cb16-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Hour of the Day&quot;</span>) <span class="sc">+</span></span>
 <span id="cb16-6"><a href="chapter-8-making-hourly-temperatures.html#cb16-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Prediction Coefficient&quot;</span>) <span class="sc">+</span></span>
 <span id="cb16-7"><a href="chapter-8-making-hourly-temperatures.html#cb16-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-8-making-hourly-temperatures.html#cb17-1" tabindex="-1"></a>Winters_daily <span class="ot">&lt;-</span> <span class="fu">make_all_day_table</span>(Winters_hours_gaps, <span class="at">input_timestep =</span> <span class="st">&quot;hour&quot;</span>)</span>
 <span id="cb17-2"><a href="chapter-8-making-hourly-temperatures.html#cb17-2" tabindex="-1"></a>Winters_emp_hourly <span class="ot">&lt;-</span> <span class="fu">Empirical_hourly_temperatures</span>(Winters_daily, empi_curve)</span>
 <span id="cb17-3"><a href="chapter-8-making-hourly-temperatures.html#cb17-3" tabindex="-1"></a><span class="fu">head</span>(Winters_emp_hourly, <span class="dv">24</span>)</span></code></pre></div>
-<pre><code>##                    DATE Year Month Day
-## 1   2008-03-03 12:00:00 2008     3   3
-## 41  2008-03-03 12:00:00 2008     3   3
-## 69  2008-03-03 12:00:00 2008     3   3
-## 91  2008-03-03 12:00:00 2008     3   3
-## 133 2008-03-03 12:00:00 2008     3   3
-## 151 2008-03-03 12:00:00 2008     3   3
-## 183 2008-03-03 12:00:00 2008     3   3
-## 207 2008-03-03 12:00:00 2008     3   3
-## 235 2008-03-03 12:00:00 2008     3   3
-## 273 2008-03-03 12:00:00 2008     3   3
-## 301 2008-03-03 12:00:00 2008     3   3
-## 320 2008-03-03 12:00:00 2008     3   3
-## 351 2008-03-03 12:00:00 2008     3   3
-## 378 2008-03-03 12:00:00 2008     3   3
-## 413 2008-03-03 12:00:00 2008     3   3
-## 444 2008-03-03 12:00:00 2008     3   3
-## 481 2008-03-03 12:00:00 2008     3   3
-## 499 2008-03-03 12:00:00 2008     3   3
-## 538 2008-03-03 12:00:00 2008     3   3
-## 568 2008-03-03 12:00:00 2008     3   3
-## 598 2008-03-03 12:00:00 2008     3   3
-## 612 2008-03-03 12:00:00 2008     3   3
-## 654 2008-03-03 12:00:00 2008     3   3
-## 683 2008-03-03 12:00:00 2008     3   3
-##     Temp_gaps Tmin    Tmean   Tmax JDay Hour
-## 1    15.01593 7.92 15.01593 19.508   63    0
-## 41   15.01593 7.92 15.01593 19.508   63    1
-## 69   15.01593 7.92 15.01593 19.508   63    2
-## 91   15.01593 7.92 15.01593 19.508   63    3
-## 133  15.01593 7.92 15.01593 19.508   63    4
-## 151  15.01593 7.92 15.01593 19.508   63    5
-## 183  15.01593 7.92 15.01593 19.508   63    6
-## 207  15.01593 7.92 15.01593 19.508   63    7
-## 235  15.01593 7.92 15.01593 19.508   63    8
-## 273  15.01593 7.92 15.01593 19.508   63    9
-## 301  15.01593 7.92 15.01593 19.508   63   10
-## 320  15.01593 7.92 15.01593 19.508   63   11
-## 351  15.01593 7.92 15.01593 19.508   63   12
-## 378  15.01593 7.92 15.01593 19.508   63   13
-## 413  15.01593 7.92 15.01593 19.508   63   14
-## 444  15.01593 7.92 15.01593 19.508   63   15
-## 481  15.01593 7.92 15.01593 19.508   63   16
-## 499  15.01593 7.92 15.01593 19.508   63   17
-## 538  15.01593 7.92 15.01593 19.508   63   18
-## 568  15.01593 7.92 15.01593 19.508   63   19
-## 598  15.01593 7.92 15.01593 19.508   63   20
-## 612  15.01593 7.92 15.01593 19.508   63   21
-## 654  15.01593 7.92 15.01593 19.508   63   22
-## 683  15.01593 7.92 15.01593 19.508   63   23
-##          Temp
-## 1    9.976706
-## 41   9.716943
-## 69   9.409812
-## 91   9.247518
-## 133  8.726599
-## 151  8.313509
-## 183  7.920000
-## 207  8.282838
-## 235 11.537726
-## 273 13.659805
-## 301 15.822638
-## 320 17.453938
-## 351 18.936122
-## 378 19.117026
-## 413 19.410656
-## 444 19.508000
-## 481 18.917381
-## 499 17.750214
-## 538 15.874616
-## 568 13.650746
-## 598 12.134141
-## 612 11.364391
-## 654 10.655172
-## 683  9.999817</code></pre>
+<pre><code>##                    DATE Year Month Day Temp_gaps Tmin    Tmean   Tmax
+## 1   2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 41  2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 69  2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 91  2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 133 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 151 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 183 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 207 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 235 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 273 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 301 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 320 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 351 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 378 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 413 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 444 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 481 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 499 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 538 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 568 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 598 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 612 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 654 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+## 683 2008-03-03 12:00:00 2008     3   3  15.01593 7.92 15.01593 19.508
+##     JDay Hour      Temp
+## 1     63    0  9.976706
+## 41    63    1  9.716943
+## 69    63    2  9.409812
+## 91    63    3  9.247518
+## 133   63    4  8.726599
+## 151   63    5  8.313509
+## 183   63    6  7.920000
+## 207   63    7  8.282838
+## 235   63    8 11.537726
+## 273   63    9 13.659805
+## 301   63   10 15.822638
+## 320   63   11 17.453938
+## 351   63   12 18.936122
+## 378   63   13 19.117026
+## 413   63   14 19.410656
+## 444   63   15 19.508000
+## 481   63   16 18.917381
+## 499   63   17 17.750214
+## 538   63   18 15.874616
+## 568   63   19 13.650746
+## 598   63   20 12.134141
+## 612   63   21 11.364391
+## 654   63   22 10.655172
+## 683   63   23  9.999817</code></pre>
 
 </div>
 </div>
@@ -524,7 +499,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });

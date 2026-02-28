@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 — Generating temperature scenarios | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 12 — Generating temperature scenarios | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 12 — Generating temperature scenarios | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 — Generating temperature scenarios | _main.knit" />
+  <meta property="og:title" content="Chapter 12 — Generating temperature scenarios | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 — Generating temperature scenarios | _main.knit" />
+  <meta name="twitter:title" content="Chapter 12 — Generating temperature scenarios | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -320,96 +320,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="generating-synthetic-temperature-data" class="section level2 hasAnchor">
 <h2>Generating synthetic temperature data<a href="chapter-12-generating-temperature-scenarios.html#generating-synthetic-temperature-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</strong></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="chapter-12-generating-temperature-scenarios.html#cb65-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb65-2"><a href="chapter-12-generating-temperature-scenarios.html#cb65-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb65-3"><a href="chapter-12-generating-temperature-scenarios.html#cb65-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb65-4"><a href="chapter-12-generating-temperature-scenarios.html#cb65-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb65-5"><a href="chapter-12-generating-temperature-scenarios.html#cb65-5" tabindex="-1"></a></span>
-<span id="cb65-6"><a href="chapter-12-generating-temperature-scenarios.html#cb65-6" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> weather_final <span class="sc">%&gt;%</span> </span>
-<span id="cb65-7"><a href="chapter-12-generating-temperature-scenarios.html#cb65-7" tabindex="-1"></a>  <span class="fu">temperature_generation</span>(<span class="at">years=</span><span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2023</span>),</span>
-<span id="cb65-8"><a href="chapter-12-generating-temperature-scenarios.html#cb65-8" tabindex="-1"></a>                         <span class="at">sim_years =</span> <span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2100</span>))</span></code></pre></div>
-<pre><code>## Warning: scenario doesn&#39;t contain named elements - consider using the following element names:
-## &#39;data&#39;, &#39;reference_year&#39;,&#39;scenario_type&#39;,&#39;labels&#39;</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="chapter-12-generating-temperature-scenarios.html#cb63-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb63-2"><a href="chapter-12-generating-temperature-scenarios.html#cb63-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb63-3"><a href="chapter-12-generating-temperature-scenarios.html#cb63-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb63-4"><a href="chapter-12-generating-temperature-scenarios.html#cb63-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb63-5"><a href="chapter-12-generating-temperature-scenarios.html#cb63-5" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="chapter-12-generating-temperature-scenarios.html#cb63-6" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> weather_final <span class="sc">%&gt;%</span> </span>
+<span id="cb63-7"><a href="chapter-12-generating-temperature-scenarios.html#cb63-7" tabindex="-1"></a>  <span class="fu">temperature_generation</span>(<span class="at">years=</span><span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2023</span>),</span>
+<span id="cb63-8"><a href="chapter-12-generating-temperature-scenarios.html#cb63-8" tabindex="-1"></a>                         <span class="at">sim_years =</span> <span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2100</span>))</span></code></pre></div>
+<pre><code>## Warning: scenario doesn&#39;t contain named elements - consider using the
+## following element names: &#39;data&#39;,
+## &#39;reference_year&#39;,&#39;scenario_type&#39;,&#39;labels&#39;</code></pre>
 <pre><code>## Warning: setting scenario_type to &#39;relative&#39;</code></pre>
-<pre><code>## Warning: Reference year missing - can&#39;t check if relative temperature scenario is valid</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="chapter-12-generating-temperature-scenarios.html#cb69-1" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> Temp[[<span class="dv">1</span>]]</span>
-<span id="cb69-2"><a href="chapter-12-generating-temperature-scenarios.html#cb69-2" tabindex="-1"></a>Temp<span class="sc">$</span>Data_source <span class="ot">&lt;-</span> <span class="st">&quot;simulated&quot;</span></span>
-<span id="cb69-3"><a href="chapter-12-generating-temperature-scenarios.html#cb69-3" tabindex="-1"></a></span>
-<span id="cb69-4"><a href="chapter-12-generating-temperature-scenarios.html#cb69-4" tabindex="-1"></a>Temperatures <span class="ot">&lt;-</span> weather_final <span class="sc">%&gt;%</span> </span>
-<span id="cb69-5"><a href="chapter-12-generating-temperature-scenarios.html#cb69-5" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">2023</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-6"><a href="chapter-12-generating-temperature-scenarios.html#cb69-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Data_source=</span><span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-7"><a href="chapter-12-generating-temperature-scenarios.html#cb69-7" tabindex="-1"></a>  <span class="fu">rbind</span>(Temp[,<span class="fu">c</span>(<span class="st">&#39;Year&#39;</span>,<span class="st">&#39;Month&#39;</span>,<span class="st">&#39;Day&#39;</span>,<span class="st">&#39;Tmin&#39;</span>,<span class="st">&#39;Tmax&#39;</span>, <span class="st">&#39;Data_source&#39;</span>)]  ) <span class="sc">%&gt;%</span></span>
-<span id="cb69-8"><a href="chapter-12-generating-temperature-scenarios.html#cb69-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">as.Date</span>(<span class="fu">ISOdate</span>(<span class="dv">2000</span>,Month,Day)))</span></code></pre></div>
+<pre><code>## Warning: Reference year missing - can&#39;t check if relative temperature
+## scenario is valid</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="chapter-12-generating-temperature-scenarios.html#cb67-1" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> Temp[[<span class="dv">1</span>]]</span>
+<span id="cb67-2"><a href="chapter-12-generating-temperature-scenarios.html#cb67-2" tabindex="-1"></a>Temp<span class="sc">$</span>Data_source <span class="ot">&lt;-</span> <span class="st">&quot;simulated&quot;</span></span>
+<span id="cb67-3"><a href="chapter-12-generating-temperature-scenarios.html#cb67-3" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="chapter-12-generating-temperature-scenarios.html#cb67-4" tabindex="-1"></a>Temperatures <span class="ot">&lt;-</span> weather_final <span class="sc">%&gt;%</span> </span>
+<span id="cb67-5"><a href="chapter-12-generating-temperature-scenarios.html#cb67-5" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">2023</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-6"><a href="chapter-12-generating-temperature-scenarios.html#cb67-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Data_source=</span><span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-7"><a href="chapter-12-generating-temperature-scenarios.html#cb67-7" tabindex="-1"></a>  <span class="fu">rbind</span>(Temp[,<span class="fu">c</span>(<span class="st">&#39;Year&#39;</span>,<span class="st">&#39;Month&#39;</span>,<span class="st">&#39;Day&#39;</span>,<span class="st">&#39;Tmin&#39;</span>,<span class="st">&#39;Tmax&#39;</span>, <span class="st">&#39;Data_source&#39;</span>)]  ) <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="chapter-12-generating-temperature-scenarios.html#cb67-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">as.Date</span>(<span class="fu">ISOdate</span>(<span class="dv">2000</span>,Month,Day)))</span></code></pre></div>
 </div>
 <div id="winter-chill-analysis-of-synthetic-data" class="section level2 hasAnchor">
 <h2>Winter chill analysis of synthetic data<a href="chapter-12-generating-temperature-scenarios.html#winter-chill-analysis-of-synthetic-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</strong></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chapter-12-generating-temperature-scenarios.html#cb68-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Temperatures,</span>
+<span id="cb68-2"><a href="chapter-12-generating-temperature-scenarios.html#cb68-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Date,<span class="at">y =</span> Tmin)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="chapter-12-generating-temperature-scenarios.html#cb68-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(Year)), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb68-4"><a href="chapter-12-generating-temperature-scenarios.html#cb68-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Data_source)) <span class="sc">+</span></span>
+<span id="cb68-5"><a href="chapter-12-generating-temperature-scenarios.html#cb68-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="chapter-12-generating-temperature-scenarios.html#cb68-6" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chapter-12-generating-temperature-scenarios.html#cb70-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Temperatures,</span>
-<span id="cb70-2"><a href="chapter-12-generating-temperature-scenarios.html#cb70-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Date,<span class="at">y =</span> Tmin)) <span class="sc">+</span></span>
+<span id="cb70-2"><a href="chapter-12-generating-temperature-scenarios.html#cb70-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Date,<span class="at">y =</span> Tmax)) <span class="sc">+</span></span>
 <span id="cb70-3"><a href="chapter-12-generating-temperature-scenarios.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(Year)), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb70-4"><a href="chapter-12-generating-temperature-scenarios.html#cb70-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Data_source)) <span class="sc">+</span></span>
-<span id="cb70-5"><a href="chapter-12-generating-temperature-scenarios.html#cb70-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb70-6"><a href="chapter-12-generating-temperature-scenarios.html#cb70-6" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</span></code></pre></div>
+<span id="cb70-4"><a href="chapter-12-generating-temperature-scenarios.html#cb70-4" tabindex="-1"></a>  <span class="co">#geom_line(aes(colour = factor(Year)), show.legend = FALSE) +</span></span>
+<span id="cb70-5"><a href="chapter-12-generating-temperature-scenarios.html#cb70-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Data_source)) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="chapter-12-generating-temperature-scenarios.html#cb70-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="chapter-12-generating-temperature-scenarios.html#cb70-7" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="chapter-12-generating-temperature-scenarios.html#cb72-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Temperatures,</span>
-<span id="cb72-2"><a href="chapter-12-generating-temperature-scenarios.html#cb72-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Date,<span class="at">y =</span> Tmax)) <span class="sc">+</span></span>
-<span id="cb72-3"><a href="chapter-12-generating-temperature-scenarios.html#cb72-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(Year)), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb72-4"><a href="chapter-12-generating-temperature-scenarios.html#cb72-4" tabindex="-1"></a>  <span class="co">#geom_line(aes(colour = factor(Year)), show.legend = FALSE) +</span></span>
-<span id="cb72-5"><a href="chapter-12-generating-temperature-scenarios.html#cb72-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Data_source)) <span class="sc">+</span></span>
-<span id="cb72-6"><a href="chapter-12-generating-temperature-scenarios.html#cb72-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb72-7"><a href="chapter-12-generating-temperature-scenarios.html#cb72-7" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-2.png" width="672" /></p>
 </div>
 <div id="freezing-hour-analysis-in-spring-or-autumn" class="section level2 hasAnchor">
 <h2>Freezing hour analysis in spring or autumn<a href="chapter-12-generating-temperature-scenarios.html#freezing-hour-analysis-in-spring-or-autumn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</strong></p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="chapter-12-generating-temperature-scenarios.html#cb74-1" tabindex="-1"></a>chill_observed <span class="ot">&lt;-</span> Temperatures <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="chapter-12-generating-temperature-scenarios.html#cb74-2" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-3"><a href="chapter-12-generating-temperature-scenarios.html#cb74-3" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">47.600</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-4"><a href="chapter-12-generating-temperature-scenarios.html#cb74-4" tabindex="-1"></a>  <span class="fu">chilling</span>(<span class="at">Start_JDay =</span> <span class="dv">91</span>,</span>
-<span id="cb74-5"><a href="chapter-12-generating-temperature-scenarios.html#cb74-5" tabindex="-1"></a>           <span class="at">End_JDay =</span> <span class="dv">120</span>)</span>
-<span id="cb74-6"><a href="chapter-12-generating-temperature-scenarios.html#cb74-6" tabindex="-1"></a></span>
-<span id="cb74-7"><a href="chapter-12-generating-temperature-scenarios.html#cb74-7" tabindex="-1"></a>chill_simulated <span class="ot">&lt;-</span> Temperatures <span class="sc">%&gt;%</span></span>
-<span id="cb74-8"><a href="chapter-12-generating-temperature-scenarios.html#cb74-8" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;simulated&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-9"><a href="chapter-12-generating-temperature-scenarios.html#cb74-9" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">47.600</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-10"><a href="chapter-12-generating-temperature-scenarios.html#cb74-10" tabindex="-1"></a>  <span class="fu">chilling</span>(<span class="at">Start_JDay =</span> <span class="dv">91</span>,</span>
-<span id="cb74-11"><a href="chapter-12-generating-temperature-scenarios.html#cb74-11" tabindex="-1"></a>           <span class="at">End_JDay =</span> <span class="dv">120</span>)</span>
-<span id="cb74-12"><a href="chapter-12-generating-temperature-scenarios.html#cb74-12" tabindex="-1"></a></span>
-<span id="cb74-13"><a href="chapter-12-generating-temperature-scenarios.html#cb74-13" tabindex="-1"></a>chill_comparison <span class="ot">&lt;-</span></span>
-<span id="cb74-14"><a href="chapter-12-generating-temperature-scenarios.html#cb74-14" tabindex="-1"></a>  <span class="fu">cbind</span>(chill_observed,</span>
-<span id="cb74-15"><a href="chapter-12-generating-temperature-scenarios.html#cb74-15" tabindex="-1"></a>        <span class="at">Data_source =</span> <span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-16"><a href="chapter-12-generating-temperature-scenarios.html#cb74-16" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">cbind</span>(chill_simulated,</span>
-<span id="cb74-17"><a href="chapter-12-generating-temperature-scenarios.html#cb74-17" tabindex="-1"></a>              <span class="at">Data_source =</span> <span class="st">&quot;simulated&quot;</span>))</span>
-<span id="cb74-18"><a href="chapter-12-generating-temperature-scenarios.html#cb74-18" tabindex="-1"></a></span>
-<span id="cb74-19"><a href="chapter-12-generating-temperature-scenarios.html#cb74-19" tabindex="-1"></a>chill_comparison_full_seasons <span class="ot">&lt;-</span> </span>
-<span id="cb74-20"><a href="chapter-12-generating-temperature-scenarios.html#cb74-20" tabindex="-1"></a>  chill_comparison <span class="sc">%&gt;%</span></span>
-<span id="cb74-21"><a href="chapter-12-generating-temperature-scenarios.html#cb74-21" tabindex="-1"></a>  <span class="fu">filter</span>(Perc_complete <span class="sc">==</span> <span class="dv">100</span>)</span>
-<span id="cb74-22"><a href="chapter-12-generating-temperature-scenarios.html#cb74-22" tabindex="-1"></a></span>
-<span id="cb74-23"><a href="chapter-12-generating-temperature-scenarios.html#cb74-23" tabindex="-1"></a><span class="fu">ggplot</span>(chill_comparison_full_seasons,</span>
-<span id="cb74-24"><a href="chapter-12-generating-temperature-scenarios.html#cb74-24" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>Chill_portions)) <span class="sc">+</span> </span>
-<span id="cb74-25"><a href="chapter-12-generating-temperature-scenarios.html#cb74-25" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>,</span>
-<span id="cb74-26"><a href="chapter-12-generating-temperature-scenarios.html#cb74-26" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">fill =</span> Data_source)) <span class="sc">+</span></span>
-<span id="cb74-27"><a href="chapter-12-generating-temperature-scenarios.html#cb74-27" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb74-28"><a href="chapter-12-generating-temperature-scenarios.html#cb74-28" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Data source&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-29"><a href="chapter-12-generating-temperature-scenarios.html#cb74-29" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chill accumulation (Chill Portions)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-30"><a href="chapter-12-generating-temperature-scenarios.html#cb74-30" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="chapter-12-generating-temperature-scenarios.html#cb75-1" tabindex="-1"></a>chill_simulations <span class="ot">&lt;-</span></span>
-<span id="cb75-2"><a href="chapter-12-generating-temperature-scenarios.html#cb75-2" tabindex="-1"></a>  chill_comparison_full_seasons <span class="sc">%&gt;%</span></span>
-<span id="cb75-3"><a href="chapter-12-generating-temperature-scenarios.html#cb75-3" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;simulated&quot;</span>)</span>
-<span id="cb75-4"><a href="chapter-12-generating-temperature-scenarios.html#cb75-4" tabindex="-1"></a></span>
-<span id="cb75-5"><a href="chapter-12-generating-temperature-scenarios.html#cb75-5" tabindex="-1"></a><span class="fu">ggplot</span>(chill_simulations,</span>
-<span id="cb75-6"><a href="chapter-12-generating-temperature-scenarios.html#cb75-6" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Chill_portions)) <span class="sc">+</span></span>
-<span id="cb75-7"><a href="chapter-12-generating-temperature-scenarios.html#cb75-7" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>,</span>
-<span id="cb75-8"><a href="chapter-12-generating-temperature-scenarios.html#cb75-8" tabindex="-1"></a>            <span class="at">lwd =</span> <span class="fl">1.5</span>,</span>
-<span id="cb75-9"><a href="chapter-12-generating-temperature-scenarios.html#cb75-9" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-10"><a href="chapter-12-generating-temperature-scenarios.html#cb75-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cumulative probability&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-11"><a href="chapter-12-generating-temperature-scenarios.html#cb75-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chill accumulation (in Chill Portions)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb75-12"><a href="chapter-12-generating-temperature-scenarios.html#cb75-12" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb75-13"><a href="chapter-12-generating-temperature-scenarios.html#cb75-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="chapter-12-generating-temperature-scenarios.html#cb72-1" tabindex="-1"></a>chill_observed <span class="ot">&lt;-</span> Temperatures <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="chapter-12-generating-temperature-scenarios.html#cb72-2" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="chapter-12-generating-temperature-scenarios.html#cb72-3" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">47.600</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-4"><a href="chapter-12-generating-temperature-scenarios.html#cb72-4" tabindex="-1"></a>  <span class="fu">chilling</span>(<span class="at">Start_JDay =</span> <span class="dv">91</span>,</span>
+<span id="cb72-5"><a href="chapter-12-generating-temperature-scenarios.html#cb72-5" tabindex="-1"></a>           <span class="at">End_JDay =</span> <span class="dv">120</span>)</span>
+<span id="cb72-6"><a href="chapter-12-generating-temperature-scenarios.html#cb72-6" tabindex="-1"></a></span>
+<span id="cb72-7"><a href="chapter-12-generating-temperature-scenarios.html#cb72-7" tabindex="-1"></a>chill_simulated <span class="ot">&lt;-</span> Temperatures <span class="sc">%&gt;%</span></span>
+<span id="cb72-8"><a href="chapter-12-generating-temperature-scenarios.html#cb72-8" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;simulated&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-9"><a href="chapter-12-generating-temperature-scenarios.html#cb72-9" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">47.600</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-10"><a href="chapter-12-generating-temperature-scenarios.html#cb72-10" tabindex="-1"></a>  <span class="fu">chilling</span>(<span class="at">Start_JDay =</span> <span class="dv">91</span>,</span>
+<span id="cb72-11"><a href="chapter-12-generating-temperature-scenarios.html#cb72-11" tabindex="-1"></a>           <span class="at">End_JDay =</span> <span class="dv">120</span>)</span>
+<span id="cb72-12"><a href="chapter-12-generating-temperature-scenarios.html#cb72-12" tabindex="-1"></a></span>
+<span id="cb72-13"><a href="chapter-12-generating-temperature-scenarios.html#cb72-13" tabindex="-1"></a>chill_comparison <span class="ot">&lt;-</span></span>
+<span id="cb72-14"><a href="chapter-12-generating-temperature-scenarios.html#cb72-14" tabindex="-1"></a>  <span class="fu">cbind</span>(chill_observed,</span>
+<span id="cb72-15"><a href="chapter-12-generating-temperature-scenarios.html#cb72-15" tabindex="-1"></a>        <span class="at">Data_source =</span> <span class="st">&quot;observed&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-16"><a href="chapter-12-generating-temperature-scenarios.html#cb72-16" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">cbind</span>(chill_simulated,</span>
+<span id="cb72-17"><a href="chapter-12-generating-temperature-scenarios.html#cb72-17" tabindex="-1"></a>              <span class="at">Data_source =</span> <span class="st">&quot;simulated&quot;</span>))</span>
+<span id="cb72-18"><a href="chapter-12-generating-temperature-scenarios.html#cb72-18" tabindex="-1"></a></span>
+<span id="cb72-19"><a href="chapter-12-generating-temperature-scenarios.html#cb72-19" tabindex="-1"></a>chill_comparison_full_seasons <span class="ot">&lt;-</span> </span>
+<span id="cb72-20"><a href="chapter-12-generating-temperature-scenarios.html#cb72-20" tabindex="-1"></a>  chill_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb72-21"><a href="chapter-12-generating-temperature-scenarios.html#cb72-21" tabindex="-1"></a>  <span class="fu">filter</span>(Perc_complete <span class="sc">==</span> <span class="dv">100</span>)</span>
+<span id="cb72-22"><a href="chapter-12-generating-temperature-scenarios.html#cb72-22" tabindex="-1"></a></span>
+<span id="cb72-23"><a href="chapter-12-generating-temperature-scenarios.html#cb72-23" tabindex="-1"></a><span class="fu">ggplot</span>(chill_comparison_full_seasons,</span>
+<span id="cb72-24"><a href="chapter-12-generating-temperature-scenarios.html#cb72-24" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>Chill_portions)) <span class="sc">+</span> </span>
+<span id="cb72-25"><a href="chapter-12-generating-temperature-scenarios.html#cb72-25" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>,</span>
+<span id="cb72-26"><a href="chapter-12-generating-temperature-scenarios.html#cb72-26" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">fill =</span> Data_source)) <span class="sc">+</span></span>
+<span id="cb72-27"><a href="chapter-12-generating-temperature-scenarios.html#cb72-27" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb72-28"><a href="chapter-12-generating-temperature-scenarios.html#cb72-28" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Data source&quot;</span>) <span class="sc">+</span></span>
+<span id="cb72-29"><a href="chapter-12-generating-temperature-scenarios.html#cb72-29" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chill accumulation (Chill Portions)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb72-30"><a href="chapter-12-generating-temperature-scenarios.html#cb72-30" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="chapter-12-generating-temperature-scenarios.html#cb73-1" tabindex="-1"></a>chill_simulations <span class="ot">&lt;-</span></span>
+<span id="cb73-2"><a href="chapter-12-generating-temperature-scenarios.html#cb73-2" tabindex="-1"></a>  chill_comparison_full_seasons <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="chapter-12-generating-temperature-scenarios.html#cb73-3" tabindex="-1"></a>  <span class="fu">filter</span>(Data_source <span class="sc">==</span> <span class="st">&quot;simulated&quot;</span>)</span>
+<span id="cb73-4"><a href="chapter-12-generating-temperature-scenarios.html#cb73-4" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="chapter-12-generating-temperature-scenarios.html#cb73-5" tabindex="-1"></a><span class="fu">ggplot</span>(chill_simulations,</span>
+<span id="cb73-6"><a href="chapter-12-generating-temperature-scenarios.html#cb73-6" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Chill_portions)) <span class="sc">+</span></span>
+<span id="cb73-7"><a href="chapter-12-generating-temperature-scenarios.html#cb73-7" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>,</span>
+<span id="cb73-8"><a href="chapter-12-generating-temperature-scenarios.html#cb73-8" tabindex="-1"></a>            <span class="at">lwd =</span> <span class="fl">1.5</span>,</span>
+<span id="cb73-9"><a href="chapter-12-generating-temperature-scenarios.html#cb73-9" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="chapter-12-generating-temperature-scenarios.html#cb73-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cumulative probability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-11"><a href="chapter-12-generating-temperature-scenarios.html#cb73-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Chill accumulation (in Chill Portions)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-12"><a href="chapter-12-generating-temperature-scenarios.html#cb73-12" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb73-13"><a href="chapter-12-generating-temperature-scenarios.html#cb73-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-2.png" width="672" /></p>
 
 <!-- Hidden processing chapter: saving data -->
 
@@ -469,7 +471,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });

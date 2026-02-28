@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 — Some useful tools in R | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 9 — Some useful tools in R | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 9 — Some useful tools in R | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 — Some useful tools in R | _main.knit" />
+  <meta property="og:title" content="Chapter 9 — Some useful tools in R | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 — Some useful tools in R | _main.knit" />
+  <meta name="twitter:title" content="Chapter 9 — Some useful tools in R | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -321,42 +321,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Data wrangling and visualization with tidyverse<a href="chapter-9-some-useful-tools-in-r.html#data-wrangling-and-visualization-with-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Based on the Winters_hours_gaps dataset, use magrittr pipes and functions of the tidyverse to accomplish the following:</strong></p>
 <p><strong>Converting data to a tibble</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-9-some-useful-tools-in-r.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching core tidyverse packages ─────────────────────────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.1     ✔ stringr   1.5.2
-## ✔ lubridate 1.9.4     ✔ tibble    3.3.0
-## ✔ purrr     1.1.0     
-## ── Conflicts ───────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter()        masks stats::filter()
-## ✖ dplyr::lag()           masks stats::lag()
-## ✖ lubridate::leap_year() masks chillR::leap_year()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-9-some-useful-tools-in-r.html#cb21-1" tabindex="-1"></a>Winters_tib <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_hours_gaps)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-9-some-useful-tools-in-r.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb19-2"><a href="chapter-9-some-useful-tools-in-r.html#cb19-2" tabindex="-1"></a>Winters_tib <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_hours_gaps)</span></code></pre></div>
 <p><strong>Subsetting rows</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-9-some-useful-tools-in-r.html#cb22-1" tabindex="-1"></a>Winters_tib10 <span class="ot">&lt;-</span> Winters_tib <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-9-some-useful-tools-in-r.html#cb20-1" tabindex="-1"></a>Winters_tib10 <span class="ot">&lt;-</span> Winters_tib <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <p><strong>Reshaping data: wide to long format</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-9-some-useful-tools-in-r.html#cb23-1" tabindex="-1"></a>Winters_long <span class="ot">&lt;-</span> Winters_tib10 <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="chapter-9-some-useful-tools-in-r.html#cb23-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Temp_gaps, Temp),</span>
-<span id="cb23-3"><a href="chapter-9-some-useful-tools-in-r.html#cb23-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;measurement&quot;</span>,</span>
-<span id="cb23-4"><a href="chapter-9-some-useful-tools-in-r.html#cb23-4" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-9-some-useful-tools-in-r.html#cb21-1" tabindex="-1"></a>Winters_long <span class="ot">&lt;-</span> Winters_tib10 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="chapter-9-some-useful-tools-in-r.html#cb21-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Temp_gaps, Temp),</span>
+<span id="cb21-3"><a href="chapter-9-some-useful-tools-in-r.html#cb21-3" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;measurement&quot;</span>,</span>
+<span id="cb21-4"><a href="chapter-9-some-useful-tools-in-r.html#cb21-4" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
 <p><strong>Faceted visualization with ggplot2</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chapter-9-some-useful-tools-in-r.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(Winters_long, <span class="fu">aes</span>(<span class="at">x =</span> Hour, <span class="at">y =</span> value)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="chapter-9-some-useful-tools-in-r.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="chapter-9-some-useful-tools-in-r.html#cb24-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>measurement, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="chapter-9-some-useful-tools-in-r.html#cb24-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="chapter-9-some-useful-tools-in-r.html#cb24-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperature values (Temp vs Temp_gaps)&quot;</span>,</span>
-<span id="cb24-6"><a href="chapter-9-some-useful-tools-in-r.html#cb24-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Hour of Day&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperature (°C)&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-9-some-useful-tools-in-r.html#cb22-1" tabindex="-1"></a><span class="fu">ggplot</span>(Winters_long, <span class="fu">aes</span>(<span class="at">x =</span> Hour, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="chapter-9-some-useful-tools-in-r.html#cb22-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="chapter-9-some-useful-tools-in-r.html#cb22-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>measurement, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="chapter-9-some-useful-tools-in-r.html#cb22-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="chapter-9-some-useful-tools-in-r.html#cb22-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperature values (Temp vs Temp_gaps)&quot;</span>,</span>
+<span id="cb22-6"><a href="chapter-9-some-useful-tools-in-r.html#cb22-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Hour of Day&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Temperature (°C)&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p><strong>Reshaping data: long to wide format</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-9-some-useful-tools-in-r.html#cb25-1" tabindex="-1"></a>Winters_wide <span class="ot">&lt;-</span> Winters_long <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> measurement, <span class="at">values_from =</span> value)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-9-some-useful-tools-in-r.html#cb23-1" tabindex="-1"></a>Winters_wide <span class="ot">&lt;-</span> Winters_long <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> measurement, <span class="at">values_from =</span> value)</span></code></pre></div>
 <p><strong>Column selection</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chapter-9-some-useful-tools-in-r.html#cb26-1" tabindex="-1"></a>Winters_select <span class="ot">&lt;-</span> Winters_wide <span class="sc">%&gt;%</span> <span class="fu">select</span>(Year, Month, Day, Temp)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chapter-9-some-useful-tools-in-r.html#cb24-1" tabindex="-1"></a>Winters_select <span class="ot">&lt;-</span> Winters_wide <span class="sc">%&gt;%</span> <span class="fu">select</span>(Year, Month, Day, Temp)</span></code></pre></div>
 <p><strong>Sorting data</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="chapter-9-some-useful-tools-in-r.html#cb27-1" tabindex="-1"></a>Winters_sorted <span class="ot">&lt;-</span> Winters_select <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="chapter-9-some-useful-tools-in-r.html#cb27-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Temp))</span>
-<span id="cb27-3"><a href="chapter-9-some-useful-tools-in-r.html#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="chapter-9-some-useful-tools-in-r.html#cb27-4" tabindex="-1"></a><span class="fu">head</span>(Winters_sorted)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-9-some-useful-tools-in-r.html#cb25-1" tabindex="-1"></a>Winters_sorted <span class="ot">&lt;-</span> Winters_select <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="chapter-9-some-useful-tools-in-r.html#cb25-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Temp))</span>
+<span id="cb25-3"><a href="chapter-9-some-useful-tools-in-r.html#cb25-3" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="chapter-9-some-useful-tools-in-r.html#cb25-4" tabindex="-1"></a><span class="fu">head</span>(Winters_sorted)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ##    Year Month   Day  Temp
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
@@ -370,12 +360,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="using-a-for-loop-for-data-transformation" class="section level2 hasAnchor">
 <h2>Using a for loop for data transformation<a href="chapter-9-some-useful-tools-in-r.html#using-a-for-loop-for-data-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>For the Winter_hours_gaps dataset, write a for loop to convert all temperatures (Temp column) to degrees Fahrenheit</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="chapter-9-some-useful-tools-in-r.html#cb29-1" tabindex="-1"></a>Winters_for <span class="ot">&lt;-</span> Winters_hours_gaps</span>
-<span id="cb29-2"><a href="chapter-9-some-useful-tools-in-r.html#cb29-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Winters_for)) {</span>
-<span id="cb29-3"><a href="chapter-9-some-useful-tools-in-r.html#cb29-3" tabindex="-1"></a>  Winters_for<span class="sc">$</span>Temp[i] <span class="ot">&lt;-</span> (Winters_for<span class="sc">$</span>Temp[i] <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb29-4"><a href="chapter-9-some-useful-tools-in-r.html#cb29-4" tabindex="-1"></a>}</span>
-<span id="cb29-5"><a href="chapter-9-some-useful-tools-in-r.html#cb29-5" tabindex="-1"></a>Winters_for <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_for)</span>
-<span id="cb29-6"><a href="chapter-9-some-useful-tools-in-r.html#cb29-6" tabindex="-1"></a>Winters_for</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="chapter-9-some-useful-tools-in-r.html#cb27-1" tabindex="-1"></a>Winters_for <span class="ot">&lt;-</span> Winters_hours_gaps</span>
+<span id="cb27-2"><a href="chapter-9-some-useful-tools-in-r.html#cb27-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Winters_for)) {</span>
+<span id="cb27-3"><a href="chapter-9-some-useful-tools-in-r.html#cb27-3" tabindex="-1"></a>  Winters_for<span class="sc">$</span>Temp[i] <span class="ot">&lt;-</span> (Winters_for<span class="sc">$</span>Temp[i] <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb27-4"><a href="chapter-9-some-useful-tools-in-r.html#cb27-4" tabindex="-1"></a>}</span>
+<span id="cb27-5"><a href="chapter-9-some-useful-tools-in-r.html#cb27-5" tabindex="-1"></a>Winters_for <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_for)</span>
+<span id="cb27-6"><a href="chapter-9-some-useful-tools-in-r.html#cb27-6" tabindex="-1"></a>Winters_for</span></code></pre></div>
 <pre><code>## # A tibble: 6,074 × 6
 ##     Year Month   Day  Hour Temp_gaps  Temp
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -394,10 +384,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="using-apply-family-functions" class="section level2 hasAnchor">
 <h2>Using apply-family functions<a href="chapter-9-some-useful-tools-in-r.html#using-apply-family-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Execute the same operation with a function from the apply family</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapter-9-some-useful-tools-in-r.html#cb31-1" tabindex="-1"></a>Winters_apply <span class="ot">&lt;-</span> Winters_hours_gaps</span>
-<span id="cb31-2"><a href="chapter-9-some-useful-tools-in-r.html#cb31-2" tabindex="-1"></a>Winters_apply<span class="sc">$</span>Temp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(Winters_apply<span class="sc">$</span>Temp, <span class="cf">function</span>(x) (x <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span>)</span>
-<span id="cb31-3"><a href="chapter-9-some-useful-tools-in-r.html#cb31-3" tabindex="-1"></a>Winters_apply <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_apply)</span>
-<span id="cb31-4"><a href="chapter-9-some-useful-tools-in-r.html#cb31-4" tabindex="-1"></a>Winters_apply</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="chapter-9-some-useful-tools-in-r.html#cb29-1" tabindex="-1"></a>Winters_apply <span class="ot">&lt;-</span> Winters_hours_gaps</span>
+<span id="cb29-2"><a href="chapter-9-some-useful-tools-in-r.html#cb29-2" tabindex="-1"></a>Winters_apply<span class="sc">$</span>Temp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(Winters_apply<span class="sc">$</span>Temp, <span class="cf">function</span>(x) (x <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span>)</span>
+<span id="cb29-3"><a href="chapter-9-some-useful-tools-in-r.html#cb29-3" tabindex="-1"></a>Winters_apply <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_apply)</span>
+<span id="cb29-4"><a href="chapter-9-some-useful-tools-in-r.html#cb29-4" tabindex="-1"></a>Winters_apply</span></code></pre></div>
 <pre><code>## # A tibble: 6,074 × 6
 ##     Year Month   Day  Hour Temp_gaps  Temp
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -416,10 +406,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="vectorized-operations-with-tidyverse" class="section level2 hasAnchor">
 <h2>Vectorized operations with tidyverse<a href="chapter-9-some-useful-tools-in-r.html#vectorized-operations-with-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Now use the tidyverse function mutate to achieve the same outcome</strong></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="chapter-9-some-useful-tools-in-r.html#cb33-1" tabindex="-1"></a>Winters_mutate <span class="ot">&lt;-</span> Winters_hours_gaps <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="chapter-9-some-useful-tools-in-r.html#cb33-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Temp =</span> (Temp <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span>)</span>
-<span id="cb33-3"><a href="chapter-9-some-useful-tools-in-r.html#cb33-3" tabindex="-1"></a>Winters_mutate <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_mutate)</span>
-<span id="cb33-4"><a href="chapter-9-some-useful-tools-in-r.html#cb33-4" tabindex="-1"></a>Winters_mutate</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapter-9-some-useful-tools-in-r.html#cb31-1" tabindex="-1"></a>Winters_mutate <span class="ot">&lt;-</span> Winters_hours_gaps <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="chapter-9-some-useful-tools-in-r.html#cb31-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Temp =</span> (Temp <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span>)</span>
+<span id="cb31-3"><a href="chapter-9-some-useful-tools-in-r.html#cb31-3" tabindex="-1"></a>Winters_mutate <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(Winters_mutate)</span>
+<span id="cb31-4"><a href="chapter-9-some-useful-tools-in-r.html#cb31-4" tabindex="-1"></a>Winters_mutate</span></code></pre></div>
 <pre><code>## # A tibble: 6,074 × 6
 ##     Year Month   Day  Hour Temp_gaps  Temp
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -491,7 +481,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });

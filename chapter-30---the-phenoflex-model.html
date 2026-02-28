@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 30 - The PhenoFlex model | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 30 - The PhenoFlex model | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 30 - The PhenoFlex model | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 30 - The PhenoFlex model | _main.knit" />
+  <meta property="og:title" content="Chapter 30 - The PhenoFlex model | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 30 - The PhenoFlex model | _main.knit" />
+  <meta name="twitter:title" content="Chapter 30 - The PhenoFlex model | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -317,110 +317,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="chapter-30---the-phenoflex-model" class="section level1 hasAnchor">
 <h1>Chapter 30 - The PhenoFlex model<a href="chapter-30---the-phenoflex-model.html#chapter-30---the-phenoflex-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this chapter, the PhenoFlex model is fitted to bloom data of Roter Boskoop apples and its performance is evaluated using predicted and observed bloom dates.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="chapter-30---the-phenoflex-model.html#cb187-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb187-2"><a href="chapter-30---the-phenoflex-model.html#cb187-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-30---the-phenoflex-model.html#cb163-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb163-2"><a href="chapter-30---the-phenoflex-model.html#cb163-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><strong>weather → hourly temps</strong></p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="chapter-30---the-phenoflex-model.html#cb188-1" tabindex="-1"></a>CKA_weather <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
-<span id="cb188-2"><a href="chapter-30---the-phenoflex-model.html#cb188-2" tabindex="-1"></a>hourtemps <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(CKA_weather, <span class="at">latitude =</span> <span class="fl">50.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="chapter-30---the-phenoflex-model.html#cb164-1" tabindex="-1"></a>CKA_weather <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb164-2"><a href="chapter-30---the-phenoflex-model.html#cb164-2" tabindex="-1"></a>hourtemps <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(CKA_weather, <span class="at">latitude =</span> <span class="fl">50.6</span>)</span></code></pre></div>
 <p><strong>Phenology (First bloom)</strong></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chapter-30---the-phenoflex-model.html#cb189-1" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-2"><a href="chapter-30---the-phenoflex-model.html#cb189-2" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, First_bloom) <span class="sc">%&gt;%</span></span>
-<span id="cb189-3"><a href="chapter-30---the-phenoflex-model.html#cb189-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb189-4"><a href="chapter-30---the-phenoflex-model.html#cb189-4" tabindex="-1"></a>    <span class="at">Year  =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
-<span id="cb189-5"><a href="chapter-30---the-phenoflex-model.html#cb189-5" tabindex="-1"></a>    <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
-<span id="cb189-6"><a href="chapter-30---the-phenoflex-model.html#cb189-6" tabindex="-1"></a>    <span class="at">Day   =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb189-7"><a href="chapter-30---the-phenoflex-model.html#cb189-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb189-8"><a href="chapter-30---the-phenoflex-model.html#cb189-8" tabindex="-1"></a>  <span class="fu">make_JDay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb189-9"><a href="chapter-30---the-phenoflex-model.html#cb189-9" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, JDay) <span class="sc">%&gt;%</span></span>
-<span id="cb189-10"><a href="chapter-30---the-phenoflex-model.html#cb189-10" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Year =</span> Pheno_year, <span class="at">pheno =</span> JDay) <span class="sc">%&gt;%</span></span>
-<span id="cb189-11"><a href="chapter-30---the-phenoflex-model.html#cb189-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pheno)) <span class="sc">%&gt;%</span></span>
-<span id="cb189-12"><a href="chapter-30---the-phenoflex-model.html#cb189-12" tabindex="-1"></a>  <span class="fu">arrange</span>(Year)</span>
-<span id="cb189-13"><a href="chapter-30---the-phenoflex-model.html#cb189-13" tabindex="-1"></a></span>
-<span id="cb189-14"><a href="chapter-30---the-phenoflex-model.html#cb189-14" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> Roter_first <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">1959</span>)</span>
-<span id="cb189-15"><a href="chapter-30---the-phenoflex-model.html#cb189-15" tabindex="-1"></a></span>
-<span id="cb189-16"><a href="chapter-30---the-phenoflex-model.html#cb189-16" tabindex="-1"></a>years_roter <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(Roter_first<span class="sc">$</span>Year))</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chapter-30---the-phenoflex-model.html#cb165-1" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-2"><a href="chapter-30---the-phenoflex-model.html#cb165-2" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, First_bloom) <span class="sc">%&gt;%</span></span>
+<span id="cb165-3"><a href="chapter-30---the-phenoflex-model.html#cb165-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb165-4"><a href="chapter-30---the-phenoflex-model.html#cb165-4" tabindex="-1"></a>    <span class="at">Year  =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb165-5"><a href="chapter-30---the-phenoflex-model.html#cb165-5" tabindex="-1"></a>    <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
+<span id="cb165-6"><a href="chapter-30---the-phenoflex-model.html#cb165-6" tabindex="-1"></a>    <span class="at">Day   =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">7</span>, <span class="dv">8</span>))</span>
+<span id="cb165-7"><a href="chapter-30---the-phenoflex-model.html#cb165-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb165-8"><a href="chapter-30---the-phenoflex-model.html#cb165-8" tabindex="-1"></a>  <span class="fu">make_JDay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb165-9"><a href="chapter-30---the-phenoflex-model.html#cb165-9" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb165-10"><a href="chapter-30---the-phenoflex-model.html#cb165-10" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Year =</span> Pheno_year, <span class="at">pheno =</span> JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb165-11"><a href="chapter-30---the-phenoflex-model.html#cb165-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pheno)) <span class="sc">%&gt;%</span></span>
+<span id="cb165-12"><a href="chapter-30---the-phenoflex-model.html#cb165-12" tabindex="-1"></a>  <span class="fu">arrange</span>(Year)</span>
+<span id="cb165-13"><a href="chapter-30---the-phenoflex-model.html#cb165-13" tabindex="-1"></a></span>
+<span id="cb165-14"><a href="chapter-30---the-phenoflex-model.html#cb165-14" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> Roter_first <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">1959</span>)</span>
+<span id="cb165-15"><a href="chapter-30---the-phenoflex-model.html#cb165-15" tabindex="-1"></a></span>
+<span id="cb165-16"><a href="chapter-30---the-phenoflex-model.html#cb165-16" tabindex="-1"></a>years_roter <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(Roter_first<span class="sc">$</span>Year))</span></code></pre></div>
 <p><strong>Build SeasonList</strong></p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="chapter-30---the-phenoflex-model.html#cb190-1" tabindex="-1"></a>SeasonList <span class="ot">&lt;-</span> <span class="fu">genSeasonList</span>(hourtemps<span class="sc">$</span>hourtemps,</span>
-<span id="cb190-2"><a href="chapter-30---the-phenoflex-model.html#cb190-2" tabindex="-1"></a>                            <span class="at">mrange =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>),</span>
-<span id="cb190-3"><a href="chapter-30---the-phenoflex-model.html#cb190-3" tabindex="-1"></a>                            <span class="at">years  =</span> years_roter)</span>
-<span id="cb190-4"><a href="chapter-30---the-phenoflex-model.html#cb190-4" tabindex="-1"></a></span>
-<span id="cb190-5"><a href="chapter-30---the-phenoflex-model.html#cb190-5" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(SeasonList) <span class="sc">==</span> <span class="fu">nrow</span>(Roter_first))</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="chapter-30---the-phenoflex-model.html#cb166-1" tabindex="-1"></a>SeasonList <span class="ot">&lt;-</span> <span class="fu">genSeasonList</span>(hourtemps<span class="sc">$</span>hourtemps,</span>
+<span id="cb166-2"><a href="chapter-30---the-phenoflex-model.html#cb166-2" tabindex="-1"></a>                            <span class="at">mrange =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>),</span>
+<span id="cb166-3"><a href="chapter-30---the-phenoflex-model.html#cb166-3" tabindex="-1"></a>                            <span class="at">years  =</span> years_roter)</span>
+<span id="cb166-4"><a href="chapter-30---the-phenoflex-model.html#cb166-4" tabindex="-1"></a></span>
+<span id="cb166-5"><a href="chapter-30---the-phenoflex-model.html#cb166-5" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(SeasonList) <span class="sc">==</span> <span class="fu">nrow</span>(Roter_first))</span></code></pre></div>
 <p><strong>Parameters + bounds</strong></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="chapter-30---the-phenoflex-model.html#cb191-1" tabindex="-1"></a>par <span class="ot">&lt;-</span>   <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">190</span>, <span class="fl">0.5</span>, <span class="dv">25</span>, <span class="fl">3372.8</span>,  <span class="fl">9900.3</span>, <span class="fl">6319.5</span>,</span>
-<span id="cb191-2"><a href="chapter-30---the-phenoflex-model.html#cb191-2" tabindex="-1"></a>           <span class="fl">5.939917e13</span>,  <span class="dv">4</span>, <span class="dv">36</span>,  <span class="dv">4</span>,  <span class="fl">1.60</span>)</span>
-<span id="cb191-3"><a href="chapter-30---the-phenoflex-model.html#cb191-3" tabindex="-1"></a></span>
-<span id="cb191-4"><a href="chapter-30---the-phenoflex-model.html#cb191-4" tabindex="-1"></a>upper <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">200</span>, <span class="fl">1.0</span>, <span class="dv">30</span>, <span class="fl">4000.0</span>, <span class="fl">10000.0</span>, <span class="fl">7000.0</span>,</span>
-<span id="cb191-5"><a href="chapter-30---the-phenoflex-model.html#cb191-5" tabindex="-1"></a>           <span class="dv">6</span>.e13, <span class="dv">10</span>, <span class="dv">40</span>, <span class="dv">10</span>, <span class="fl">50.00</span>)</span>
-<span id="cb191-6"><a href="chapter-30---the-phenoflex-model.html#cb191-6" tabindex="-1"></a></span>
-<span id="cb191-7"><a href="chapter-30---the-phenoflex-model.html#cb191-7" tabindex="-1"></a>lower <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">180</span>, <span class="fl">0.1</span>, <span class="dv">0</span> , <span class="fl">3000.0</span>,  <span class="fl">9000.0</span>, <span class="fl">6000.0</span>,</span>
-<span id="cb191-8"><a href="chapter-30---the-phenoflex-model.html#cb191-8" tabindex="-1"></a>           <span class="dv">5</span>.e13,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="chapter-30---the-phenoflex-model.html#cb167-1" tabindex="-1"></a>par <span class="ot">&lt;-</span>   <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">190</span>, <span class="fl">0.5</span>, <span class="dv">25</span>, <span class="fl">3372.8</span>,  <span class="fl">9900.3</span>, <span class="fl">6319.5</span>,</span>
+<span id="cb167-2"><a href="chapter-30---the-phenoflex-model.html#cb167-2" tabindex="-1"></a>           <span class="fl">5.939917e13</span>,  <span class="dv">4</span>, <span class="dv">36</span>,  <span class="dv">4</span>,  <span class="fl">1.60</span>)</span>
+<span id="cb167-3"><a href="chapter-30---the-phenoflex-model.html#cb167-3" tabindex="-1"></a></span>
+<span id="cb167-4"><a href="chapter-30---the-phenoflex-model.html#cb167-4" tabindex="-1"></a>upper <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">200</span>, <span class="fl">1.0</span>, <span class="dv">30</span>, <span class="fl">4000.0</span>, <span class="fl">10000.0</span>, <span class="fl">7000.0</span>,</span>
+<span id="cb167-5"><a href="chapter-30---the-phenoflex-model.html#cb167-5" tabindex="-1"></a>           <span class="dv">6</span>.e13, <span class="dv">10</span>, <span class="dv">40</span>, <span class="dv">10</span>, <span class="fl">50.00</span>)</span>
+<span id="cb167-6"><a href="chapter-30---the-phenoflex-model.html#cb167-6" tabindex="-1"></a></span>
+<span id="cb167-7"><a href="chapter-30---the-phenoflex-model.html#cb167-7" tabindex="-1"></a>lower <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">180</span>, <span class="fl">0.1</span>, <span class="dv">0</span> , <span class="fl">3000.0</span>,  <span class="fl">9000.0</span>, <span class="fl">6000.0</span>,</span>
+<span id="cb167-8"><a href="chapter-30---the-phenoflex-model.html#cb167-8" tabindex="-1"></a>           <span class="dv">5</span>.e13,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="fl">0.05</span>)</span></code></pre></div>
 <div id="parameterize-phenoflex-for-roter-boskoop" class="section level2 hasAnchor">
 <h2>Parameterize PhenoFlex for Roter Boskoop<a href="chapter-30---the-phenoflex-model.html#parameterize-phenoflex-for-roter-boskoop" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</strong></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="chapter-30---the-phenoflex-model.html#cb192-1" tabindex="-1"></a>Fit_res <span class="ot">&lt;-</span> <span class="fu">phenologyFitter</span>(</span>
-<span id="cb192-2"><a href="chapter-30---the-phenoflex-model.html#cb192-2" tabindex="-1"></a>  <span class="at">par.guess  =</span> par,</span>
-<span id="cb192-3"><a href="chapter-30---the-phenoflex-model.html#cb192-3" tabindex="-1"></a>  <span class="at">modelfn    =</span> PhenoFlex_GDHwrapper,</span>
-<span id="cb192-4"><a href="chapter-30---the-phenoflex-model.html#cb192-4" tabindex="-1"></a>  <span class="at">bloomJDays =</span> Roter_first<span class="sc">$</span>pheno,</span>
-<span id="cb192-5"><a href="chapter-30---the-phenoflex-model.html#cb192-5" tabindex="-1"></a>  <span class="at">SeasonList =</span> SeasonList,</span>
-<span id="cb192-6"><a href="chapter-30---the-phenoflex-model.html#cb192-6" tabindex="-1"></a>  <span class="at">lower      =</span> lower,</span>
-<span id="cb192-7"><a href="chapter-30---the-phenoflex-model.html#cb192-7" tabindex="-1"></a>  <span class="at">upper      =</span> upper,</span>
-<span id="cb192-8"><a href="chapter-30---the-phenoflex-model.html#cb192-8" tabindex="-1"></a>  <span class="at">control    =</span> <span class="fu">list</span>(</span>
-<span id="cb192-9"><a href="chapter-30---the-phenoflex-model.html#cb192-9" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb192-10"><a href="chapter-30---the-phenoflex-model.html#cb192-10" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb192-11"><a href="chapter-30---the-phenoflex-model.html#cb192-11" tabindex="-1"></a>    <span class="at">maxit =</span> <span class="dv">1000</span>,</span>
-<span id="cb192-12"><a href="chapter-30---the-phenoflex-model.html#cb192-12" tabindex="-1"></a>    <span class="at">nb.stop.improvement =</span> <span class="dv">5</span></span>
-<span id="cb192-13"><a href="chapter-30---the-phenoflex-model.html#cb192-13" tabindex="-1"></a>  )</span>
-<span id="cb192-14"><a href="chapter-30---the-phenoflex-model.html#cb192-14" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Lade nötigen Namensraum: parallel</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="chapter-30---the-phenoflex-model.html#cb194-1" tabindex="-1"></a>Roter_par <span class="ot">&lt;-</span> Fit_res<span class="sc">$</span>par</span>
-<span id="cb194-2"><a href="chapter-30---the-phenoflex-model.html#cb194-2" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(Roter_par) <span class="sc">==</span> <span class="dv">12</span>)</span>
-<span id="cb194-3"><a href="chapter-30---the-phenoflex-model.html#cb194-3" tabindex="-1"></a></span>
-<span id="cb194-4"><a href="chapter-30---the-phenoflex-model.html#cb194-4" tabindex="-1"></a><span class="fu">write.csv</span>(Roter_par,</span>
-<span id="cb194-5"><a href="chapter-30---the-phenoflex-model.html#cb194-5" tabindex="-1"></a>          <span class="st">&quot;data/PhenoFlex_parameters_Roter_Boskoop.csv&quot;</span>,</span>
-<span id="cb194-6"><a href="chapter-30---the-phenoflex-model.html#cb194-6" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="chapter-30---the-phenoflex-model.html#cb168-1" tabindex="-1"></a>Fit_res <span class="ot">&lt;-</span> <span class="fu">phenologyFitter</span>(</span>
+<span id="cb168-2"><a href="chapter-30---the-phenoflex-model.html#cb168-2" tabindex="-1"></a>  <span class="at">par.guess  =</span> par,</span>
+<span id="cb168-3"><a href="chapter-30---the-phenoflex-model.html#cb168-3" tabindex="-1"></a>  <span class="at">modelfn    =</span> PhenoFlex_GDHwrapper,</span>
+<span id="cb168-4"><a href="chapter-30---the-phenoflex-model.html#cb168-4" tabindex="-1"></a>  <span class="at">bloomJDays =</span> Roter_first<span class="sc">$</span>pheno,</span>
+<span id="cb168-5"><a href="chapter-30---the-phenoflex-model.html#cb168-5" tabindex="-1"></a>  <span class="at">SeasonList =</span> SeasonList,</span>
+<span id="cb168-6"><a href="chapter-30---the-phenoflex-model.html#cb168-6" tabindex="-1"></a>  <span class="at">lower      =</span> lower,</span>
+<span id="cb168-7"><a href="chapter-30---the-phenoflex-model.html#cb168-7" tabindex="-1"></a>  <span class="at">upper      =</span> upper,</span>
+<span id="cb168-8"><a href="chapter-30---the-phenoflex-model.html#cb168-8" tabindex="-1"></a>  <span class="at">control    =</span> <span class="fu">list</span>(</span>
+<span id="cb168-9"><a href="chapter-30---the-phenoflex-model.html#cb168-9" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb168-10"><a href="chapter-30---the-phenoflex-model.html#cb168-10" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb168-11"><a href="chapter-30---the-phenoflex-model.html#cb168-11" tabindex="-1"></a>    <span class="at">maxit =</span> <span class="dv">1000</span>,</span>
+<span id="cb168-12"><a href="chapter-30---the-phenoflex-model.html#cb168-12" tabindex="-1"></a>    <span class="at">nb.stop.improvement =</span> <span class="dv">5</span></span>
+<span id="cb168-13"><a href="chapter-30---the-phenoflex-model.html#cb168-13" tabindex="-1"></a>  )</span>
+<span id="cb168-14"><a href="chapter-30---the-phenoflex-model.html#cb168-14" tabindex="-1"></a>)</span>
+<span id="cb168-15"><a href="chapter-30---the-phenoflex-model.html#cb168-15" tabindex="-1"></a></span>
+<span id="cb168-16"><a href="chapter-30---the-phenoflex-model.html#cb168-16" tabindex="-1"></a>Roter_par <span class="ot">&lt;-</span> Fit_res<span class="sc">$</span>par</span>
+<span id="cb168-17"><a href="chapter-30---the-phenoflex-model.html#cb168-17" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(Roter_par) <span class="sc">==</span> <span class="dv">12</span>)</span>
+<span id="cb168-18"><a href="chapter-30---the-phenoflex-model.html#cb168-18" tabindex="-1"></a></span>
+<span id="cb168-19"><a href="chapter-30---the-phenoflex-model.html#cb168-19" tabindex="-1"></a><span class="fu">write.csv</span>(Roter_par,</span>
+<span id="cb168-20"><a href="chapter-30---the-phenoflex-model.html#cb168-20" tabindex="-1"></a>          <span class="st">&quot;data/PhenoFlex_parameters_Roter_Boskoop.csv&quot;</span>,</span>
+<span id="cb168-21"><a href="chapter-30---the-phenoflex-model.html#cb168-21" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="predicted-vs.-observed-bloom-dates" class="section level2 hasAnchor">
 <h2>Predicted vs. observed bloom dates<a href="chapter-30---the-phenoflex-model.html#predicted-vs.-observed-bloom-dates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Produce plots of predicted vs. observed bloom dates and distribution of prediction errors</strong></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="chapter-30---the-phenoflex-model.html#cb195-1" tabindex="-1"></a>Roter_PhenoFlex_predictions <span class="ot">&lt;-</span> Roter_first</span>
-<span id="cb195-2"><a href="chapter-30---the-phenoflex-model.html#cb195-2" tabindex="-1"></a>Roter_PhenoFlex_predictions<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="cn">NA_real_</span></span>
-<span id="cb195-3"><a href="chapter-30---the-phenoflex-model.html#cb195-3" tabindex="-1"></a></span>
-<span id="cb195-4"><a href="chapter-30---the-phenoflex-model.html#cb195-4" tabindex="-1"></a><span class="cf">for</span> (y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Roter_PhenoFlex_predictions)) {</span>
-<span id="cb195-5"><a href="chapter-30---the-phenoflex-model.html#cb195-5" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>predicted[y] <span class="ot">&lt;-</span></span>
-<span id="cb195-6"><a href="chapter-30---the-phenoflex-model.html#cb195-6" tabindex="-1"></a>    <span class="fu">PhenoFlex_GDHwrapper</span>(SeasonList[[y]], Roter_par)</span>
-<span id="cb195-7"><a href="chapter-30---the-phenoflex-model.html#cb195-7" tabindex="-1"></a>}</span>
-<span id="cb195-8"><a href="chapter-30---the-phenoflex-model.html#cb195-8" tabindex="-1"></a></span>
-<span id="cb195-9"><a href="chapter-30---the-phenoflex-model.html#cb195-9" tabindex="-1"></a>Roter_PhenoFlex_predictions<span class="sc">$</span>Error <span class="ot">&lt;-</span></span>
-<span id="cb195-10"><a href="chapter-30---the-phenoflex-model.html#cb195-10" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>predicted <span class="sc">-</span></span>
-<span id="cb195-11"><a href="chapter-30---the-phenoflex-model.html#cb195-11" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>pheno</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="chapter-30---the-phenoflex-model.html#cb169-1" tabindex="-1"></a>Roter_PhenoFlex_predictions <span class="ot">&lt;-</span> Roter_first</span>
+<span id="cb169-2"><a href="chapter-30---the-phenoflex-model.html#cb169-2" tabindex="-1"></a>Roter_PhenoFlex_predictions<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="cn">NA_real_</span></span>
+<span id="cb169-3"><a href="chapter-30---the-phenoflex-model.html#cb169-3" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="chapter-30---the-phenoflex-model.html#cb169-4" tabindex="-1"></a><span class="cf">for</span> (y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Roter_PhenoFlex_predictions)) {</span>
+<span id="cb169-5"><a href="chapter-30---the-phenoflex-model.html#cb169-5" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>predicted[y] <span class="ot">&lt;-</span></span>
+<span id="cb169-6"><a href="chapter-30---the-phenoflex-model.html#cb169-6" tabindex="-1"></a>    <span class="fu">PhenoFlex_GDHwrapper</span>(SeasonList[[y]], Roter_par)</span>
+<span id="cb169-7"><a href="chapter-30---the-phenoflex-model.html#cb169-7" tabindex="-1"></a>}</span>
+<span id="cb169-8"><a href="chapter-30---the-phenoflex-model.html#cb169-8" tabindex="-1"></a></span>
+<span id="cb169-9"><a href="chapter-30---the-phenoflex-model.html#cb169-9" tabindex="-1"></a>Roter_PhenoFlex_predictions<span class="sc">$</span>Error <span class="ot">&lt;-</span></span>
+<span id="cb169-10"><a href="chapter-30---the-phenoflex-model.html#cb169-10" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>predicted <span class="sc">-</span></span>
+<span id="cb169-11"><a href="chapter-30---the-phenoflex-model.html#cb169-11" tabindex="-1"></a>  Roter_PhenoFlex_predictions<span class="sc">$</span>pheno</span></code></pre></div>
 <p><strong>Predicted vs observed</strong></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="chapter-30---the-phenoflex-model.html#cb196-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter_PhenoFlex_predictions,</span>
-<span id="cb196-2"><a href="chapter-30---the-phenoflex-model.html#cb196-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> pheno, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
-<span id="cb196-3"><a href="chapter-30---the-phenoflex-model.html#cb196-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb196-4"><a href="chapter-30---the-phenoflex-model.html#cb196-4" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb196-5"><a href="chapter-30---the-phenoflex-model.html#cb196-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb196-6"><a href="chapter-30---the-phenoflex-model.html#cb196-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Observed bloom date (Day of the year)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb196-7"><a href="chapter-30---the-phenoflex-model.html#cb196-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Predicted bloom date (Day of the year)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb196-8"><a href="chapter-30---the-phenoflex-model.html#cb196-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Roter Boskoop – Predicted vs. observed bloom dates&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="chapter-30---the-phenoflex-model.html#cb170-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter_PhenoFlex_predictions,</span>
+<span id="cb170-2"><a href="chapter-30---the-phenoflex-model.html#cb170-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> pheno, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb170-3"><a href="chapter-30---the-phenoflex-model.html#cb170-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb170-4"><a href="chapter-30---the-phenoflex-model.html#cb170-4" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb170-5"><a href="chapter-30---the-phenoflex-model.html#cb170-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb170-6"><a href="chapter-30---the-phenoflex-model.html#cb170-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Observed bloom date (Day of the year)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb170-7"><a href="chapter-30---the-phenoflex-model.html#cb170-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Predicted bloom date (Day of the year)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb170-8"><a href="chapter-30---the-phenoflex-model.html#cb170-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Roter Boskoop – Predicted vs. observed bloom dates&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <p><strong>Error distribution</strong></p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="chapter-30---the-phenoflex-model.html#cb197-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter_PhenoFlex_predictions,</span>
-<span id="cb197-2"><a href="chapter-30---the-phenoflex-model.html#cb197-2" tabindex="-1"></a>       <span class="fu">aes</span>(Error)) <span class="sc">+</span></span>
-<span id="cb197-3"><a href="chapter-30---the-phenoflex-model.html#cb197-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb197-4"><a href="chapter-30---the-phenoflex-model.html#cb197-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb197-5"><a href="chapter-30---the-phenoflex-model.html#cb197-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Prediction error (days)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb197-6"><a href="chapter-30---the-phenoflex-model.html#cb197-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Roter Boskoop – Distribution of prediction errors&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="chapter-30---the-phenoflex-model.html#cb171-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter_PhenoFlex_predictions,</span>
+<span id="cb171-2"><a href="chapter-30---the-phenoflex-model.html#cb171-2" tabindex="-1"></a>       <span class="fu">aes</span>(Error)) <span class="sc">+</span></span>
+<span id="cb171-3"><a href="chapter-30---the-phenoflex-model.html#cb171-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb171-4"><a href="chapter-30---the-phenoflex-model.html#cb171-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb171-5"><a href="chapter-30---the-phenoflex-model.html#cb171-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Prediction error (days)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-6"><a href="chapter-30---the-phenoflex-model.html#cb171-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Roter Boskoop – Distribution of prediction errors&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
 </div>
 <div id="model-performance-metrics" class="section level2 hasAnchor">
 <h2>Model performance metrics<a href="chapter-30---the-phenoflex-model.html#model-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Compute the model performance metrics RMSEP, mean error and mean absolute error.</strong></p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="chapter-30---the-phenoflex-model.html#cb198-1" tabindex="-1"></a><span class="fu">RMSEP</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>predicted,</span>
-<span id="cb198-2"><a href="chapter-30---the-phenoflex-model.html#cb198-2" tabindex="-1"></a>      Roter_PhenoFlex_predictions<span class="sc">$</span>pheno)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="chapter-30---the-phenoflex-model.html#cb172-1" tabindex="-1"></a><span class="fu">RMSEP</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>predicted,</span>
+<span id="cb172-2"><a href="chapter-30---the-phenoflex-model.html#cb172-2" tabindex="-1"></a>      Roter_PhenoFlex_predictions<span class="sc">$</span>pheno)</span></code></pre></div>
 <pre><code>## [1] 4.690369</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="chapter-30---the-phenoflex-model.html#cb200-1" tabindex="-1"></a><span class="fu">mean</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>Error)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="chapter-30---the-phenoflex-model.html#cb174-1" tabindex="-1"></a><span class="fu">mean</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>Error)</span></code></pre></div>
 <pre><code>## [1] -1.915972</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="chapter-30---the-phenoflex-model.html#cb202-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>Error))</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="chapter-30---the-phenoflex-model.html#cb176-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(Roter_PhenoFlex_predictions<span class="sc">$</span>Error))</span></code></pre></div>
 <pre><code>## [1] 3.340972</code></pre>
 
 </div>
@@ -479,7 +479,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });

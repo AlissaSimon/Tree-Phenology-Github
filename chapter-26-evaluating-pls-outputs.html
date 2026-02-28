@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 26 — Evaluating PLS outputs | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 26 — Evaluating PLS outputs | Tree Phenology Logbook</title>
+  <meta name="description" content="Chapter 26 — Evaluating PLS outputs | Tree Phenology Logbook" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 26 — Evaluating PLS outputs | _main.knit" />
+  <meta property="og:title" content="Chapter 26 — Evaluating PLS outputs | Tree Phenology Logbook" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 26 — Evaluating PLS outputs | _main.knit" />
+  <meta name="twitter:title" content="Chapter 26 — Evaluating PLS outputs | Tree Phenology Logbook" />
   
   
   
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
           </h1>
         </div>
 
@@ -321,226 +321,203 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Reproducing analysis<a href="chapter-26-evaluating-pls-outputs.html#reproducing-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Reproduce the analysis for the ‘Roter Boskoop’ dataset.</strong></p>
 <p><strong>Load packages and phenology data</strong></p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chapter-26-evaluating-pls-outputs.html#cb157-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb157-2"><a href="chapter-26-evaluating-pls-outputs.html#cb157-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb157-3"><a href="chapter-26-evaluating-pls-outputs.html#cb157-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb157-4"><a href="chapter-26-evaluating-pls-outputs.html#cb157-4" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
-<span id="cb157-5"><a href="chapter-26-evaluating-pls-outputs.html#cb157-5" tabindex="-1"></a></span>
-<span id="cb157-6"><a href="chapter-26-evaluating-pls-outputs.html#cb157-6" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb157-7"><a href="chapter-26-evaluating-pls-outputs.html#cb157-7" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, First_bloom) <span class="sc">%&gt;%</span></span>
-<span id="cb157-8"><a href="chapter-26-evaluating-pls-outputs.html#cb157-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year  =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
-<span id="cb157-9"><a href="chapter-26-evaluating-pls-outputs.html#cb157-9" tabindex="-1"></a>         <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
-<span id="cb157-10"><a href="chapter-26-evaluating-pls-outputs.html#cb157-10" tabindex="-1"></a>         <span class="at">Day   =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">7</span>, <span class="dv">8</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb157-11"><a href="chapter-26-evaluating-pls-outputs.html#cb157-11" tabindex="-1"></a>  <span class="fu">make_JDay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb157-12"><a href="chapter-26-evaluating-pls-outputs.html#cb157-12" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, JDay) <span class="sc">%&gt;%</span></span>
-<span id="cb157-13"><a href="chapter-26-evaluating-pls-outputs.html#cb157-13" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Year =</span> Pheno_year,</span>
-<span id="cb157-14"><a href="chapter-26-evaluating-pls-outputs.html#cb157-14" tabindex="-1"></a>         <span class="at">pheno =</span> JDay)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="chapter-26-evaluating-pls-outputs.html#cb147-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb147-2"><a href="chapter-26-evaluating-pls-outputs.html#cb147-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb147-3"><a href="chapter-26-evaluating-pls-outputs.html#cb147-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb147-4"><a href="chapter-26-evaluating-pls-outputs.html#cb147-4" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
+<span id="cb147-5"><a href="chapter-26-evaluating-pls-outputs.html#cb147-5" tabindex="-1"></a></span>
+<span id="cb147-6"><a href="chapter-26-evaluating-pls-outputs.html#cb147-6" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb147-7"><a href="chapter-26-evaluating-pls-outputs.html#cb147-7" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, First_bloom) <span class="sc">%&gt;%</span></span>
+<span id="cb147-8"><a href="chapter-26-evaluating-pls-outputs.html#cb147-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year  =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb147-9"><a href="chapter-26-evaluating-pls-outputs.html#cb147-9" tabindex="-1"></a>         <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
+<span id="cb147-10"><a href="chapter-26-evaluating-pls-outputs.html#cb147-10" tabindex="-1"></a>         <span class="at">Day   =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">7</span>, <span class="dv">8</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb147-11"><a href="chapter-26-evaluating-pls-outputs.html#cb147-11" tabindex="-1"></a>  <span class="fu">make_JDay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb147-12"><a href="chapter-26-evaluating-pls-outputs.html#cb147-12" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb147-13"><a href="chapter-26-evaluating-pls-outputs.html#cb147-13" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Year =</span> Pheno_year,</span>
+<span id="cb147-14"><a href="chapter-26-evaluating-pls-outputs.html#cb147-14" tabindex="-1"></a>         <span class="at">pheno =</span> JDay)</span></code></pre></div>
 <p><strong>Load temperature data and generate hourly temperatures</strong></p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="chapter-26-evaluating-pls-outputs.html#cb158-1" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
-<span id="cb158-2"><a href="chapter-26-evaluating-pls-outputs.html#cb158-2" tabindex="-1"></a></span>
-<span id="cb158-3"><a href="chapter-26-evaluating-pls-outputs.html#cb158-3" tabindex="-1"></a>temps_hourly <span class="ot">&lt;-</span> temps <span class="sc">%&gt;%</span></span>
-<span id="cb158-4"><a href="chapter-26-evaluating-pls-outputs.html#cb158-4" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">50.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="chapter-26-evaluating-pls-outputs.html#cb148-1" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb148-2"><a href="chapter-26-evaluating-pls-outputs.html#cb148-2" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="chapter-26-evaluating-pls-outputs.html#cb148-3" tabindex="-1"></a>temps_hourly <span class="ot">&lt;-</span> temps <span class="sc">%&gt;%</span></span>
+<span id="cb148-4"><a href="chapter-26-evaluating-pls-outputs.html#cb148-4" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">50.6</span>)</span></code></pre></div>
 <p><strong>Compute daily chill and heat metrics</strong></p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-26-evaluating-pls-outputs.html#cb159-1" tabindex="-1"></a>daychill <span class="ot">&lt;-</span> <span class="fu">daily_chill</span>(</span>
-<span id="cb159-2"><a href="chapter-26-evaluating-pls-outputs.html#cb159-2" tabindex="-1"></a>  <span class="at">hourtemps =</span> temps_hourly,</span>
-<span id="cb159-3"><a href="chapter-26-evaluating-pls-outputs.html#cb159-3" tabindex="-1"></a>  <span class="at">running_mean =</span> <span class="dv">1</span>,</span>
-<span id="cb159-4"><a href="chapter-26-evaluating-pls-outputs.html#cb159-4" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(</span>
-<span id="cb159-5"><a href="chapter-26-evaluating-pls-outputs.html#cb159-5" tabindex="-1"></a>    <span class="at">Chilling_Hours   =</span> Chilling_Hours,</span>
-<span id="cb159-6"><a href="chapter-26-evaluating-pls-outputs.html#cb159-6" tabindex="-1"></a>    <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
-<span id="cb159-7"><a href="chapter-26-evaluating-pls-outputs.html#cb159-7" tabindex="-1"></a>    <span class="at">Chill_Portions   =</span> Dynamic_Model,</span>
-<span id="cb159-8"><a href="chapter-26-evaluating-pls-outputs.html#cb159-8" tabindex="-1"></a>    <span class="at">GDH              =</span> GDH</span>
-<span id="cb159-9"><a href="chapter-26-evaluating-pls-outputs.html#cb159-9" tabindex="-1"></a>  )</span>
-<span id="cb159-10"><a href="chapter-26-evaluating-pls-outputs.html#cb159-10" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="chapter-26-evaluating-pls-outputs.html#cb149-1" tabindex="-1"></a>daychill <span class="ot">&lt;-</span> <span class="fu">daily_chill</span>(</span>
+<span id="cb149-2"><a href="chapter-26-evaluating-pls-outputs.html#cb149-2" tabindex="-1"></a>  <span class="at">hourtemps =</span> temps_hourly,</span>
+<span id="cb149-3"><a href="chapter-26-evaluating-pls-outputs.html#cb149-3" tabindex="-1"></a>  <span class="at">running_mean =</span> <span class="dv">1</span>,</span>
+<span id="cb149-4"><a href="chapter-26-evaluating-pls-outputs.html#cb149-4" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(</span>
+<span id="cb149-5"><a href="chapter-26-evaluating-pls-outputs.html#cb149-5" tabindex="-1"></a>    <span class="at">Chilling_Hours   =</span> Chilling_Hours,</span>
+<span id="cb149-6"><a href="chapter-26-evaluating-pls-outputs.html#cb149-6" tabindex="-1"></a>    <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
+<span id="cb149-7"><a href="chapter-26-evaluating-pls-outputs.html#cb149-7" tabindex="-1"></a>    <span class="at">Chill_Portions   =</span> Dynamic_Model,</span>
+<span id="cb149-8"><a href="chapter-26-evaluating-pls-outputs.html#cb149-8" tabindex="-1"></a>    <span class="at">GDH              =</span> GDH</span>
+<span id="cb149-9"><a href="chapter-26-evaluating-pls-outputs.html#cb149-9" tabindex="-1"></a>  )</span>
+<span id="cb149-10"><a href="chapter-26-evaluating-pls-outputs.html#cb149-10" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Run PLS regression using agroclimatic metrics</strong></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="chapter-26-evaluating-pls-outputs.html#cb160-1" tabindex="-1"></a>plscf <span class="ot">&lt;-</span> <span class="fu">PLS_chill_force</span>(</span>
-<span id="cb160-2"><a href="chapter-26-evaluating-pls-outputs.html#cb160-2" tabindex="-1"></a>  <span class="at">daily_chill_obj =</span> daychill,</span>
-<span id="cb160-3"><a href="chapter-26-evaluating-pls-outputs.html#cb160-3" tabindex="-1"></a>  <span class="at">bio_data_frame  =</span> Roter_first,</span>
-<span id="cb160-4"><a href="chapter-26-evaluating-pls-outputs.html#cb160-4" tabindex="-1"></a>  <span class="at">split_month     =</span> <span class="dv">6</span>,</span>
-<span id="cb160-5"><a href="chapter-26-evaluating-pls-outputs.html#cb160-5" tabindex="-1"></a>  <span class="at">chill_models    =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
-<span id="cb160-6"><a href="chapter-26-evaluating-pls-outputs.html#cb160-6" tabindex="-1"></a>  <span class="at">heat_models     =</span> <span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb160-7"><a href="chapter-26-evaluating-pls-outputs.html#cb160-7" tabindex="-1"></a>  <span class="at">runn_means      =</span> <span class="dv">11</span></span>
-<span id="cb160-8"><a href="chapter-26-evaluating-pls-outputs.html#cb160-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="chapter-26-evaluating-pls-outputs.html#cb150-1" tabindex="-1"></a>plscf <span class="ot">&lt;-</span> <span class="fu">PLS_chill_force</span>(</span>
+<span id="cb150-2"><a href="chapter-26-evaluating-pls-outputs.html#cb150-2" tabindex="-1"></a>  <span class="at">daily_chill_obj =</span> daychill,</span>
+<span id="cb150-3"><a href="chapter-26-evaluating-pls-outputs.html#cb150-3" tabindex="-1"></a>  <span class="at">bio_data_frame  =</span> Roter_first,</span>
+<span id="cb150-4"><a href="chapter-26-evaluating-pls-outputs.html#cb150-4" tabindex="-1"></a>  <span class="at">split_month     =</span> <span class="dv">6</span>,</span>
+<span id="cb150-5"><a href="chapter-26-evaluating-pls-outputs.html#cb150-5" tabindex="-1"></a>  <span class="at">chill_models    =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb150-6"><a href="chapter-26-evaluating-pls-outputs.html#cb150-6" tabindex="-1"></a>  <span class="at">heat_models     =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb150-7"><a href="chapter-26-evaluating-pls-outputs.html#cb150-7" tabindex="-1"></a>  <span class="at">runn_means      =</span> <span class="dv">11</span></span>
+<span id="cb150-8"><a href="chapter-26-evaluating-pls-outputs.html#cb150-8" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Visualize PLS results and delineate response phases</strong></p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="chapter-26-evaluating-pls-outputs.html#cb161-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;data/plot_pls_ggplot.R&quot;</span>)</span>
-<span id="cb161-2"><a href="chapter-26-evaluating-pls-outputs.html#cb161-2" tabindex="-1"></a></span>
-<span id="cb161-3"><a href="chapter-26-evaluating-pls-outputs.html#cb161-3" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(</span>
-<span id="cb161-4"><a href="chapter-26-evaluating-pls-outputs.html#cb161-4" tabindex="-1"></a>  plscf,</span>
-<span id="cb161-5"><a href="chapter-26-evaluating-pls-outputs.html#cb161-5" tabindex="-1"></a>  <span class="at">chill_metric =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
-<span id="cb161-6"><a href="chapter-26-evaluating-pls-outputs.html#cb161-6" tabindex="-1"></a>  <span class="at">heat_metric  =</span> <span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb161-7"><a href="chapter-26-evaluating-pls-outputs.html#cb161-7" tabindex="-1"></a>  <span class="at">chill_label  =</span> <span class="st">&quot;CP&quot;</span>,</span>
-<span id="cb161-8"><a href="chapter-26-evaluating-pls-outputs.html#cb161-8" tabindex="-1"></a>  <span class="at">heat_label   =</span> <span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb161-9"><a href="chapter-26-evaluating-pls-outputs.html#cb161-9" tabindex="-1"></a>  <span class="at">chill_phase  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">50</span>),</span>
-<span id="cb161-10"><a href="chapter-26-evaluating-pls-outputs.html#cb161-10" tabindex="-1"></a>  <span class="at">heat_phase   =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
-<span id="cb161-11"><a href="chapter-26-evaluating-pls-outputs.html#cb161-11" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="chapter-26-evaluating-pls-outputs.html#cb151-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;data/plot_pls_ggplot.R&quot;</span>)</span>
+<span id="cb151-2"><a href="chapter-26-evaluating-pls-outputs.html#cb151-2" tabindex="-1"></a></span>
+<span id="cb151-3"><a href="chapter-26-evaluating-pls-outputs.html#cb151-3" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(</span>
+<span id="cb151-4"><a href="chapter-26-evaluating-pls-outputs.html#cb151-4" tabindex="-1"></a>  plscf,</span>
+<span id="cb151-5"><a href="chapter-26-evaluating-pls-outputs.html#cb151-5" tabindex="-1"></a>  <span class="at">chill_metric =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb151-6"><a href="chapter-26-evaluating-pls-outputs.html#cb151-6" tabindex="-1"></a>  <span class="at">heat_metric  =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb151-7"><a href="chapter-26-evaluating-pls-outputs.html#cb151-7" tabindex="-1"></a>  <span class="at">chill_label  =</span> <span class="st">&quot;CP&quot;</span>,</span>
+<span id="cb151-8"><a href="chapter-26-evaluating-pls-outputs.html#cb151-8" tabindex="-1"></a>  <span class="at">heat_label   =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb151-9"><a href="chapter-26-evaluating-pls-outputs.html#cb151-9" tabindex="-1"></a>  <span class="at">chill_phase  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">50</span>),</span>
+<span id="cb151-10"><a href="chapter-26-evaluating-pls-outputs.html#cb151-10" tabindex="-1"></a>  <span class="at">heat_phase   =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
+<span id="cb151-11"><a href="chapter-26-evaluating-pls-outputs.html#cb151-11" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <p><strong>Estimate chilling and forcing requirements</strong></p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="chapter-26-evaluating-pls-outputs.html#cb162-1" tabindex="-1"></a>chill_phase <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">320</span>, <span class="dv">50</span>)</span>
-<span id="cb162-2"><a href="chapter-26-evaluating-pls-outputs.html#cb162-2" tabindex="-1"></a>heat_phase  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
-<span id="cb162-3"><a href="chapter-26-evaluating-pls-outputs.html#cb162-3" tabindex="-1"></a></span>
-<span id="cb162-4"><a href="chapter-26-evaluating-pls-outputs.html#cb162-4" tabindex="-1"></a>chill <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
-<span id="cb162-5"><a href="chapter-26-evaluating-pls-outputs.html#cb162-5" tabindex="-1"></a>  <span class="at">hourtemps     =</span> temps_hourly,</span>
-<span id="cb162-6"><a href="chapter-26-evaluating-pls-outputs.html#cb162-6" tabindex="-1"></a>  <span class="at">Start_JDay    =</span> chill_phase[<span class="dv">1</span>],</span>
-<span id="cb162-7"><a href="chapter-26-evaluating-pls-outputs.html#cb162-7" tabindex="-1"></a>  <span class="at">End_JDay      =</span> chill_phase[<span class="dv">2</span>],</span>
-<span id="cb162-8"><a href="chapter-26-evaluating-pls-outputs.html#cb162-8" tabindex="-1"></a>  <span class="at">models        =</span> <span class="fu">list</span>(<span class="at">Chill_Portions =</span> Dynamic_Model),</span>
-<span id="cb162-9"><a href="chapter-26-evaluating-pls-outputs.html#cb162-9" tabindex="-1"></a>  <span class="at">misstolerance =</span> <span class="dv">10</span></span>
-<span id="cb162-10"><a href="chapter-26-evaluating-pls-outputs.html#cb162-10" tabindex="-1"></a>)</span>
-<span id="cb162-11"><a href="chapter-26-evaluating-pls-outputs.html#cb162-11" tabindex="-1"></a></span>
-<span id="cb162-12"><a href="chapter-26-evaluating-pls-outputs.html#cb162-12" tabindex="-1"></a>heat <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
-<span id="cb162-13"><a href="chapter-26-evaluating-pls-outputs.html#cb162-13" tabindex="-1"></a>  <span class="at">hourtemps  =</span> temps_hourly,</span>
-<span id="cb162-14"><a href="chapter-26-evaluating-pls-outputs.html#cb162-14" tabindex="-1"></a>  <span class="at">Start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
-<span id="cb162-15"><a href="chapter-26-evaluating-pls-outputs.html#cb162-15" tabindex="-1"></a>  <span class="at">End_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
-<span id="cb162-16"><a href="chapter-26-evaluating-pls-outputs.html#cb162-16" tabindex="-1"></a>  <span class="at">models     =</span> <span class="fu">list</span>(<span class="at">GDH =</span> GDH)</span>
-<span id="cb162-17"><a href="chapter-26-evaluating-pls-outputs.html#cb162-17" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="chapter-26-evaluating-pls-outputs.html#cb152-1" tabindex="-1"></a>chill_phase <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">320</span>, <span class="dv">50</span>)</span>
+<span id="cb152-2"><a href="chapter-26-evaluating-pls-outputs.html#cb152-2" tabindex="-1"></a>heat_phase  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
+<span id="cb152-3"><a href="chapter-26-evaluating-pls-outputs.html#cb152-3" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="chapter-26-evaluating-pls-outputs.html#cb152-4" tabindex="-1"></a>chill <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
+<span id="cb152-5"><a href="chapter-26-evaluating-pls-outputs.html#cb152-5" tabindex="-1"></a>  <span class="at">hourtemps     =</span> temps_hourly,</span>
+<span id="cb152-6"><a href="chapter-26-evaluating-pls-outputs.html#cb152-6" tabindex="-1"></a>  <span class="at">Start_JDay    =</span> chill_phase[<span class="dv">1</span>],</span>
+<span id="cb152-7"><a href="chapter-26-evaluating-pls-outputs.html#cb152-7" tabindex="-1"></a>  <span class="at">End_JDay      =</span> chill_phase[<span class="dv">2</span>],</span>
+<span id="cb152-8"><a href="chapter-26-evaluating-pls-outputs.html#cb152-8" tabindex="-1"></a>  <span class="at">models        =</span> <span class="fu">list</span>(<span class="at">Chill_Portions =</span> Dynamic_Model),</span>
+<span id="cb152-9"><a href="chapter-26-evaluating-pls-outputs.html#cb152-9" tabindex="-1"></a>  <span class="at">misstolerance =</span> <span class="dv">10</span></span>
+<span id="cb152-10"><a href="chapter-26-evaluating-pls-outputs.html#cb152-10" tabindex="-1"></a>)</span>
+<span id="cb152-11"><a href="chapter-26-evaluating-pls-outputs.html#cb152-11" tabindex="-1"></a></span>
+<span id="cb152-12"><a href="chapter-26-evaluating-pls-outputs.html#cb152-12" tabindex="-1"></a>heat <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
+<span id="cb152-13"><a href="chapter-26-evaluating-pls-outputs.html#cb152-13" tabindex="-1"></a>  <span class="at">hourtemps  =</span> temps_hourly,</span>
+<span id="cb152-14"><a href="chapter-26-evaluating-pls-outputs.html#cb152-14" tabindex="-1"></a>  <span class="at">Start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
+<span id="cb152-15"><a href="chapter-26-evaluating-pls-outputs.html#cb152-15" tabindex="-1"></a>  <span class="at">End_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
+<span id="cb152-16"><a href="chapter-26-evaluating-pls-outputs.html#cb152-16" tabindex="-1"></a>  <span class="at">models     =</span> <span class="fu">list</span>(<span class="at">GDH =</span> GDH)</span>
+<span id="cb152-17"><a href="chapter-26-evaluating-pls-outputs.html#cb152-17" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Inspect chill and heat distributions</strong></p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-26-evaluating-pls-outputs.html#cb163-1" tabindex="-1"></a><span class="fu">ggplot</span>(chill, <span class="fu">aes</span>(<span class="at">x =</span> Chill_Portions)) <span class="sc">+</span></span>
-<span id="cb163-2"><a href="chapter-26-evaluating-pls-outputs.html#cb163-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb163-3"><a href="chapter-26-evaluating-pls-outputs.html#cb163-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="chapter-26-evaluating-pls-outputs.html#cb153-1" tabindex="-1"></a><span class="fu">ggplot</span>(chill, <span class="fu">aes</span>(<span class="at">x =</span> Chill_Portions)) <span class="sc">+</span></span>
+<span id="cb153-2"><a href="chapter-26-evaluating-pls-outputs.html#cb153-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb153-3"><a href="chapter-26-evaluating-pls-outputs.html#cb153-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chapter-26-evaluating-pls-outputs.html#cb165-1" tabindex="-1"></a><span class="fu">ggplot</span>(heat, <span class="fu">aes</span>(<span class="at">x =</span> GDH)) <span class="sc">+</span></span>
-<span id="cb165-2"><a href="chapter-26-evaluating-pls-outputs.html#cb165-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb165-3"><a href="chapter-26-evaluating-pls-outputs.html#cb165-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="chapter-26-evaluating-pls-outputs.html#cb155-1" tabindex="-1"></a><span class="fu">ggplot</span>(heat, <span class="fu">aes</span>(<span class="at">x =</span> GDH)) <span class="sc">+</span></span>
+<span id="cb155-2"><a href="chapter-26-evaluating-pls-outputs.html#cb155-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb155-3"><a href="chapter-26-evaluating-pls-outputs.html#cb155-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-92-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-142-2.png" width="672" /></p>
 <p><strong>Quantify chill and heat requirements</strong></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="chapter-26-evaluating-pls-outputs.html#cb167-1" tabindex="-1"></a>chill_requirement  <span class="ot">&lt;-</span> <span class="fu">mean</span>(chill<span class="sc">$</span>Chill_Portions)</span>
-<span id="cb167-2"><a href="chapter-26-evaluating-pls-outputs.html#cb167-2" tabindex="-1"></a>chill_req_error    <span class="ot">&lt;-</span> <span class="fu">sd</span>(chill<span class="sc">$</span>Chill_Portions)</span>
-<span id="cb167-3"><a href="chapter-26-evaluating-pls-outputs.html#cb167-3" tabindex="-1"></a></span>
-<span id="cb167-4"><a href="chapter-26-evaluating-pls-outputs.html#cb167-4" tabindex="-1"></a>heat_requirement   <span class="ot">&lt;-</span> <span class="fu">mean</span>(heat<span class="sc">$</span>GDH)</span>
-<span id="cb167-5"><a href="chapter-26-evaluating-pls-outputs.html#cb167-5" tabindex="-1"></a>heat_req_error     <span class="ot">&lt;-</span> <span class="fu">sd</span>(heat<span class="sc">$</span>GDH)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chapter-26-evaluating-pls-outputs.html#cb157-1" tabindex="-1"></a>chill_requirement  <span class="ot">&lt;-</span> <span class="fu">mean</span>(chill<span class="sc">$</span>Chill_Portions)</span>
+<span id="cb157-2"><a href="chapter-26-evaluating-pls-outputs.html#cb157-2" tabindex="-1"></a>chill_req_error    <span class="ot">&lt;-</span> <span class="fu">sd</span>(chill<span class="sc">$</span>Chill_Portions)</span>
+<span id="cb157-3"><a href="chapter-26-evaluating-pls-outputs.html#cb157-3" tabindex="-1"></a></span>
+<span id="cb157-4"><a href="chapter-26-evaluating-pls-outputs.html#cb157-4" tabindex="-1"></a>heat_requirement   <span class="ot">&lt;-</span> <span class="fu">mean</span>(heat<span class="sc">$</span>GDH)</span>
+<span id="cb157-5"><a href="chapter-26-evaluating-pls-outputs.html#cb157-5" tabindex="-1"></a>heat_req_error     <span class="ot">&lt;-</span> <span class="fu">sd</span>(heat<span class="sc">$</span>GDH)</span></code></pre></div>
 <p><strong>Combine chill, heat, and phenology data</strong></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="chapter-26-evaluating-pls-outputs.html#cb168-1" tabindex="-1"></a>metrics_by_season <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
-<span id="cb168-2"><a href="chapter-26-evaluating-pls-outputs.html#cb168-2" tabindex="-1"></a>  chill[, <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Chill_Portions&quot;</span>)],</span>
-<span id="cb168-3"><a href="chapter-26-evaluating-pls-outputs.html#cb168-3" tabindex="-1"></a>  heat[,  <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;GDH&quot;</span>)],</span>
-<span id="cb168-4"><a href="chapter-26-evaluating-pls-outputs.html#cb168-4" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>)</span>
-<span id="cb168-5"><a href="chapter-26-evaluating-pls-outputs.html#cb168-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb168-6"><a href="chapter-26-evaluating-pls-outputs.html#cb168-6" tabindex="-1"></a>  <span class="fu">merge</span>(Roter_first, <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="chapter-26-evaluating-pls-outputs.html#cb158-1" tabindex="-1"></a>metrics_by_season <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb158-2"><a href="chapter-26-evaluating-pls-outputs.html#cb158-2" tabindex="-1"></a>  chill[, <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Chill_Portions&quot;</span>)],</span>
+<span id="cb158-3"><a href="chapter-26-evaluating-pls-outputs.html#cb158-3" tabindex="-1"></a>  heat[,  <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;GDH&quot;</span>)],</span>
+<span id="cb158-4"><a href="chapter-26-evaluating-pls-outputs.html#cb158-4" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>)</span>
+<span id="cb158-5"><a href="chapter-26-evaluating-pls-outputs.html#cb158-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb158-6"><a href="chapter-26-evaluating-pls-outputs.html#cb158-6" tabindex="-1"></a>  <span class="fu">merge</span>(Roter_first, <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
 <p><strong>Plot chill vs heat colored by bloom date</strong></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="chapter-26-evaluating-pls-outputs.html#cb169-1" tabindex="-1"></a><span class="fu">ggplot</span>(metrics_by_season, <span class="fu">aes</span>(Chill_Portions, GDH)) <span class="sc">+</span></span>
-<span id="cb169-2"><a href="chapter-26-evaluating-pls-outputs.html#cb169-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> pheno), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb169-3"><a href="chapter-26-evaluating-pls-outputs.html#cb169-3" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(<span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
-<span id="cb169-4"><a href="chapter-26-evaluating-pls-outputs.html#cb169-4" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb169-5"><a href="chapter-26-evaluating-pls-outputs.html#cb169-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-26-evaluating-pls-outputs.html#cb159-1" tabindex="-1"></a><span class="fu">ggplot</span>(metrics_by_season, <span class="fu">aes</span>(Chill_Portions, GDH)) <span class="sc">+</span></span>
+<span id="cb159-2"><a href="chapter-26-evaluating-pls-outputs.html#cb159-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> pheno), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb159-3"><a href="chapter-26-evaluating-pls-outputs.html#cb159-3" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(<span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
+<span id="cb159-4"><a href="chapter-26-evaluating-pls-outputs.html#cb159-4" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb159-5"><a href="chapter-26-evaluating-pls-outputs.html#cb159-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
 <p><strong>Compute mean temperatures during chilling and forcing phases</strong></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="chapter-26-evaluating-pls-outputs.html#cb170-1" tabindex="-1"></a>mean_temp_period <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb170-2"><a href="chapter-26-evaluating-pls-outputs.html#cb170-2" tabindex="-1"></a>  temps,</span>
-<span id="cb170-3"><a href="chapter-26-evaluating-pls-outputs.html#cb170-3" tabindex="-1"></a>  start_JDay,</span>
-<span id="cb170-4"><a href="chapter-26-evaluating-pls-outputs.html#cb170-4" tabindex="-1"></a>  end_JDay,</span>
-<span id="cb170-5"><a href="chapter-26-evaluating-pls-outputs.html#cb170-5" tabindex="-1"></a>  <span class="at">end_season =</span> end_JDay</span>
-<span id="cb170-6"><a href="chapter-26-evaluating-pls-outputs.html#cb170-6" tabindex="-1"></a>) {</span>
-<span id="cb170-7"><a href="chapter-26-evaluating-pls-outputs.html#cb170-7" tabindex="-1"></a>  temps_JDay <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(temps) <span class="sc">%&gt;%</span></span>
-<span id="cb170-8"><a href="chapter-26-evaluating-pls-outputs.html#cb170-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Season =</span> Year)</span>
-<span id="cb170-9"><a href="chapter-26-evaluating-pls-outputs.html#cb170-9" tabindex="-1"></a></span>
-<span id="cb170-10"><a href="chapter-26-evaluating-pls-outputs.html#cb170-10" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
-<span id="cb170-11"><a href="chapter-26-evaluating-pls-outputs.html#cb170-11" tabindex="-1"></a>    temps_JDay<span class="sc">$</span>Season[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="ot">&lt;-</span></span>
-<span id="cb170-12"><a href="chapter-26-evaluating-pls-outputs.html#cb170-12" tabindex="-1"></a>      temps_JDay<span class="sc">$</span>Year[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb170-13"><a href="chapter-26-evaluating-pls-outputs.html#cb170-13" tabindex="-1"></a></span>
-<span id="cb170-14"><a href="chapter-26-evaluating-pls-outputs.html#cb170-14" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
-<span id="cb170-15"><a href="chapter-26-evaluating-pls-outputs.html#cb170-15" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">|</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
-<span id="cb170-16"><a href="chapter-26-evaluating-pls-outputs.html#cb170-16" tabindex="-1"></a></span>
-<span id="cb170-17"><a href="chapter-26-evaluating-pls-outputs.html#cb170-17" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&lt;=</span> end_JDay)</span>
-<span id="cb170-18"><a href="chapter-26-evaluating-pls-outputs.html#cb170-18" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">&amp;</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
-<span id="cb170-19"><a href="chapter-26-evaluating-pls-outputs.html#cb170-19" tabindex="-1"></a></span>
-<span id="cb170-20"><a href="chapter-26-evaluating-pls-outputs.html#cb170-20" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="fu">c</span>(<span class="st">&quot;Tmin&quot;</span>, <span class="st">&quot;Tmax&quot;</span>)],</span>
-<span id="cb170-21"><a href="chapter-26-evaluating-pls-outputs.html#cb170-21" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
-<span id="cb170-22"><a href="chapter-26-evaluating-pls-outputs.html#cb170-22" tabindex="-1"></a>                          <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb170-23"><a href="chapter-26-evaluating-pls-outputs.html#cb170-23" tabindex="-1"></a></span>
-<span id="cb170-24"><a href="chapter-26-evaluating-pls-outputs.html#cb170-24" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;n_days&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="st">&quot;Tmin&quot;</span>],</span>
-<span id="cb170-25"><a href="chapter-26-evaluating-pls-outputs.html#cb170-25" tabindex="-1"></a>                                      <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
-<span id="cb170-26"><a href="chapter-26-evaluating-pls-outputs.html#cb170-26" tabindex="-1"></a>                                      <span class="at">FUN =</span> length)[, <span class="dv">2</span>]</span>
-<span id="cb170-27"><a href="chapter-26-evaluating-pls-outputs.html#cb170-27" tabindex="-1"></a></span>
-<span id="cb170-28"><a href="chapter-26-evaluating-pls-outputs.html#cb170-28" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;Tmean&quot;</span>] <span class="ot">&lt;-</span> (mean_temps<span class="sc">$</span>Tmin <span class="sc">+</span> mean_temps<span class="sc">$</span>Tmax) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb170-29"><a href="chapter-26-evaluating-pls-outputs.html#cb170-29" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> mean_temps[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span>
-<span id="cb170-30"><a href="chapter-26-evaluating-pls-outputs.html#cb170-30" tabindex="-1"></a>  <span class="fu">colnames</span>(mean_temps)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;End_year&quot;</span></span>
-<span id="cb170-31"><a href="chapter-26-evaluating-pls-outputs.html#cb170-31" tabindex="-1"></a>  mean_temps</span>
-<span id="cb170-32"><a href="chapter-26-evaluating-pls-outputs.html#cb170-32" tabindex="-1"></a>}</span>
-<span id="cb170-33"><a href="chapter-26-evaluating-pls-outputs.html#cb170-33" tabindex="-1"></a></span>
-<span id="cb170-34"><a href="chapter-26-evaluating-pls-outputs.html#cb170-34" tabindex="-1"></a>mean_temp_chill <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
-<span id="cb170-35"><a href="chapter-26-evaluating-pls-outputs.html#cb170-35" tabindex="-1"></a>  temps,</span>
-<span id="cb170-36"><a href="chapter-26-evaluating-pls-outputs.html#cb170-36" tabindex="-1"></a>  <span class="at">start_JDay =</span> chill_phase[<span class="dv">1</span>],</span>
-<span id="cb170-37"><a href="chapter-26-evaluating-pls-outputs.html#cb170-37" tabindex="-1"></a>  <span class="at">end_JDay   =</span> chill_phase[<span class="dv">2</span>],</span>
-<span id="cb170-38"><a href="chapter-26-evaluating-pls-outputs.html#cb170-38" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
-<span id="cb170-39"><a href="chapter-26-evaluating-pls-outputs.html#cb170-39" tabindex="-1"></a>)</span>
-<span id="cb170-40"><a href="chapter-26-evaluating-pls-outputs.html#cb170-40" tabindex="-1"></a></span>
-<span id="cb170-41"><a href="chapter-26-evaluating-pls-outputs.html#cb170-41" tabindex="-1"></a>mean_temp_heat <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
-<span id="cb170-42"><a href="chapter-26-evaluating-pls-outputs.html#cb170-42" tabindex="-1"></a>  temps,</span>
-<span id="cb170-43"><a href="chapter-26-evaluating-pls-outputs.html#cb170-43" tabindex="-1"></a>  <span class="at">start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
-<span id="cb170-44"><a href="chapter-26-evaluating-pls-outputs.html#cb170-44" tabindex="-1"></a>  <span class="at">end_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
-<span id="cb170-45"><a href="chapter-26-evaluating-pls-outputs.html#cb170-45" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
-<span id="cb170-46"><a href="chapter-26-evaluating-pls-outputs.html#cb170-46" tabindex="-1"></a>)</span>
-<span id="cb170-47"><a href="chapter-26-evaluating-pls-outputs.html#cb170-47" tabindex="-1"></a></span>
-<span id="cb170-48"><a href="chapter-26-evaluating-pls-outputs.html#cb170-48" tabindex="-1"></a>mean_chill <span class="ot">&lt;-</span> mean_temp_chill[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
-<span id="cb170-49"><a href="chapter-26-evaluating-pls-outputs.html#cb170-49" tabindex="-1"></a><span class="fu">colnames</span>(mean_chill)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_chill&quot;</span></span>
-<span id="cb170-50"><a href="chapter-26-evaluating-pls-outputs.html#cb170-50" tabindex="-1"></a></span>
-<span id="cb170-51"><a href="chapter-26-evaluating-pls-outputs.html#cb170-51" tabindex="-1"></a>mean_heat <span class="ot">&lt;-</span> mean_temp_heat[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
-<span id="cb170-52"><a href="chapter-26-evaluating-pls-outputs.html#cb170-52" tabindex="-1"></a><span class="fu">colnames</span>(mean_heat)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_heat&quot;</span></span>
-<span id="cb170-53"><a href="chapter-26-evaluating-pls-outputs.html#cb170-53" tabindex="-1"></a></span>
-<span id="cb170-54"><a href="chapter-26-evaluating-pls-outputs.html#cb170-54" tabindex="-1"></a>phase_Tmeans <span class="ot">&lt;-</span> <span class="fu">merge</span>(mean_chill, mean_heat, <span class="at">by =</span> <span class="st">&quot;End_year&quot;</span>)</span>
-<span id="cb170-55"><a href="chapter-26-evaluating-pls-outputs.html#cb170-55" tabindex="-1"></a></span>
-<span id="cb170-56"><a href="chapter-26-evaluating-pls-outputs.html#cb170-56" tabindex="-1"></a>Tmeans_pheno <span class="ot">&lt;-</span> <span class="fu">merge</span>(phase_Tmeans,</span>
-<span id="cb170-57"><a href="chapter-26-evaluating-pls-outputs.html#cb170-57" tabindex="-1"></a>                      Roter_first,</span>
-<span id="cb170-58"><a href="chapter-26-evaluating-pls-outputs.html#cb170-58" tabindex="-1"></a>                      <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>,</span>
-<span id="cb170-59"><a href="chapter-26-evaluating-pls-outputs.html#cb170-59" tabindex="-1"></a>                      <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="chapter-26-evaluating-pls-outputs.html#cb160-1" tabindex="-1"></a>mean_temp_period <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb160-2"><a href="chapter-26-evaluating-pls-outputs.html#cb160-2" tabindex="-1"></a>  temps,</span>
+<span id="cb160-3"><a href="chapter-26-evaluating-pls-outputs.html#cb160-3" tabindex="-1"></a>  start_JDay,</span>
+<span id="cb160-4"><a href="chapter-26-evaluating-pls-outputs.html#cb160-4" tabindex="-1"></a>  end_JDay,</span>
+<span id="cb160-5"><a href="chapter-26-evaluating-pls-outputs.html#cb160-5" tabindex="-1"></a>  <span class="at">end_season =</span> end_JDay</span>
+<span id="cb160-6"><a href="chapter-26-evaluating-pls-outputs.html#cb160-6" tabindex="-1"></a>) {</span>
+<span id="cb160-7"><a href="chapter-26-evaluating-pls-outputs.html#cb160-7" tabindex="-1"></a>  temps_JDay <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(temps) <span class="sc">%&gt;%</span></span>
+<span id="cb160-8"><a href="chapter-26-evaluating-pls-outputs.html#cb160-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Season =</span> Year)</span>
+<span id="cb160-9"><a href="chapter-26-evaluating-pls-outputs.html#cb160-9" tabindex="-1"></a></span>
+<span id="cb160-10"><a href="chapter-26-evaluating-pls-outputs.html#cb160-10" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
+<span id="cb160-11"><a href="chapter-26-evaluating-pls-outputs.html#cb160-11" tabindex="-1"></a>    temps_JDay<span class="sc">$</span>Season[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="ot">&lt;-</span></span>
+<span id="cb160-12"><a href="chapter-26-evaluating-pls-outputs.html#cb160-12" tabindex="-1"></a>      temps_JDay<span class="sc">$</span>Year[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb160-13"><a href="chapter-26-evaluating-pls-outputs.html#cb160-13" tabindex="-1"></a></span>
+<span id="cb160-14"><a href="chapter-26-evaluating-pls-outputs.html#cb160-14" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
+<span id="cb160-15"><a href="chapter-26-evaluating-pls-outputs.html#cb160-15" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">|</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
+<span id="cb160-16"><a href="chapter-26-evaluating-pls-outputs.html#cb160-16" tabindex="-1"></a></span>
+<span id="cb160-17"><a href="chapter-26-evaluating-pls-outputs.html#cb160-17" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&lt;=</span> end_JDay)</span>
+<span id="cb160-18"><a href="chapter-26-evaluating-pls-outputs.html#cb160-18" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">&amp;</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
+<span id="cb160-19"><a href="chapter-26-evaluating-pls-outputs.html#cb160-19" tabindex="-1"></a></span>
+<span id="cb160-20"><a href="chapter-26-evaluating-pls-outputs.html#cb160-20" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="fu">c</span>(<span class="st">&quot;Tmin&quot;</span>, <span class="st">&quot;Tmax&quot;</span>)],</span>
+<span id="cb160-21"><a href="chapter-26-evaluating-pls-outputs.html#cb160-21" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
+<span id="cb160-22"><a href="chapter-26-evaluating-pls-outputs.html#cb160-22" tabindex="-1"></a>                          <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb160-23"><a href="chapter-26-evaluating-pls-outputs.html#cb160-23" tabindex="-1"></a></span>
+<span id="cb160-24"><a href="chapter-26-evaluating-pls-outputs.html#cb160-24" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;n_days&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="st">&quot;Tmin&quot;</span>],</span>
+<span id="cb160-25"><a href="chapter-26-evaluating-pls-outputs.html#cb160-25" tabindex="-1"></a>                                      <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
+<span id="cb160-26"><a href="chapter-26-evaluating-pls-outputs.html#cb160-26" tabindex="-1"></a>                                      <span class="at">FUN =</span> length)[, <span class="dv">2</span>]</span>
+<span id="cb160-27"><a href="chapter-26-evaluating-pls-outputs.html#cb160-27" tabindex="-1"></a></span>
+<span id="cb160-28"><a href="chapter-26-evaluating-pls-outputs.html#cb160-28" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;Tmean&quot;</span>] <span class="ot">&lt;-</span> (mean_temps<span class="sc">$</span>Tmin <span class="sc">+</span> mean_temps<span class="sc">$</span>Tmax) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb160-29"><a href="chapter-26-evaluating-pls-outputs.html#cb160-29" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> mean_temps[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span>
+<span id="cb160-30"><a href="chapter-26-evaluating-pls-outputs.html#cb160-30" tabindex="-1"></a>  <span class="fu">colnames</span>(mean_temps)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;End_year&quot;</span></span>
+<span id="cb160-31"><a href="chapter-26-evaluating-pls-outputs.html#cb160-31" tabindex="-1"></a>  mean_temps</span>
+<span id="cb160-32"><a href="chapter-26-evaluating-pls-outputs.html#cb160-32" tabindex="-1"></a>}</span>
+<span id="cb160-33"><a href="chapter-26-evaluating-pls-outputs.html#cb160-33" tabindex="-1"></a></span>
+<span id="cb160-34"><a href="chapter-26-evaluating-pls-outputs.html#cb160-34" tabindex="-1"></a>mean_temp_chill <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
+<span id="cb160-35"><a href="chapter-26-evaluating-pls-outputs.html#cb160-35" tabindex="-1"></a>  temps,</span>
+<span id="cb160-36"><a href="chapter-26-evaluating-pls-outputs.html#cb160-36" tabindex="-1"></a>  <span class="at">start_JDay =</span> chill_phase[<span class="dv">1</span>],</span>
+<span id="cb160-37"><a href="chapter-26-evaluating-pls-outputs.html#cb160-37" tabindex="-1"></a>  <span class="at">end_JDay   =</span> chill_phase[<span class="dv">2</span>],</span>
+<span id="cb160-38"><a href="chapter-26-evaluating-pls-outputs.html#cb160-38" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
+<span id="cb160-39"><a href="chapter-26-evaluating-pls-outputs.html#cb160-39" tabindex="-1"></a>)</span>
+<span id="cb160-40"><a href="chapter-26-evaluating-pls-outputs.html#cb160-40" tabindex="-1"></a></span>
+<span id="cb160-41"><a href="chapter-26-evaluating-pls-outputs.html#cb160-41" tabindex="-1"></a>mean_temp_heat <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
+<span id="cb160-42"><a href="chapter-26-evaluating-pls-outputs.html#cb160-42" tabindex="-1"></a>  temps,</span>
+<span id="cb160-43"><a href="chapter-26-evaluating-pls-outputs.html#cb160-43" tabindex="-1"></a>  <span class="at">start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
+<span id="cb160-44"><a href="chapter-26-evaluating-pls-outputs.html#cb160-44" tabindex="-1"></a>  <span class="at">end_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
+<span id="cb160-45"><a href="chapter-26-evaluating-pls-outputs.html#cb160-45" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
+<span id="cb160-46"><a href="chapter-26-evaluating-pls-outputs.html#cb160-46" tabindex="-1"></a>)</span>
+<span id="cb160-47"><a href="chapter-26-evaluating-pls-outputs.html#cb160-47" tabindex="-1"></a></span>
+<span id="cb160-48"><a href="chapter-26-evaluating-pls-outputs.html#cb160-48" tabindex="-1"></a>mean_chill <span class="ot">&lt;-</span> mean_temp_chill[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
+<span id="cb160-49"><a href="chapter-26-evaluating-pls-outputs.html#cb160-49" tabindex="-1"></a><span class="fu">colnames</span>(mean_chill)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_chill&quot;</span></span>
+<span id="cb160-50"><a href="chapter-26-evaluating-pls-outputs.html#cb160-50" tabindex="-1"></a></span>
+<span id="cb160-51"><a href="chapter-26-evaluating-pls-outputs.html#cb160-51" tabindex="-1"></a>mean_heat <span class="ot">&lt;-</span> mean_temp_heat[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
+<span id="cb160-52"><a href="chapter-26-evaluating-pls-outputs.html#cb160-52" tabindex="-1"></a><span class="fu">colnames</span>(mean_heat)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_heat&quot;</span></span>
+<span id="cb160-53"><a href="chapter-26-evaluating-pls-outputs.html#cb160-53" tabindex="-1"></a></span>
+<span id="cb160-54"><a href="chapter-26-evaluating-pls-outputs.html#cb160-54" tabindex="-1"></a>phase_Tmeans <span class="ot">&lt;-</span> <span class="fu">merge</span>(mean_chill, mean_heat, <span class="at">by =</span> <span class="st">&quot;End_year&quot;</span>)</span>
+<span id="cb160-55"><a href="chapter-26-evaluating-pls-outputs.html#cb160-55" tabindex="-1"></a></span>
+<span id="cb160-56"><a href="chapter-26-evaluating-pls-outputs.html#cb160-56" tabindex="-1"></a>Tmeans_pheno <span class="ot">&lt;-</span> <span class="fu">merge</span>(phase_Tmeans,</span>
+<span id="cb160-57"><a href="chapter-26-evaluating-pls-outputs.html#cb160-57" tabindex="-1"></a>                      Roter_first,</span>
+<span id="cb160-58"><a href="chapter-26-evaluating-pls-outputs.html#cb160-58" tabindex="-1"></a>                      <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>,</span>
+<span id="cb160-59"><a href="chapter-26-evaluating-pls-outputs.html#cb160-59" tabindex="-1"></a>                      <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
 <p><strong>Interpolate bloom dates using kriging</strong></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="chapter-26-evaluating-pls-outputs.html#cb171-1" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div>
-<pre><code>## Lade nötiges Paket: spam</code></pre>
-<pre><code>## Spam version 2.11-1 (2025-01-20) is loaded.
-## Type &#39;help( Spam)&#39; or &#39;demo( spam)&#39; for a short introduction 
-## and overview of this package.
-## Help for individual functions is also obtained by adding the
-## suffix &#39;.spam&#39; to the function name, e.g. &#39;help( chol.spam)&#39;.</code></pre>
-<pre><code>## 
-## Attache Paket: &#39;spam&#39;</code></pre>
-<pre><code>## Die folgenden Objekte sind maskiert von &#39;package:base&#39;:
-## 
-##     backsolve, forwardsolve</code></pre>
-<pre><code>## Lade nötiges Paket: viridisLite</code></pre>
-<pre><code>## Lade nötiges Paket: RColorBrewer</code></pre>
-<pre><code>## 
-## Try help(fields) to get started.</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="chapter-26-evaluating-pls-outputs.html#cb179-1" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">Krig</span>(</span>
-<span id="cb179-2"><a href="chapter-26-evaluating-pls-outputs.html#cb179-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.matrix</span>(Tmeans_pheno[, <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>)]),</span>
-<span id="cb179-3"><a href="chapter-26-evaluating-pls-outputs.html#cb179-3" tabindex="-1"></a>  <span class="at">Y =</span> Tmeans_pheno<span class="sc">$</span>pheno</span>
-<span id="cb179-4"><a href="chapter-26-evaluating-pls-outputs.html#cb179-4" tabindex="-1"></a>)</span>
-<span id="cb179-5"><a href="chapter-26-evaluating-pls-outputs.html#cb179-5" tabindex="-1"></a></span>
-<span id="cb179-6"><a href="chapter-26-evaluating-pls-outputs.html#cb179-6" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predictSurface</span>(k)</span>
-<span id="cb179-7"><a href="chapter-26-evaluating-pls-outputs.html#cb179-7" tabindex="-1"></a></span>
-<span id="cb179-8"><a href="chapter-26-evaluating-pls-outputs.html#cb179-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
-<pre><code>## 
-## Attache Paket: &#39;reshape2&#39;</code></pre>
-<pre><code>## Das folgende Objekt ist maskiert &#39;package:tidyr&#39;:
-## 
-##     smiths</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="chapter-26-evaluating-pls-outputs.html#cb182-1" tabindex="-1"></a><span class="fu">library</span>(metR)</span></code></pre></div>
-<pre><code>## 
-## Attache Paket: &#39;metR&#39;</code></pre>
-<pre><code>## Das folgende Objekt ist maskiert &#39;package:purrr&#39;:
-## 
-##     cross</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="chapter-26-evaluating-pls-outputs.html#cb185-1" tabindex="-1"></a>melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(pred<span class="sc">$</span>z)</span>
-<span id="cb185-2"><a href="chapter-26-evaluating-pls-outputs.html#cb185-2" tabindex="-1"></a><span class="fu">colnames</span>(melted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>, <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="chapter-26-evaluating-pls-outputs.html#cb161-1" tabindex="-1"></a><span class="fu">library</span>(fields)</span>
+<span id="cb161-2"><a href="chapter-26-evaluating-pls-outputs.html#cb161-2" tabindex="-1"></a></span>
+<span id="cb161-3"><a href="chapter-26-evaluating-pls-outputs.html#cb161-3" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">Krig</span>(</span>
+<span id="cb161-4"><a href="chapter-26-evaluating-pls-outputs.html#cb161-4" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.matrix</span>(Tmeans_pheno[, <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>)]),</span>
+<span id="cb161-5"><a href="chapter-26-evaluating-pls-outputs.html#cb161-5" tabindex="-1"></a>  <span class="at">Y =</span> Tmeans_pheno<span class="sc">$</span>pheno</span>
+<span id="cb161-6"><a href="chapter-26-evaluating-pls-outputs.html#cb161-6" tabindex="-1"></a>)</span>
+<span id="cb161-7"><a href="chapter-26-evaluating-pls-outputs.html#cb161-7" tabindex="-1"></a></span>
+<span id="cb161-8"><a href="chapter-26-evaluating-pls-outputs.html#cb161-8" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predictSurface</span>(k)</span>
+<span id="cb161-9"><a href="chapter-26-evaluating-pls-outputs.html#cb161-9" tabindex="-1"></a></span>
+<span id="cb161-10"><a href="chapter-26-evaluating-pls-outputs.html#cb161-10" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb161-11"><a href="chapter-26-evaluating-pls-outputs.html#cb161-11" tabindex="-1"></a><span class="fu">library</span>(metR)</span>
+<span id="cb161-12"><a href="chapter-26-evaluating-pls-outputs.html#cb161-12" tabindex="-1"></a></span>
+<span id="cb161-13"><a href="chapter-26-evaluating-pls-outputs.html#cb161-13" tabindex="-1"></a>melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(pred<span class="sc">$</span>z)</span>
+<span id="cb161-14"><a href="chapter-26-evaluating-pls-outputs.html#cb161-14" tabindex="-1"></a><span class="fu">colnames</span>(melted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>, <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
 <p><strong>Plot bloom date response surface</strong></p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="chapter-26-evaluating-pls-outputs.html#cb186-1" tabindex="-1"></a><span class="fu">ggplot</span>(melted,</span>
-<span id="cb186-2"><a href="chapter-26-evaluating-pls-outputs.html#cb186-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
-<span id="cb186-3"><a href="chapter-26-evaluating-pls-outputs.html#cb186-3" tabindex="-1"></a>           <span class="at">y =</span> Tmean_heat,</span>
-<span id="cb186-4"><a href="chapter-26-evaluating-pls-outputs.html#cb186-4" tabindex="-1"></a>           <span class="at">z =</span> value)) <span class="sc">+</span></span>
-<span id="cb186-5"><a href="chapter-26-evaluating-pls-outputs.html#cb186-5" tabindex="-1"></a>  <span class="fu">geom_contour_fill</span>(<span class="at">bins =</span> <span class="dv">80</span>) <span class="sc">+</span></span>
-<span id="cb186-6"><a href="chapter-26-evaluating-pls-outputs.html#cb186-6" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
-<span id="cb186-7"><a href="chapter-26-evaluating-pls-outputs.html#cb186-7" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
-<span id="cb186-8"><a href="chapter-26-evaluating-pls-outputs.html#cb186-8" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span></span>
-<span id="cb186-9"><a href="chapter-26-evaluating-pls-outputs.html#cb186-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb186-10"><a href="chapter-26-evaluating-pls-outputs.html#cb186-10" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb186-11"><a href="chapter-26-evaluating-pls-outputs.html#cb186-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb186-12"><a href="chapter-26-evaluating-pls-outputs.html#cb186-12" tabindex="-1"></a>    <span class="at">data =</span> Tmeans_pheno,</span>
-<span id="cb186-13"><a href="chapter-26-evaluating-pls-outputs.html#cb186-13" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
-<span id="cb186-14"><a href="chapter-26-evaluating-pls-outputs.html#cb186-14" tabindex="-1"></a>        <span class="at">y =</span> Tmean_heat),</span>
-<span id="cb186-15"><a href="chapter-26-evaluating-pls-outputs.html#cb186-15" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb186-16"><a href="chapter-26-evaluating-pls-outputs.html#cb186-16" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span></span>
-<span id="cb186-17"><a href="chapter-26-evaluating-pls-outputs.html#cb186-17" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb186-18"><a href="chapter-26-evaluating-pls-outputs.html#cb186-18" tabindex="-1"></a>  <span class="fu">geom_text_contour</span>(<span class="at">stroke =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb186-19"><a href="chapter-26-evaluating-pls-outputs.html#cb186-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="chapter-26-evaluating-pls-outputs.html#cb162-1" tabindex="-1"></a><span class="fu">ggplot</span>(melted,</span>
+<span id="cb162-2"><a href="chapter-26-evaluating-pls-outputs.html#cb162-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
+<span id="cb162-3"><a href="chapter-26-evaluating-pls-outputs.html#cb162-3" tabindex="-1"></a>           <span class="at">y =</span> Tmean_heat,</span>
+<span id="cb162-4"><a href="chapter-26-evaluating-pls-outputs.html#cb162-4" tabindex="-1"></a>           <span class="at">z =</span> value)) <span class="sc">+</span></span>
+<span id="cb162-5"><a href="chapter-26-evaluating-pls-outputs.html#cb162-5" tabindex="-1"></a>  <span class="fu">geom_contour_fill</span>(<span class="at">bins =</span> <span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb162-6"><a href="chapter-26-evaluating-pls-outputs.html#cb162-6" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb162-7"><a href="chapter-26-evaluating-pls-outputs.html#cb162-7" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
+<span id="cb162-8"><a href="chapter-26-evaluating-pls-outputs.html#cb162-8" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span></span>
+<span id="cb162-9"><a href="chapter-26-evaluating-pls-outputs.html#cb162-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb162-10"><a href="chapter-26-evaluating-pls-outputs.html#cb162-10" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb162-11"><a href="chapter-26-evaluating-pls-outputs.html#cb162-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb162-12"><a href="chapter-26-evaluating-pls-outputs.html#cb162-12" tabindex="-1"></a>    <span class="at">data =</span> Tmeans_pheno,</span>
+<span id="cb162-13"><a href="chapter-26-evaluating-pls-outputs.html#cb162-13" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
+<span id="cb162-14"><a href="chapter-26-evaluating-pls-outputs.html#cb162-14" tabindex="-1"></a>        <span class="at">y =</span> Tmean_heat),</span>
+<span id="cb162-15"><a href="chapter-26-evaluating-pls-outputs.html#cb162-15" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb162-16"><a href="chapter-26-evaluating-pls-outputs.html#cb162-16" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span></span>
+<span id="cb162-17"><a href="chapter-26-evaluating-pls-outputs.html#cb162-17" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb162-18"><a href="chapter-26-evaluating-pls-outputs.html#cb162-18" tabindex="-1"></a>  <span class="fu">geom_text_contour</span>(<span class="at">stroke =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb162-19"><a href="chapter-26-evaluating-pls-outputs.html#cb162-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 </div>
 <div id="interpreting-surface-plots-across-climates" class="section level2 hasAnchor">
 <h2>Interpreting surface plots across climates<a href="chapter-26-evaluating-pls-outputs.html#interpreting-surface-plots-across-climates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -621,7 +598,8 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section",
+    "scroll_highlight": true
   }
 });
 });
