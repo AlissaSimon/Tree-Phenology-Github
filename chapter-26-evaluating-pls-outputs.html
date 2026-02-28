@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>22 Chapter 26 — Evaluating PLS outputs | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="22 Chapter 26 — Evaluating PLS outputs | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="22 Chapter 26 — Evaluating PLS outputs | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-25-why-pls-doesnt-always-work.html"/>
+<link rel="next" href="chapter-27---the-relative-importance-of-chill-and-heat.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Tree Phenology Logbook</a></li>
+<li class="chapter" data-level="1" data-path="chapter-3-tree-dormancy.html"><a href="chapter-3-tree-dormancy.html"><i class="fa fa-check"></i><b>1</b> Chapter 3 — Tree Dormancy</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-3-tree-dormancy.html"><a href="chapter-3-tree-dormancy.html#estimating-chilling-and-forcing-requirements"><i class="fa fa-check"></i><b>1.1</b> Estimating chilling and forcing requirements</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-3-tree-dormancy.html"><a href="chapter-3-tree-dormancy.html#advantages-of-the-bbch-scale"><i class="fa fa-check"></i><b>1.2</b> Advantages of the BBCH scale</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-3-tree-dormancy.html"><a href="chapter-3-tree-dormancy.html#classification-of-sweet-cherry-phenological-stages"><i class="fa fa-check"></i><b>1.3</b> Classification of sweet cherry phenological stages</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-4-climate-change-and-impact-projection.html"><a href="chapter-4-climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>2</b> Chapter 4 — Climate Change and Impact Projection</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-4-climate-change-and-impact-projection.html"><a href="chapter-4-climate-change-and-impact-projection.html#drivers-of-climate-change"><i class="fa fa-check"></i><b>2.1</b> Drivers of climate change</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-4-climate-change-and-impact-projection.html"><a href="chapter-4-climate-change-and-impact-projection.html#recent-temperature-dynamics-and-causes-for-concern"><i class="fa fa-check"></i><b>2.2</b> Recent temperature dynamics and causes for concern</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-4-climate-change-and-impact-projection.html"><a href="chapter-4-climate-change-and-impact-projection.html#representative-concentration-pathways-rcps"><i class="fa fa-check"></i><b>2.3</b> Representative Concentration Pathways (RCPs)</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-4-climate-change-and-impact-projection.html"><a href="chapter-4-climate-change-and-impact-projection.html#climate-impact-projection-methods"><i class="fa fa-check"></i><b>2.4</b> Climate impact projection methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-5-winter-chill-projections.html"><a href="chapter-5-winter-chill-projections.html"><i class="fa fa-check"></i><b>3</b> Chapter 5 — Winter Chill Projections</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-5-winter-chill-projections.html"><a href="chapter-5-winter-chill-projections.html#data-access-and-processing-challenges"><i class="fa fa-check"></i><b>3.1</b> Data access and processing challenges</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-5-winter-chill-projections.html"><a href="chapter-5-winter-chill-projections.html#basic-workflow-for-chill-projections"><i class="fa fa-check"></i><b>3.2</b> Basic workflow for chill projections</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-6-manual-chill-analysis.html"><a href="chapter-6-manual-chill-analysis.html"><i class="fa fa-check"></i><b>4</b> Chapter 6 — Manual chill analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-6-manual-chill-analysis.html"><a href="chapter-6-manual-chill-analysis.html#calculating-warm-hours-25-c"><i class="fa fa-check"></i><b>4.1</b> Calculating warm hours (&gt;25 °C)</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-6-manual-chill-analysis.html"><a href="chapter-6-manual-chill-analysis.html#calculating-warm-hours-for-a-defined-time-period"><i class="fa fa-check"></i><b>4.2</b> Calculating warm hours for a defined time period</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-7-chill-models.html"><a href="chapter-7-chill-models.html"><i class="fa fa-check"></i><b>5</b> Chapter 7 — Chill models</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-7-chill-models.html"><a href="chapter-7-chill-models.html#applying-a-built-in-chill-model"><i class="fa fa-check"></i><b>5.1</b> Applying a built-in chill model</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-7-chill-models.html"><a href="chapter-7-chill-models.html#defining-a-custom-chill-model"><i class="fa fa-check"></i><b>5.2</b> Defining a custom chill model</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-7-chill-models.html"><a href="chapter-7-chill-models.html#applying-the-custom-chill-model"><i class="fa fa-check"></i><b>5.3</b> Applying the custom chill model</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-8-making-hourly-temperatures.html"><a href="chapter-8-making-hourly-temperatures.html"><i class="fa fa-check"></i><b>6</b> Chapter 8 — Making hourly temperatures</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-8-making-hourly-temperatures.html"><a href="chapter-8-making-hourly-temperatures.html#daylength-and-solar-geometry"><i class="fa fa-check"></i><b>6.1</b> Daylength and solar geometry</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-8-making-hourly-temperatures.html"><a href="chapter-8-making-hourly-temperatures.html#idealized-diurnal-temperature-curves"><i class="fa fa-check"></i><b>6.2</b> Idealized diurnal temperature curves</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-8-making-hourly-temperatures.html"><a href="chapter-8-making-hourly-temperatures.html#empirical-reconstruction-of-hourly-temperatures"><i class="fa fa-check"></i><b>6.3</b> Empirical reconstruction of hourly temperatures</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-9-some-useful-tools-in-r.html"><a href="chapter-9-some-useful-tools-in-r.html"><i class="fa fa-check"></i><b>7</b> Chapter 9 — Some useful tools in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-9-some-useful-tools-in-r.html"><a href="chapter-9-some-useful-tools-in-r.html#data-wrangling-and-visualization-with-tidyverse"><i class="fa fa-check"></i><b>7.1</b> Data wrangling and visualization with tidyverse</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-9-some-useful-tools-in-r.html"><a href="chapter-9-some-useful-tools-in-r.html#using-a-for-loop-for-data-transformation"><i class="fa fa-check"></i><b>7.2</b> Using a for loop for data transformation</a></li>
+<li class="chapter" data-level="7.3" data-path="chapter-9-some-useful-tools-in-r.html"><a href="chapter-9-some-useful-tools-in-r.html#using-apply-family-functions"><i class="fa fa-check"></i><b>7.3</b> Using apply-family functions</a></li>
+<li class="chapter" data-level="7.4" data-path="chapter-9-some-useful-tools-in-r.html"><a href="chapter-9-some-useful-tools-in-r.html#vectorized-operations-with-tidyverse"><i class="fa fa-check"></i><b>7.4</b> Vectorized operations with tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-10-getting-temperature-data.html"><a href="chapter-10-getting-temperature-data.html"><i class="fa fa-check"></i><b>8</b> Chapter 10 — Getting temperature data</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chapter-10-getting-temperature-data.html"><a href="chapter-10-getting-temperature-data.html#selecting-a-study-location-and-nearby-weather-stations"><i class="fa fa-check"></i><b>8.1</b> Selecting a study location and nearby weather stations</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-10-getting-temperature-data.html"><a href="chapter-10-getting-temperature-data.html#downloading-historical-weather-data"><i class="fa fa-check"></i><b>8.2</b> Downloading historical weather data</a></li>
+<li class="chapter" data-level="8.3" data-path="chapter-10-getting-temperature-data.html"><a href="chapter-10-getting-temperature-data.html#preparing-weather-data-for-chillr"><i class="fa fa-check"></i><b>8.3</b> Preparing weather data for chillR</a></li>
+<li class="chapter" data-level="8.4" data-path="chapter-10-getting-temperature-data.html"><a href="chapter-10-getting-temperature-data.html#sources"><i class="fa fa-check"></i><b>8.4</b> Sources</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>9</b> Chapter 11 — Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html#identifying-gaps-in-the-temperature-record"><i class="fa fa-check"></i><b>9.1</b> Identifying gaps in the temperature record</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html#identifying-nearby-weather-stations"><i class="fa fa-check"></i><b>9.2</b> Identifying nearby weather stations</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html#selecting-suitable-stations-for-gap-filling"><i class="fa fa-check"></i><b>9.3</b> Selecting suitable stations for gap filling</a></li>
+<li class="chapter" data-level="9.4" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html#downloading-patching-station-data-and-patching-gaps-in-the-temperature-record"><i class="fa fa-check"></i><b>9.4</b> Downloading patching station data AND Patching gaps in the temperature record</a></li>
+<li class="chapter" data-level="9.5" data-path="chapter-11-filling-gaps-in-temperature-records.html"><a href="chapter-11-filling-gaps-in-temperature-records.html#evaluating-patching-success-and-final-gap-filling-and-data-preparation"><i class="fa fa-check"></i><b>9.5</b> Evaluating patching success and final gap filling and data preparation</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-12-generating-temperature-scenarios.html"><a href="chapter-12-generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>10</b> Chapter 12 — Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chapter-12-generating-temperature-scenarios.html"><a href="chapter-12-generating-temperature-scenarios.html#generating-synthetic-temperature-data"><i class="fa fa-check"></i><b>10.1</b> Generating synthetic temperature data</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-12-generating-temperature-scenarios.html"><a href="chapter-12-generating-temperature-scenarios.html#winter-chill-analysis-of-synthetic-data"><i class="fa fa-check"></i><b>10.2</b> Winter chill analysis of synthetic data</a></li>
+<li class="chapter" data-level="10.3" data-path="chapter-12-generating-temperature-scenarios.html"><a href="chapter-12-generating-temperature-scenarios.html#freezing-hour-analysis-in-spring-or-autumn"><i class="fa fa-check"></i><b>10.3</b> Freezing hour analysis in spring or autumn</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chapter-14-historic-temperature-scenarios.html"><a href="chapter-14-historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Chapter 14 — Historic temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chapter-14-historic-temperature-scenarios.html"><a href="chapter-14-historic-temperature-scenarios.html#creating-historic-temperature-scenarios"><i class="fa fa-check"></i><b>11.1</b> Creating historic temperature scenarios</a></li>
+<li class="chapter" data-level="11.2" data-path="chapter-14-historic-temperature-scenarios.html"><a href="chapter-14-historic-temperature-scenarios.html#chill-accumulation-under-historic-scenarios"><i class="fa fa-check"></i><b>11.2</b> Chill accumulation under historic scenarios</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chapter-15-future-temperature-scenarios.html"><a href="chapter-15-future-temperature-scenarios.html"><i class="fa fa-check"></i><b>12</b> Chapter 15 — Future temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="chapter-15-future-temperature-scenarios.html"><a href="chapter-15-future-temperature-scenarios.html#rcps-and-ssps-concepts-and-differences"><i class="fa fa-check"></i><b>12.1</b> RCPs and SSPs: concepts and differences</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chapter-16-making-cmip6-scenarios.html"><a href="chapter-16-making-cmip6-scenarios.html"><i class="fa fa-check"></i><b>13</b> Chapter 16 — Making CMIP6 scenarios</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="chapter-16-making-cmip6-scenarios.html"><a href="chapter-16-making-cmip6-scenarios.html#generating-cmip6-based-temperature-scenarios"><i class="fa fa-check"></i><b>13.1</b> Generating CMIP6-based temperature scenarios</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="chapter-18-plotting-future-scenarios.html"><a href="chapter-18-plotting-future-scenarios.html"><i class="fa fa-check"></i><b>14</b> Chapter 18 — Plotting future scenarios</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="chapter-18-plotting-future-scenarios.html"><a href="chapter-18-plotting-future-scenarios.html#visualizing-historical-and-future-chill-scenarios"><i class="fa fa-check"></i><b>14.1</b> Visualizing historical and future chill scenarios</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="chapter-19-chill-model-comparison.html"><a href="chapter-19-chill-model-comparison.html"><i class="fa fa-check"></i><b>15</b> Chapter 19 — Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="chapter-19-chill-model-comparison.html"><a href="chapter-19-chill-model-comparison.html#chill-model-comparison-for-a-selected-location"><i class="fa fa-check"></i><b>15.1</b> Chill model comparison for a selected location</a></li>
+<li class="chapter" data-level="15.2" data-path="chapter-19-chill-model-comparison.html"><a href="chapter-19-chill-model-comparison.html#heat-map-of-past-and-future-safe-winter-chill-changes"><i class="fa fa-check"></i><b>15.2</b> Heat map of past and future Safe Winter Chill changes</a></li>
+<li class="chapter" data-level="15.3" data-path="chapter-19-chill-model-comparison.html"><a href="chapter-19-chill-model-comparison.html#animated-time-series-of-safe-winter-chill"><i class="fa fa-check"></i><b>15.3</b> Animated time series of Safe Winter Chill</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="chapter-20-simple-phenology-analysis.html"><a href="chapter-20-simple-phenology-analysis.html"><i class="fa fa-check"></i><b>16</b> Chapter 20 — Simple phenology analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="chapter-20-simple-phenology-analysis.html"><a href="chapter-20-simple-phenology-analysis.html#p-hacking-and-its-implications"><i class="fa fa-check"></i><b>16.1</b> P-hacking and its implications</a></li>
+<li class="chapter" data-level="16.2" data-path="chapter-20-simple-phenology-analysis.html"><a href="chapter-20-simple-phenology-analysis.html#causal-relationship-between-temperature-and-bloom-dates"><i class="fa fa-check"></i><b>16.2</b> Causal relationship between temperature and bloom dates</a></li>
+<li class="chapter" data-level="16.3" data-path="chapter-20-simple-phenology-analysis.html"><a href="chapter-20-simple-phenology-analysis.html#requirements-for-a-process-based-phenology-model"><i class="fa fa-check"></i><b>16.3</b> Requirements for a process-based phenology model</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chapter-21-delineating-temperature-response-phases-with-pls-regression.html"><a href="chapter-21-delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>17</b> Chapter 21 — Delineating temperature response phases with PLS regression</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="chapter-21-delineating-temperature-response-phases-with-pls-regression.html"><a href="chapter-21-delineating-temperature-response-phases-with-pls-regression.html#interpreting-pls-results-with-caution"><i class="fa fa-check"></i><b>17.1</b> Interpreting PLS results with caution</a></li>
+<li class="chapter" data-level="17.2" data-path="chapter-21-delineating-temperature-response-phases-with-pls-regression.html"><a href="chapter-21-delineating-temperature-response-phases-with-pls-regression.html#replicating-the-pls-analysis-for-roter-boskoop"><i class="fa fa-check"></i><b>17.2</b> Replicating the PLS analysis for ‘Roter Boskoop’</a></li>
+<li class="chapter" data-level="17.3" data-path="chapter-21-delineating-temperature-response-phases-with-pls-regression.html"><a href="chapter-21-delineating-temperature-response-phases-with-pls-regression.html#why-is-the-chilling-response-not-detected"><i class="fa fa-check"></i><b>17.3</b> Why is the chilling response not detected?</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="chapter-22-successes-and-limitations-of-pls-regression-analysis.html"><a href="chapter-22-successes-and-limitations-of-pls-regression-analysis.html"><i class="fa fa-check"></i><b>18</b> Chapter 22 — Successes and limitations of PLS regression analysis</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="chapter-22-successes-and-limitations-of-pls-regression-analysis.html"><a href="chapter-22-successes-and-limitations-of-pls-regression-analysis.html#when-does-pls-detect-the-chilling-phase"><i class="fa fa-check"></i><b>18.1</b> When does PLS detect the chilling phase?</a></li>
+<li class="chapter" data-level="18.2" data-path="chapter-22-successes-and-limitations-of-pls-regression-analysis.html"><a href="chapter-22-successes-and-limitations-of-pls-regression-analysis.html#how-can-these-limitations-be-addressed"><i class="fa fa-check"></i><b>18.2</b> How can these limitations be addressed?</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="chapter-23-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-23-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>19</b> Chapter 23 — PLS regression with agroclimatic metrics</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="chapter-23-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-23-pls-regression-with-agroclimatic-metrics.html#pls-regression-using-chill-and-heat-metrics"><i class="fa fa-check"></i><b>19.1</b> PLS regression using chill and heat metrics</a></li>
+<li class="chapter" data-level="19.2" data-path="chapter-23-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-23-pls-regression-with-agroclimatic-metrics.html#delineating-chilling-and-forcing-phases-across-chill-models"><i class="fa fa-check"></i><b>19.2</b> Delineating chilling and forcing phases across chill models</a></li>
+<li class="chapter" data-level="19.3" data-path="chapter-23-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-23-pls-regression-with-agroclimatic-metrics.html#visualization-and-interpretation-of-chilling-and-forcing-phases"><i class="fa fa-check"></i><b>19.3</b> Visualization and interpretation of chilling and forcing phases</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> Chapter 24 — Examples of PLS regression with agroclimatic metrics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html#patterns-across-climates"><i class="fa fa-check"></i><b>20.1</b> Patterns across climates</a></li>
+<li class="chapter" data-level="20.2" data-path="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="chapter-24-examples-of-pls-regression-with-agroclimatic-metrics.html#reasons-for-success-and-failure"><i class="fa fa-check"></i><b>20.2</b> Reasons for success and failure</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="chapter-25-why-pls-doesnt-always-work.html"><a href="chapter-25-why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>21</b> Chapter 25 — Why PLS doesn’t always work</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="chapter-25-why-pls-doesnt-always-work.html"><a href="chapter-25-why-pls-doesnt-always-work.html#sensitivity-analysis-of-chill-and-heat-models"><i class="fa fa-check"></i><b>21.1</b> Sensitivity analysis of chill and heat models</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="chapter-26-evaluating-pls-outputs.html"><a href="chapter-26-evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>22</b> Chapter 26 — Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="chapter-26-evaluating-pls-outputs.html"><a href="chapter-26-evaluating-pls-outputs.html#reproducing-analysis"><i class="fa fa-check"></i><b>22.1</b> Reproducing analysis</a></li>
+<li class="chapter" data-level="22.2" data-path="chapter-26-evaluating-pls-outputs.html"><a href="chapter-26-evaluating-pls-outputs.html#interpreting-surface-plots-across-climates"><i class="fa fa-check"></i><b>22.2</b> Interpreting surface plots across climates</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="chapter-27---the-relative-importance-of-chill-and-heat.html"><a href="chapter-27---the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>23</b> Chapter 27 - The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="chapter-27---the-relative-importance-of-chill-and-heat.html"><a href="chapter-27---the-relative-importance-of-chill-and-heat.html#temperature-response-hypothesis"><i class="fa fa-check"></i><b>23.1</b> Temperature response hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="chapter-29---making-valid-tree-phenology-models.html"><a href="chapter-29---making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>24</b> Chapter 29 - Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="chapter-29---making-valid-tree-phenology-models.html"><a href="chapter-29---making-valid-tree-phenology-models.html#output-vs.-process-validation"><i class="fa fa-check"></i><b>24.1</b> Output vs. process validation</a></li>
+<li class="chapter" data-level="24.2" data-path="chapter-29---making-valid-tree-phenology-models.html"><a href="chapter-29---making-valid-tree-phenology-models.html#validity-domain"><i class="fa fa-check"></i><b>24.2</b> Validity domain</a></li>
+<li class="chapter" data-level="24.3" data-path="chapter-29---making-valid-tree-phenology-models.html"><a href="chapter-29---making-valid-tree-phenology-models.html#validation-for-purpose"><i class="fa fa-check"></i><b>24.3</b> Validation for purpose</a></li>
+<li class="chapter" data-level="24.4" data-path="chapter-29---making-valid-tree-phenology-models.html"><a href="chapter-29---making-valid-tree-phenology-models.html#ensuring-model-suitability"><i class="fa fa-check"></i><b>24.4</b> Ensuring model suitability</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="chapter-30---the-phenoflex-model.html"><a href="chapter-30---the-phenoflex-model.html"><i class="fa fa-check"></i><b>25</b> Chapter 30 - The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="chapter-30---the-phenoflex-model.html"><a href="chapter-30---the-phenoflex-model.html#parameterize-phenoflex-for-roter-boskoop"><i class="fa fa-check"></i><b>25.1</b> Parameterize PhenoFlex for Roter Boskoop</a></li>
+<li class="chapter" data-level="25.2" data-path="chapter-30---the-phenoflex-model.html"><a href="chapter-30---the-phenoflex-model.html#predicted-vs.-observed-bloom-dates"><i class="fa fa-check"></i><b>25.2</b> Predicted vs. observed bloom dates</a></li>
+<li class="chapter" data-level="25.3" data-path="chapter-30---the-phenoflex-model.html"><a href="chapter-30---the-phenoflex-model.html#model-performance-metrics"><i class="fa fa-check"></i><b>25.3</b> Model performance metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="chapter-31---the-phenoflex-model---a-second-look.html"><a href="chapter-31---the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>26</b> Chapter 31 - The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="chapter-31---the-phenoflex-model---a-second-look.html"><a href="chapter-31---the-phenoflex-model---a-second-look.html#chill-and-heat-response-plots"><i class="fa fa-check"></i><b>26.1</b> Chill and heat response plots</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="chapter-32---can-we-improve-the-performance-of-phenoflex.html"><a href="chapter-32---can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>27</b> Chapter 32 - Can we improve the performance of PhenoFlex?</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="chapter-32---can-we-improve-the-performance-of-phenoflex.html"><a href="chapter-32---can-we-improve-the-performance-of-phenoflex.html#objective-of-the-analysis"><i class="fa fa-check"></i><b>27.1</b> Objective of the analysis</a></li>
+<li class="chapter" data-level="27.2" data-path="chapter-32---can-we-improve-the-performance-of-phenoflex.html"><a href="chapter-32---can-we-improve-the-performance-of-phenoflex.html#main-conclusion"><i class="fa fa-check"></i><b>27.2</b> Main conclusion</a></li>
+<li class="chapter" data-level="27.3" data-path="chapter-32---can-we-improve-the-performance-of-phenoflex.html"><a href="chapter-32---can-we-improve-the-performance-of-phenoflex.html#future-experimental-tests"><i class="fa fa-check"></i><b>27.3</b> Future experimental tests</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="chapter-33---frost-risk-analysis.html"><a href="chapter-33---frost-risk-analysis.html"><i class="fa fa-check"></i><b>28</b> Chapter 33 - Frost risk analysis</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="chapter-33---frost-risk-analysis.html"><a href="chapter-33---frost-risk-analysis.html#developement-of-bloom-period"><i class="fa fa-check"></i><b>28.1</b> Developement of bloom period</a></li>
+<li class="chapter" data-level="28.2" data-path="chapter-33---frost-risk-analysis.html"><a href="chapter-33---frost-risk-analysis.html#occurence-of-frost-events"><i class="fa fa-check"></i><b>28.2</b> Occurence of frost events</a></li>
+<li class="chapter" data-level="28.3" data-path="chapter-33---frost-risk-analysis.html"><a href="chapter-33---frost-risk-analysis.html#spring-frost-and-frost-events"><i class="fa fa-check"></i><b>28.3</b> Spring frost and frost events</a></li>
+<li class="chapter" data-level="28.4" data-path="chapter-33---frost-risk-analysis.html"><a href="chapter-33---frost-risk-analysis.html#trend-of-risk"><i class="fa fa-check"></i><b>28.4</b> Trend of risk</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-26-evaluating-pls-outputs" class="section level1 hasAnchor" number="22">
+<h1><span class="header-section-number">22</span> Chapter 26 — Evaluating PLS outputs<a href="chapter-26-evaluating-pls-outputs.html#chapter-26-evaluating-pls-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter uses the Roter Boskoop dataset to assess PLS results, translating chilling and forcing phases into chill and heat requirements and showing when PLS is informative.</p>
+<div id="reproducing-analysis" class="section level2 hasAnchor" number="22.1">
+<h2><span class="header-section-number">22.1</span> Reproducing analysis<a href="chapter-26-evaluating-pls-outputs.html#reproducing-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Reproduce the analysis for the ‘Roter Boskoop’ dataset.</strong></p>
+<p><strong>Load packages and phenology data</strong></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="chapter-26-evaluating-pls-outputs.html#cb159-1" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb159-2"><a href="chapter-26-evaluating-pls-outputs.html#cb159-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb159-3"><a href="chapter-26-evaluating-pls-outputs.html#cb159-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb159-4"><a href="chapter-26-evaluating-pls-outputs.html#cb159-4" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
+<span id="cb159-5"><a href="chapter-26-evaluating-pls-outputs.html#cb159-5" tabindex="-1"></a></span>
+<span id="cb159-6"><a href="chapter-26-evaluating-pls-outputs.html#cb159-6" tabindex="-1"></a>Roter_first <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb159-7"><a href="chapter-26-evaluating-pls-outputs.html#cb159-7" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, First_bloom) <span class="sc">%&gt;%</span></span>
+<span id="cb159-8"><a href="chapter-26-evaluating-pls-outputs.html#cb159-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year  =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb159-9"><a href="chapter-26-evaluating-pls-outputs.html#cb159-9" tabindex="-1"></a>         <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
+<span id="cb159-10"><a href="chapter-26-evaluating-pls-outputs.html#cb159-10" tabindex="-1"></a>         <span class="at">Day   =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(First_bloom, <span class="dv">7</span>, <span class="dv">8</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb159-11"><a href="chapter-26-evaluating-pls-outputs.html#cb159-11" tabindex="-1"></a>  <span class="fu">make_JDay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb159-12"><a href="chapter-26-evaluating-pls-outputs.html#cb159-12" tabindex="-1"></a>  <span class="fu">select</span>(Pheno_year, JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb159-13"><a href="chapter-26-evaluating-pls-outputs.html#cb159-13" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Year =</span> Pheno_year,</span>
+<span id="cb159-14"><a href="chapter-26-evaluating-pls-outputs.html#cb159-14" tabindex="-1"></a>         <span class="at">pheno =</span> JDay)</span></code></pre></div>
+<p><strong>Load temperature data and generate hourly temperatures</strong></p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="chapter-26-evaluating-pls-outputs.html#cb160-1" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb160-2"><a href="chapter-26-evaluating-pls-outputs.html#cb160-2" tabindex="-1"></a></span>
+<span id="cb160-3"><a href="chapter-26-evaluating-pls-outputs.html#cb160-3" tabindex="-1"></a>temps_hourly <span class="ot">&lt;-</span> temps <span class="sc">%&gt;%</span></span>
+<span id="cb160-4"><a href="chapter-26-evaluating-pls-outputs.html#cb160-4" tabindex="-1"></a>  <span class="fu">stack_hourly_temps</span>(<span class="at">latitude =</span> <span class="fl">50.6</span>)</span></code></pre></div>
+<p><strong>Compute daily chill and heat metrics</strong></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="chapter-26-evaluating-pls-outputs.html#cb161-1" tabindex="-1"></a>daychill <span class="ot">&lt;-</span> <span class="fu">daily_chill</span>(</span>
+<span id="cb161-2"><a href="chapter-26-evaluating-pls-outputs.html#cb161-2" tabindex="-1"></a>  <span class="at">hourtemps =</span> temps_hourly,</span>
+<span id="cb161-3"><a href="chapter-26-evaluating-pls-outputs.html#cb161-3" tabindex="-1"></a>  <span class="at">running_mean =</span> <span class="dv">1</span>,</span>
+<span id="cb161-4"><a href="chapter-26-evaluating-pls-outputs.html#cb161-4" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(</span>
+<span id="cb161-5"><a href="chapter-26-evaluating-pls-outputs.html#cb161-5" tabindex="-1"></a>    <span class="at">Chilling_Hours   =</span> Chilling_Hours,</span>
+<span id="cb161-6"><a href="chapter-26-evaluating-pls-outputs.html#cb161-6" tabindex="-1"></a>    <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
+<span id="cb161-7"><a href="chapter-26-evaluating-pls-outputs.html#cb161-7" tabindex="-1"></a>    <span class="at">Chill_Portions   =</span> Dynamic_Model,</span>
+<span id="cb161-8"><a href="chapter-26-evaluating-pls-outputs.html#cb161-8" tabindex="-1"></a>    <span class="at">GDH              =</span> GDH</span>
+<span id="cb161-9"><a href="chapter-26-evaluating-pls-outputs.html#cb161-9" tabindex="-1"></a>  )</span>
+<span id="cb161-10"><a href="chapter-26-evaluating-pls-outputs.html#cb161-10" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Run PLS regression using agroclimatic metrics</strong></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="chapter-26-evaluating-pls-outputs.html#cb162-1" tabindex="-1"></a>plscf <span class="ot">&lt;-</span> <span class="fu">PLS_chill_force</span>(</span>
+<span id="cb162-2"><a href="chapter-26-evaluating-pls-outputs.html#cb162-2" tabindex="-1"></a>  <span class="at">daily_chill_obj =</span> daychill,</span>
+<span id="cb162-3"><a href="chapter-26-evaluating-pls-outputs.html#cb162-3" tabindex="-1"></a>  <span class="at">bio_data_frame  =</span> Roter_first,</span>
+<span id="cb162-4"><a href="chapter-26-evaluating-pls-outputs.html#cb162-4" tabindex="-1"></a>  <span class="at">split_month     =</span> <span class="dv">6</span>,</span>
+<span id="cb162-5"><a href="chapter-26-evaluating-pls-outputs.html#cb162-5" tabindex="-1"></a>  <span class="at">chill_models    =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb162-6"><a href="chapter-26-evaluating-pls-outputs.html#cb162-6" tabindex="-1"></a>  <span class="at">heat_models     =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb162-7"><a href="chapter-26-evaluating-pls-outputs.html#cb162-7" tabindex="-1"></a>  <span class="at">runn_means      =</span> <span class="dv">11</span></span>
+<span id="cb162-8"><a href="chapter-26-evaluating-pls-outputs.html#cb162-8" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Visualize PLS results and delineate response phases</strong></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="chapter-26-evaluating-pls-outputs.html#cb163-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;data/plot_pls_ggplot.R&quot;</span>)</span>
+<span id="cb163-2"><a href="chapter-26-evaluating-pls-outputs.html#cb163-2" tabindex="-1"></a></span>
+<span id="cb163-3"><a href="chapter-26-evaluating-pls-outputs.html#cb163-3" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(</span>
+<span id="cb163-4"><a href="chapter-26-evaluating-pls-outputs.html#cb163-4" tabindex="-1"></a>  plscf,</span>
+<span id="cb163-5"><a href="chapter-26-evaluating-pls-outputs.html#cb163-5" tabindex="-1"></a>  <span class="at">chill_metric =</span> <span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb163-6"><a href="chapter-26-evaluating-pls-outputs.html#cb163-6" tabindex="-1"></a>  <span class="at">heat_metric  =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb163-7"><a href="chapter-26-evaluating-pls-outputs.html#cb163-7" tabindex="-1"></a>  <span class="at">chill_label  =</span> <span class="st">&quot;CP&quot;</span>,</span>
+<span id="cb163-8"><a href="chapter-26-evaluating-pls-outputs.html#cb163-8" tabindex="-1"></a>  <span class="at">heat_label   =</span> <span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb163-9"><a href="chapter-26-evaluating-pls-outputs.html#cb163-9" tabindex="-1"></a>  <span class="at">chill_phase  =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">50</span>),</span>
+<span id="cb163-10"><a href="chapter-26-evaluating-pls-outputs.html#cb163-10" tabindex="-1"></a>  <span class="at">heat_phase   =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
+<span id="cb163-11"><a href="chapter-26-evaluating-pls-outputs.html#cb163-11" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p><strong>Estimate chilling and forcing requirements</strong></p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="chapter-26-evaluating-pls-outputs.html#cb164-1" tabindex="-1"></a>chill_phase <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">320</span>, <span class="dv">50</span>)</span>
+<span id="cb164-2"><a href="chapter-26-evaluating-pls-outputs.html#cb164-2" tabindex="-1"></a>heat_phase  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">110</span>)</span>
+<span id="cb164-3"><a href="chapter-26-evaluating-pls-outputs.html#cb164-3" tabindex="-1"></a></span>
+<span id="cb164-4"><a href="chapter-26-evaluating-pls-outputs.html#cb164-4" tabindex="-1"></a>chill <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
+<span id="cb164-5"><a href="chapter-26-evaluating-pls-outputs.html#cb164-5" tabindex="-1"></a>  <span class="at">hourtemps     =</span> temps_hourly,</span>
+<span id="cb164-6"><a href="chapter-26-evaluating-pls-outputs.html#cb164-6" tabindex="-1"></a>  <span class="at">Start_JDay    =</span> chill_phase[<span class="dv">1</span>],</span>
+<span id="cb164-7"><a href="chapter-26-evaluating-pls-outputs.html#cb164-7" tabindex="-1"></a>  <span class="at">End_JDay      =</span> chill_phase[<span class="dv">2</span>],</span>
+<span id="cb164-8"><a href="chapter-26-evaluating-pls-outputs.html#cb164-8" tabindex="-1"></a>  <span class="at">models        =</span> <span class="fu">list</span>(<span class="at">Chill_Portions =</span> Dynamic_Model),</span>
+<span id="cb164-9"><a href="chapter-26-evaluating-pls-outputs.html#cb164-9" tabindex="-1"></a>  <span class="at">misstolerance =</span> <span class="dv">10</span></span>
+<span id="cb164-10"><a href="chapter-26-evaluating-pls-outputs.html#cb164-10" tabindex="-1"></a>)</span>
+<span id="cb164-11"><a href="chapter-26-evaluating-pls-outputs.html#cb164-11" tabindex="-1"></a></span>
+<span id="cb164-12"><a href="chapter-26-evaluating-pls-outputs.html#cb164-12" tabindex="-1"></a>heat <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(</span>
+<span id="cb164-13"><a href="chapter-26-evaluating-pls-outputs.html#cb164-13" tabindex="-1"></a>  <span class="at">hourtemps  =</span> temps_hourly,</span>
+<span id="cb164-14"><a href="chapter-26-evaluating-pls-outputs.html#cb164-14" tabindex="-1"></a>  <span class="at">Start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
+<span id="cb164-15"><a href="chapter-26-evaluating-pls-outputs.html#cb164-15" tabindex="-1"></a>  <span class="at">End_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
+<span id="cb164-16"><a href="chapter-26-evaluating-pls-outputs.html#cb164-16" tabindex="-1"></a>  <span class="at">models     =</span> <span class="fu">list</span>(<span class="at">GDH =</span> GDH)</span>
+<span id="cb164-17"><a href="chapter-26-evaluating-pls-outputs.html#cb164-17" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Inspect chill and heat distributions</strong></p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chapter-26-evaluating-pls-outputs.html#cb165-1" tabindex="-1"></a><span class="fu">ggplot</span>(chill, <span class="fu">aes</span>(<span class="at">x =</span> Chill_Portions)) <span class="sc">+</span></span>
+<span id="cb165-2"><a href="chapter-26-evaluating-pls-outputs.html#cb165-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb165-3"><a href="chapter-26-evaluating-pls-outputs.html#cb165-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="chapter-26-evaluating-pls-outputs.html#cb167-1" tabindex="-1"></a><span class="fu">ggplot</span>(heat, <span class="fu">aes</span>(<span class="at">x =</span> GDH)) <span class="sc">+</span></span>
+<span id="cb167-2"><a href="chapter-26-evaluating-pls-outputs.html#cb167-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb167-3"><a href="chapter-26-evaluating-pls-outputs.html#cb167-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-92-2.png" width="672" /></p>
+<p><strong>Quantify chill and heat requirements</strong></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="chapter-26-evaluating-pls-outputs.html#cb169-1" tabindex="-1"></a>chill_requirement  <span class="ot">&lt;-</span> <span class="fu">mean</span>(chill<span class="sc">$</span>Chill_Portions)</span>
+<span id="cb169-2"><a href="chapter-26-evaluating-pls-outputs.html#cb169-2" tabindex="-1"></a>chill_req_error    <span class="ot">&lt;-</span> <span class="fu">sd</span>(chill<span class="sc">$</span>Chill_Portions)</span>
+<span id="cb169-3"><a href="chapter-26-evaluating-pls-outputs.html#cb169-3" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="chapter-26-evaluating-pls-outputs.html#cb169-4" tabindex="-1"></a>heat_requirement   <span class="ot">&lt;-</span> <span class="fu">mean</span>(heat<span class="sc">$</span>GDH)</span>
+<span id="cb169-5"><a href="chapter-26-evaluating-pls-outputs.html#cb169-5" tabindex="-1"></a>heat_req_error     <span class="ot">&lt;-</span> <span class="fu">sd</span>(heat<span class="sc">$</span>GDH)</span></code></pre></div>
+<p><strong>Combine chill, heat, and phenology data</strong></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="chapter-26-evaluating-pls-outputs.html#cb170-1" tabindex="-1"></a>metrics_by_season <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb170-2"><a href="chapter-26-evaluating-pls-outputs.html#cb170-2" tabindex="-1"></a>  chill[, <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Chill_Portions&quot;</span>)],</span>
+<span id="cb170-3"><a href="chapter-26-evaluating-pls-outputs.html#cb170-3" tabindex="-1"></a>  heat[,  <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;GDH&quot;</span>)],</span>
+<span id="cb170-4"><a href="chapter-26-evaluating-pls-outputs.html#cb170-4" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Season&quot;</span>, <span class="st">&quot;End_year&quot;</span>)</span>
+<span id="cb170-5"><a href="chapter-26-evaluating-pls-outputs.html#cb170-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb170-6"><a href="chapter-26-evaluating-pls-outputs.html#cb170-6" tabindex="-1"></a>  <span class="fu">merge</span>(Roter_first, <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
+<p><strong>Plot chill vs heat colored by bloom date</strong></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="chapter-26-evaluating-pls-outputs.html#cb171-1" tabindex="-1"></a><span class="fu">ggplot</span>(metrics_by_season, <span class="fu">aes</span>(Chill_Portions, GDH)) <span class="sc">+</span></span>
+<span id="cb171-2"><a href="chapter-26-evaluating-pls-outputs.html#cb171-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> pheno), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb171-3"><a href="chapter-26-evaluating-pls-outputs.html#cb171-3" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(<span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
+<span id="cb171-4"><a href="chapter-26-evaluating-pls-outputs.html#cb171-4" tabindex="-1"></a>                        <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-5"><a href="chapter-26-evaluating-pls-outputs.html#cb171-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><strong>Compute mean temperatures during chilling and forcing phases</strong></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="chapter-26-evaluating-pls-outputs.html#cb172-1" tabindex="-1"></a>mean_temp_period <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb172-2"><a href="chapter-26-evaluating-pls-outputs.html#cb172-2" tabindex="-1"></a>  temps,</span>
+<span id="cb172-3"><a href="chapter-26-evaluating-pls-outputs.html#cb172-3" tabindex="-1"></a>  start_JDay,</span>
+<span id="cb172-4"><a href="chapter-26-evaluating-pls-outputs.html#cb172-4" tabindex="-1"></a>  end_JDay,</span>
+<span id="cb172-5"><a href="chapter-26-evaluating-pls-outputs.html#cb172-5" tabindex="-1"></a>  <span class="at">end_season =</span> end_JDay</span>
+<span id="cb172-6"><a href="chapter-26-evaluating-pls-outputs.html#cb172-6" tabindex="-1"></a>) {</span>
+<span id="cb172-7"><a href="chapter-26-evaluating-pls-outputs.html#cb172-7" tabindex="-1"></a>  temps_JDay <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(temps) <span class="sc">%&gt;%</span></span>
+<span id="cb172-8"><a href="chapter-26-evaluating-pls-outputs.html#cb172-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Season =</span> Year)</span>
+<span id="cb172-9"><a href="chapter-26-evaluating-pls-outputs.html#cb172-9" tabindex="-1"></a></span>
+<span id="cb172-10"><a href="chapter-26-evaluating-pls-outputs.html#cb172-10" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
+<span id="cb172-11"><a href="chapter-26-evaluating-pls-outputs.html#cb172-11" tabindex="-1"></a>    temps_JDay<span class="sc">$</span>Season[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="ot">&lt;-</span></span>
+<span id="cb172-12"><a href="chapter-26-evaluating-pls-outputs.html#cb172-12" tabindex="-1"></a>      temps_JDay<span class="sc">$</span>Year[<span class="fu">which</span>(temps_JDay<span class="sc">$</span>JDay <span class="sc">&gt;=</span> start_JDay)] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb172-13"><a href="chapter-26-evaluating-pls-outputs.html#cb172-13" tabindex="-1"></a></span>
+<span id="cb172-14"><a href="chapter-26-evaluating-pls-outputs.html#cb172-14" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&gt;</span> end_season)</span>
+<span id="cb172-15"><a href="chapter-26-evaluating-pls-outputs.html#cb172-15" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">|</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
+<span id="cb172-16"><a href="chapter-26-evaluating-pls-outputs.html#cb172-16" tabindex="-1"></a></span>
+<span id="cb172-17"><a href="chapter-26-evaluating-pls-outputs.html#cb172-17" tabindex="-1"></a>  <span class="cf">if</span> (start_JDay <span class="sc">&lt;=</span> end_JDay)</span>
+<span id="cb172-18"><a href="chapter-26-evaluating-pls-outputs.html#cb172-18" tabindex="-1"></a>    sub_temps <span class="ot">&lt;-</span> <span class="fu">subset</span>(temps_JDay, JDay <span class="sc">&lt;=</span> end_JDay <span class="sc">&amp;</span> JDay <span class="sc">&gt;=</span> start_JDay)</span>
+<span id="cb172-19"><a href="chapter-26-evaluating-pls-outputs.html#cb172-19" tabindex="-1"></a></span>
+<span id="cb172-20"><a href="chapter-26-evaluating-pls-outputs.html#cb172-20" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="fu">c</span>(<span class="st">&quot;Tmin&quot;</span>, <span class="st">&quot;Tmax&quot;</span>)],</span>
+<span id="cb172-21"><a href="chapter-26-evaluating-pls-outputs.html#cb172-21" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
+<span id="cb172-22"><a href="chapter-26-evaluating-pls-outputs.html#cb172-22" tabindex="-1"></a>                          <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb172-23"><a href="chapter-26-evaluating-pls-outputs.html#cb172-23" tabindex="-1"></a></span>
+<span id="cb172-24"><a href="chapter-26-evaluating-pls-outputs.html#cb172-24" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;n_days&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(sub_temps[, <span class="st">&quot;Tmin&quot;</span>],</span>
+<span id="cb172-25"><a href="chapter-26-evaluating-pls-outputs.html#cb172-25" tabindex="-1"></a>                                      <span class="at">by =</span> <span class="fu">list</span>(sub_temps<span class="sc">$</span>Season),</span>
+<span id="cb172-26"><a href="chapter-26-evaluating-pls-outputs.html#cb172-26" tabindex="-1"></a>                                      <span class="at">FUN =</span> length)[, <span class="dv">2</span>]</span>
+<span id="cb172-27"><a href="chapter-26-evaluating-pls-outputs.html#cb172-27" tabindex="-1"></a></span>
+<span id="cb172-28"><a href="chapter-26-evaluating-pls-outputs.html#cb172-28" tabindex="-1"></a>  mean_temps[, <span class="st">&quot;Tmean&quot;</span>] <span class="ot">&lt;-</span> (mean_temps<span class="sc">$</span>Tmin <span class="sc">+</span> mean_temps<span class="sc">$</span>Tmax) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb172-29"><a href="chapter-26-evaluating-pls-outputs.html#cb172-29" tabindex="-1"></a>  mean_temps <span class="ot">&lt;-</span> mean_temps[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span>
+<span id="cb172-30"><a href="chapter-26-evaluating-pls-outputs.html#cb172-30" tabindex="-1"></a>  <span class="fu">colnames</span>(mean_temps)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;End_year&quot;</span></span>
+<span id="cb172-31"><a href="chapter-26-evaluating-pls-outputs.html#cb172-31" tabindex="-1"></a>  mean_temps</span>
+<span id="cb172-32"><a href="chapter-26-evaluating-pls-outputs.html#cb172-32" tabindex="-1"></a>}</span>
+<span id="cb172-33"><a href="chapter-26-evaluating-pls-outputs.html#cb172-33" tabindex="-1"></a></span>
+<span id="cb172-34"><a href="chapter-26-evaluating-pls-outputs.html#cb172-34" tabindex="-1"></a>mean_temp_chill <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
+<span id="cb172-35"><a href="chapter-26-evaluating-pls-outputs.html#cb172-35" tabindex="-1"></a>  temps,</span>
+<span id="cb172-36"><a href="chapter-26-evaluating-pls-outputs.html#cb172-36" tabindex="-1"></a>  <span class="at">start_JDay =</span> chill_phase[<span class="dv">1</span>],</span>
+<span id="cb172-37"><a href="chapter-26-evaluating-pls-outputs.html#cb172-37" tabindex="-1"></a>  <span class="at">end_JDay   =</span> chill_phase[<span class="dv">2</span>],</span>
+<span id="cb172-38"><a href="chapter-26-evaluating-pls-outputs.html#cb172-38" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
+<span id="cb172-39"><a href="chapter-26-evaluating-pls-outputs.html#cb172-39" tabindex="-1"></a>)</span>
+<span id="cb172-40"><a href="chapter-26-evaluating-pls-outputs.html#cb172-40" tabindex="-1"></a></span>
+<span id="cb172-41"><a href="chapter-26-evaluating-pls-outputs.html#cb172-41" tabindex="-1"></a>mean_temp_heat <span class="ot">&lt;-</span> <span class="fu">mean_temp_period</span>(</span>
+<span id="cb172-42"><a href="chapter-26-evaluating-pls-outputs.html#cb172-42" tabindex="-1"></a>  temps,</span>
+<span id="cb172-43"><a href="chapter-26-evaluating-pls-outputs.html#cb172-43" tabindex="-1"></a>  <span class="at">start_JDay =</span> heat_phase[<span class="dv">1</span>],</span>
+<span id="cb172-44"><a href="chapter-26-evaluating-pls-outputs.html#cb172-44" tabindex="-1"></a>  <span class="at">end_JDay   =</span> heat_phase[<span class="dv">2</span>],</span>
+<span id="cb172-45"><a href="chapter-26-evaluating-pls-outputs.html#cb172-45" tabindex="-1"></a>  <span class="at">end_season =</span> <span class="dv">60</span></span>
+<span id="cb172-46"><a href="chapter-26-evaluating-pls-outputs.html#cb172-46" tabindex="-1"></a>)</span>
+<span id="cb172-47"><a href="chapter-26-evaluating-pls-outputs.html#cb172-47" tabindex="-1"></a></span>
+<span id="cb172-48"><a href="chapter-26-evaluating-pls-outputs.html#cb172-48" tabindex="-1"></a>mean_chill <span class="ot">&lt;-</span> mean_temp_chill[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
+<span id="cb172-49"><a href="chapter-26-evaluating-pls-outputs.html#cb172-49" tabindex="-1"></a><span class="fu">colnames</span>(mean_chill)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_chill&quot;</span></span>
+<span id="cb172-50"><a href="chapter-26-evaluating-pls-outputs.html#cb172-50" tabindex="-1"></a></span>
+<span id="cb172-51"><a href="chapter-26-evaluating-pls-outputs.html#cb172-51" tabindex="-1"></a>mean_heat <span class="ot">&lt;-</span> mean_temp_heat[, <span class="fu">c</span>(<span class="st">&quot;End_year&quot;</span>, <span class="st">&quot;Tmean&quot;</span>)]</span>
+<span id="cb172-52"><a href="chapter-26-evaluating-pls-outputs.html#cb172-52" tabindex="-1"></a><span class="fu">colnames</span>(mean_heat)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Tmean_heat&quot;</span></span>
+<span id="cb172-53"><a href="chapter-26-evaluating-pls-outputs.html#cb172-53" tabindex="-1"></a></span>
+<span id="cb172-54"><a href="chapter-26-evaluating-pls-outputs.html#cb172-54" tabindex="-1"></a>phase_Tmeans <span class="ot">&lt;-</span> <span class="fu">merge</span>(mean_chill, mean_heat, <span class="at">by =</span> <span class="st">&quot;End_year&quot;</span>)</span>
+<span id="cb172-55"><a href="chapter-26-evaluating-pls-outputs.html#cb172-55" tabindex="-1"></a></span>
+<span id="cb172-56"><a href="chapter-26-evaluating-pls-outputs.html#cb172-56" tabindex="-1"></a>Tmeans_pheno <span class="ot">&lt;-</span> <span class="fu">merge</span>(phase_Tmeans,</span>
+<span id="cb172-57"><a href="chapter-26-evaluating-pls-outputs.html#cb172-57" tabindex="-1"></a>                      Roter_first,</span>
+<span id="cb172-58"><a href="chapter-26-evaluating-pls-outputs.html#cb172-58" tabindex="-1"></a>                      <span class="at">by.x =</span> <span class="st">&quot;End_year&quot;</span>,</span>
+<span id="cb172-59"><a href="chapter-26-evaluating-pls-outputs.html#cb172-59" tabindex="-1"></a>                      <span class="at">by.y =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
+<p><strong>Interpolate bloom dates using kriging</strong></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="chapter-26-evaluating-pls-outputs.html#cb173-1" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div>
+<pre><code>## Lade nötiges Paket: spam</code></pre>
+<pre><code>## Spam version 2.11-1 (2025-01-20) is loaded.
+## Type &#39;help( Spam)&#39; or &#39;demo( spam)&#39; for a short introduction 
+## and overview of this package.
+## Help for individual functions is also obtained by adding the
+## suffix &#39;.spam&#39; to the function name, e.g. &#39;help( chol.spam)&#39;.</code></pre>
+<pre><code>## 
+## Attache Paket: &#39;spam&#39;</code></pre>
+<pre><code>## Die folgenden Objekte sind maskiert von &#39;package:base&#39;:
+## 
+##     backsolve, forwardsolve</code></pre>
+<pre><code>## Lade nötiges Paket: viridisLite</code></pre>
+<pre><code>## Lade nötiges Paket: RColorBrewer</code></pre>
+<pre><code>## 
+## Try help(fields) to get started.</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="chapter-26-evaluating-pls-outputs.html#cb181-1" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">Krig</span>(</span>
+<span id="cb181-2"><a href="chapter-26-evaluating-pls-outputs.html#cb181-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.matrix</span>(Tmeans_pheno[, <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>)]),</span>
+<span id="cb181-3"><a href="chapter-26-evaluating-pls-outputs.html#cb181-3" tabindex="-1"></a>  <span class="at">Y =</span> Tmeans_pheno<span class="sc">$</span>pheno</span>
+<span id="cb181-4"><a href="chapter-26-evaluating-pls-outputs.html#cb181-4" tabindex="-1"></a>)</span>
+<span id="cb181-5"><a href="chapter-26-evaluating-pls-outputs.html#cb181-5" tabindex="-1"></a></span>
+<span id="cb181-6"><a href="chapter-26-evaluating-pls-outputs.html#cb181-6" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predictSurface</span>(k)</span>
+<span id="cb181-7"><a href="chapter-26-evaluating-pls-outputs.html#cb181-7" tabindex="-1"></a></span>
+<span id="cb181-8"><a href="chapter-26-evaluating-pls-outputs.html#cb181-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
+<pre><code>## 
+## Attache Paket: &#39;reshape2&#39;</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:tidyr&#39;:
+## 
+##     smiths</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="chapter-26-evaluating-pls-outputs.html#cb184-1" tabindex="-1"></a><span class="fu">library</span>(metR)</span></code></pre></div>
+<pre><code>## 
+## Attache Paket: &#39;metR&#39;</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:purrr&#39;:
+## 
+##     cross</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="chapter-26-evaluating-pls-outputs.html#cb187-1" tabindex="-1"></a>melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(pred<span class="sc">$</span>z)</span>
+<span id="cb187-2"><a href="chapter-26-evaluating-pls-outputs.html#cb187-2" tabindex="-1"></a><span class="fu">colnames</span>(melted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Tmean_chill&quot;</span>, <span class="st">&quot;Tmean_heat&quot;</span>, <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<p><strong>Plot bloom date response surface</strong></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="chapter-26-evaluating-pls-outputs.html#cb188-1" tabindex="-1"></a><span class="fu">ggplot</span>(melted,</span>
+<span id="cb188-2"><a href="chapter-26-evaluating-pls-outputs.html#cb188-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
+<span id="cb188-3"><a href="chapter-26-evaluating-pls-outputs.html#cb188-3" tabindex="-1"></a>           <span class="at">y =</span> Tmean_heat,</span>
+<span id="cb188-4"><a href="chapter-26-evaluating-pls-outputs.html#cb188-4" tabindex="-1"></a>           <span class="at">z =</span> value)) <span class="sc">+</span></span>
+<span id="cb188-5"><a href="chapter-26-evaluating-pls-outputs.html#cb188-5" tabindex="-1"></a>  <span class="fu">geom_contour_fill</span>(<span class="at">bins =</span> <span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb188-6"><a href="chapter-26-evaluating-pls-outputs.html#cb188-6" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb188-7"><a href="chapter-26-evaluating-pls-outputs.html#cb188-7" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>)),</span>
+<span id="cb188-8"><a href="chapter-26-evaluating-pls-outputs.html#cb188-8" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Bloom date</span><span class="sc">\n</span><span class="st">(DOY)&quot;</span></span>
+<span id="cb188-9"><a href="chapter-26-evaluating-pls-outputs.html#cb188-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb188-10"><a href="chapter-26-evaluating-pls-outputs.html#cb188-10" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-11"><a href="chapter-26-evaluating-pls-outputs.html#cb188-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb188-12"><a href="chapter-26-evaluating-pls-outputs.html#cb188-12" tabindex="-1"></a>    <span class="at">data =</span> Tmeans_pheno,</span>
+<span id="cb188-13"><a href="chapter-26-evaluating-pls-outputs.html#cb188-13" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Tmean_chill,</span>
+<span id="cb188-14"><a href="chapter-26-evaluating-pls-outputs.html#cb188-14" tabindex="-1"></a>        <span class="at">y =</span> Tmean_heat),</span>
+<span id="cb188-15"><a href="chapter-26-evaluating-pls-outputs.html#cb188-15" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb188-16"><a href="chapter-26-evaluating-pls-outputs.html#cb188-16" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span></span>
+<span id="cb188-17"><a href="chapter-26-evaluating-pls-outputs.html#cb188-17" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb188-18"><a href="chapter-26-evaluating-pls-outputs.html#cb188-18" tabindex="-1"></a>  <span class="fu">geom_text_contour</span>(<span class="at">stroke =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb188-19"><a href="chapter-26-evaluating-pls-outputs.html#cb188-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+</div>
+<div id="interpreting-surface-plots-across-climates" class="section level2 hasAnchor" number="22.2">
+<h2><span class="header-section-number">22.2</span> Interpreting surface plots across climates<a href="chapter-26-evaluating-pls-outputs.html#interpreting-surface-plots-across-climates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>We’ve looked at data from a number of locations so far. How would you expect this surface plot to look like in Beijing? And how should it look in Tunisia?</strong></p>
+<p><strong>How would this surface look in Beijing?</strong></p>
+<ul>
+<li>Much wider temperature space</li>
+<li>Clear separation between:
+<ul>
+<li>Cold chilling temperatures</li>
+<li>Warm forcing temperatures</li>
+</ul></li>
+<li>Strong diagonal gradient</li>
+<li>Both chilling and forcing effects clearly visible
+<strong>→ PLS and surface plots would work good there</strong></li>
+</ul>
+<p><strong>How would this surface look in Tunisia?</strong></p>
+<ul>
+<li>Narrow and fragmented temperature space</li>
+<li>Chilling and forcing overlap strongly</li>
+<li>Large white (unobserved) regions
+<strong>→ Chilling signal could be weak or absent → PLS struggles</strong></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-25-why-pls-doesnt-always-work.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-27---the-relative-importance-of-chill-and-heat.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "lunr",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection",
+    "scroll_highlight": true
+  },
+  "toolbar": {
+    "position": "fixed"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
