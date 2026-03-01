@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 — Getting temperature data | Tree Phenology Logbook</title>
-  <meta name="description" content="Chapter 10 — Getting temperature data | Tree Phenology Logbook" />
+  <title>Chapter 10 — Getting temperature data | _main.knit</title>
+  <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 — Getting temperature data | Tree Phenology Logbook" />
+  <meta property="og:title" content="Chapter 10 — Getting temperature data | _main.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 — Getting temperature data | Tree Phenology Logbook" />
+  <meta name="twitter:title" content="Chapter 10 — Getting temperature data | _main.knit" />
   
   
   
@@ -52,8 +52,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -127,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -306,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -349,15 +348,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-4"><a href="chapter-10-getting-temperature-data.html#cb33-4" tabindex="-1"></a>                          <span class="at">time_interval=</span><span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2024</span>))</span>
 <span id="cb33-5"><a href="chapter-10-getting-temperature-data.html#cb33-5" tabindex="-1"></a><span class="fu">head</span>(station_list)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
-##   chillR_code STATION.NAME     CTRY    Lat  Long  BEGIN    END Distance
-##   &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;    &lt;dbl&gt;
-## 1 06620099999 SCHAFFHAUSEN     CH     47.7  8.62 1.96e7 2.03e7     12.6
-## 2 06671099999 STECKBORN        CH     47.7  8.98 2.01e7 2.03e7     17.4
-## 3 06623099999 SALEN-REUTENEN   CH     47.6  9.02 2.01e7 2.03e7     20.5
-## 4 06624099999 HALLAU           CH     47.7  8.47 2.01e7 2.03e7     23.3
-## 5 06679099999 AADORF-TAENIKON  CH     47.5  8.9  1.99e7 2.03e7     29.2
-## 6 10921099999 NEUHAUSEN OB ECK GM     48.0  8.9  1.97e7 2.00e7     29.8
-## # ℹ 2 more variables: Overlap_years &lt;dbl&gt;, Perc_interval_covered &lt;dbl&gt;</code></pre>
+##   chillR_code STATION.NAME     CTRY    Lat  Long    BEGIN      END Distance Overlap_years
+##   &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+## 1 06620099999 SCHAFFHAUSEN     CH     47.7  8.62 19550101 20250824     12.6         35   
+## 2 06671099999 STECKBORN        CH     47.7  8.98 20120209 20250824     17.4         12.9 
+## 3 06623099999 SALEN-REUTENEN   CH     47.6  9.02 20110124 20250824     20.5         13.9 
+## 4 06624099999 HALLAU           CH     47.7  8.47 20120124 20250824     23.3         12.9 
+## 5 06679099999 AADORF-TAENIKON  CH     47.5  8.9  19901101 20250824     29.2         34.2 
+## 6 10921099999 NEUHAUSEN OB ECK GM     48.0  8.9  19730102 19950228     29.8          5.16
+## # ℹ 1 more variable: Perc_interval_covered &lt;dbl&gt;</code></pre>
 </div>
 <div id="downloading-historical-weather-data" class="section level2 hasAnchor">
 <h2>Downloading historical weather data<a href="chapter-10-getting-temperature-data.html#downloading-historical-weather-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -366,43 +365,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-2"><a href="chapter-10-getting-temperature-data.html#cb35-2" tabindex="-1"></a>                     <span class="at">location=</span>station_list<span class="sc">$</span>chillR_code[<span class="dv">14</span>],</span>
 <span id="cb35-3"><a href="chapter-10-getting-temperature-data.html#cb35-3" tabindex="-1"></a>                     <span class="at">time_interval=</span><span class="fu">c</span>(<span class="dv">1990</span>,<span class="dv">2024</span>))</span></code></pre></div>
 <pre><code>## Loading data for 35 years from station &#39;GUETTINGEN&#39;
-## =======================================================================</code></pre>
+## ===================================================================================================</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="chapter-10-getting-temperature-data.html#cb37-1" tabindex="-1"></a><span class="fu">head</span>(weather[[<span class="dv">1</span>]])</span></code></pre></div>
-<pre><code>##      STATION       DATE LATITUDE LONGITUDE ELEVATION           NAME
-## 1 6621099999 1990-11-01     47.6  9.283333       440 GUETTINGEN, SZ
-## 2 6621099999 1990-11-02     47.6  9.283333       440 GUETTINGEN, SZ
-## 3 6621099999 1990-11-03     47.6  9.283333       440 GUETTINGEN, SZ
-## 4 6621099999 1990-11-04     47.6  9.283333       440 GUETTINGEN, SZ
-## 5 6621099999 1990-11-05     47.6  9.283333       440 GUETTINGEN, SZ
-## 6 6621099999 1990-11-06     47.6  9.283333       440 GUETTINGEN, SZ
-##   TEMP TEMP_ATTRIBUTES DEWP DEWP_ATTRIBUTES    SLP SLP_ATTRIBUTES
-## 1 45.9              15 39.6              15 1009.0             15
-## 2 41.6              15 37.5              15 1007.5             15
-## 3 40.5              16 37.5              16 1007.9             16
-## 4 38.9              15 34.4              15 1013.3             15
-## 5 37.0              16 34.7              16 1020.9             16
-## 6 37.0              16 32.7              16 1029.2             16
-##     STP STP_ATTRIBUTES VISIB VISIB_ATTRIBUTES  WDSP WDSP_ATTRIBUTES
-## 1 956.8             15 999.9                0 999.9               0
-## 2 955.0             15 999.9                0 999.9               0
-## 3 955.2             16 999.9                0 999.9               0
-## 4 960.2             15 999.9                0 999.9               0
-## 5 967.2             16 999.9                0 999.9               0
-## 6 975.0             16 999.9                0 999.9               0
-##   MXSPD  GUST  MAX MAX_ATTRIBUTES  MIN MIN_ATTRIBUTES  PRCP
-## 1 999.9 999.9 50.4              * 38.7              * 99.99
-## 2 999.9 999.9 47.5              * 36.5              * 99.99
-## 3 999.9 999.9 43.9              * 38.1              *  0.00
-## 4 999.9 999.9 42.8              * 35.4              *  0.00
-## 5 999.9 999.9 38.7              * 34.5              * 99.99
-## 6 999.9 999.9 41.4              * 34.2              *  0.00
-##   PRCP_ATTRIBUTES  SNDP FRSHTT
-## 1                 999.9  10000
-## 2                 999.9  10000
-## 3               I 999.9      0
-## 4               I 999.9      0
-## 5                 999.9  11000
-## 6               I 999.9      0</code></pre>
+<pre><code>##      STATION       DATE LATITUDE LONGITUDE ELEVATION           NAME TEMP TEMP_ATTRIBUTES DEWP
+## 1 6621099999 1990-11-01     47.6  9.283333       440 GUETTINGEN, SZ 45.9              15 39.6
+## 2 6621099999 1990-11-02     47.6  9.283333       440 GUETTINGEN, SZ 41.6              15 37.5
+## 3 6621099999 1990-11-03     47.6  9.283333       440 GUETTINGEN, SZ 40.5              16 37.5
+## 4 6621099999 1990-11-04     47.6  9.283333       440 GUETTINGEN, SZ 38.9              15 34.4
+## 5 6621099999 1990-11-05     47.6  9.283333       440 GUETTINGEN, SZ 37.0              16 34.7
+## 6 6621099999 1990-11-06     47.6  9.283333       440 GUETTINGEN, SZ 37.0              16 32.7
+##   DEWP_ATTRIBUTES    SLP SLP_ATTRIBUTES   STP STP_ATTRIBUTES VISIB VISIB_ATTRIBUTES  WDSP
+## 1              15 1009.0             15 956.8             15 999.9                0 999.9
+## 2              15 1007.5             15 955.0             15 999.9                0 999.9
+## 3              16 1007.9             16 955.2             16 999.9                0 999.9
+## 4              15 1013.3             15 960.2             15 999.9                0 999.9
+## 5              16 1020.9             16 967.2             16 999.9                0 999.9
+## 6              16 1029.2             16 975.0             16 999.9                0 999.9
+##   WDSP_ATTRIBUTES MXSPD  GUST  MAX MAX_ATTRIBUTES  MIN MIN_ATTRIBUTES  PRCP PRCP_ATTRIBUTES  SNDP
+## 1               0 999.9 999.9 50.4              * 38.7              * 99.99                 999.9
+## 2               0 999.9 999.9 47.5              * 36.5              * 99.99                 999.9
+## 3               0 999.9 999.9 43.9              * 38.1              *  0.00               I 999.9
+## 4               0 999.9 999.9 42.8              * 35.4              *  0.00               I 999.9
+## 5               0 999.9 999.9 38.7              * 34.5              * 99.99                 999.9
+## 6               0 999.9 999.9 41.4              * 34.2              *  0.00               I 999.9
+##   FRSHTT
+## 1  10000
+## 2  10000
+## 3      0
+## 4      0
+## 5  11000
+## 6      0</code></pre>
 </div>
 <div id="preparing-weather-data-for-chillr" class="section level2 hasAnchor">
 <h2>Preparing weather data for chillR<a href="chapter-10-getting-temperature-data.html#preparing-weather-data-for-chillr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -411,8 +403,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-2"><a href="chapter-10-getting-temperature-data.html#cb39-2" tabindex="-1"></a>güttingen_weather <span class="ot">&lt;-</span> cleaned_weather[[<span class="dv">1</span>]]</span>
 <span id="cb39-3"><a href="chapter-10-getting-temperature-data.html#cb39-3" tabindex="-1"></a></span>
 <span id="cb39-4"><a href="chapter-10-getting-temperature-data.html#cb39-4" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&#39;data_güttingen&#39;</span>)</span></code></pre></div>
-<pre><code>## Warning in dir.create(&quot;data_güttingen&quot;): &#39;data_güttingen&#39; existiert
-## bereits</code></pre>
+<pre><code>## Warning in dir.create(&quot;data_güttingen&quot;): &#39;data_güttingen&#39; existiert bereits</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="chapter-10-getting-temperature-data.html#cb41-1" tabindex="-1"></a><span class="fu">write.csv</span>(station_list,<span class="st">&quot;data_güttingen/station_list.csv&quot;</span>,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
 <span id="cb41-2"><a href="chapter-10-getting-temperature-data.html#cb41-2" tabindex="-1"></a><span class="fu">write.csv</span>(weather[[<span class="dv">1</span>]],<span class="st">&quot;data_güttingen/Güttingen_raw_weather.csv&quot;</span>,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
 <span id="cb41-3"><a href="chapter-10-getting-temperature-data.html#cb41-3" tabindex="-1"></a><span class="fu">write.csv</span>(cleaned_weather[[<span class="dv">1</span>]],<span class="st">&quot;data_güttingen/Güttingen_chillR_weather.csv&quot;</span>,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
@@ -484,8 +475,7 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "section",
-    "scroll_highlight": true
+    "collapse": "section"
   }
 });
 });

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 — Chill model comparison | Tree Phenology Logbook</title>
-  <meta name="description" content="Chapter 19 — Chill model comparison | Tree Phenology Logbook" />
+  <title>Chapter 19 — Chill model comparison | _main.knit</title>
+  <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 — Chill model comparison | Tree Phenology Logbook" />
+  <meta property="og:title" content="Chapter 19 — Chill model comparison | _main.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 — Chill model comparison | Tree Phenology Logbook" />
+  <meta name="twitter:title" content="Chapter 19 — Chill model comparison | _main.knit" />
   
   
   
@@ -52,8 +52,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -127,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -306,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -563,7 +562,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb112-24"><a href="chapter-19-chill-model-comparison.html#cb112-24" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">14</span>)</span>
 <span id="cb112-25"><a href="chapter-19-chill-model-comparison.html#cb112-25" tabindex="-1"></a></span>
 <span id="cb112-26"><a href="chapter-19-chill-model-comparison.html#cb112-26" tabindex="-1"></a>(p_past <span class="sc">+</span> p_future <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 </div>
 <div id="animated-time-series-of-safe-winter-chill" class="section level2 hasAnchor">
 <h2>Animated time series of Safe Winter Chill<a href="chapter-19-chill-model-comparison.html#animated-time-series-of-safe-winter-chill" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -593,169 +592,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb115-7"><a href="chapter-19-chill-model-comparison.html#cb115-7" tabindex="-1"></a>  GCM_mean</span>
 <span id="cb115-8"><a href="chapter-19-chill-model-comparison.html#cb115-8" tabindex="-1"></a>)</span>
 <span id="cb115-9"><a href="chapter-19-chill-model-comparison.html#cb115-9" tabindex="-1"></a></span>
-<span id="cb115-10"><a href="chapter-19-chill-model-comparison.html#cb115-10" tabindex="-1"></a>p_anim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb115-10"><a href="chapter-19-chill-model-comparison.html#cb115-10" tabindex="-1"></a>p_static <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb115-11"><a href="chapter-19-chill-model-comparison.html#cb115-11" tabindex="-1"></a>  TS,</span>
-<span id="cb115-12"><a href="chapter-19-chill-model-comparison.html#cb115-12" tabindex="-1"></a>  <span class="fu">aes</span>(Year, SWC, <span class="at">col =</span> <span class="fu">factor</span>(Metric, <span class="at">levels =</span> metrics))</span>
-<span id="cb115-13"><a href="chapter-19-chill-model-comparison.html#cb115-13" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb115-14"><a href="chapter-19-chill-model-comparison.html#cb115-14" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb115-15"><a href="chapter-19-chill-model-comparison.html#cb115-15" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>SSP, <span class="at">nrow =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb115-16"><a href="chapter-19-chill-model-comparison.html#cb115-16" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">labels =</span> model_labels) <span class="sc">+</span></span>
-<span id="cb115-17"><a href="chapter-19-chill-model-comparison.html#cb115-17" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb115-18"><a href="chapter-19-chill-model-comparison.html#cb115-18" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">11</span>)</span>
-<span id="cb115-19"><a href="chapter-19-chill-model-comparison.html#cb115-19" tabindex="-1"></a></span>
-<span id="cb115-20"><a href="chapter-19-chill-model-comparison.html#cb115-20" tabindex="-1"></a><span class="fu">animate</span>(</span>
-<span id="cb115-21"><a href="chapter-19-chill-model-comparison.html#cb115-21" tabindex="-1"></a>  p_anim <span class="sc">+</span> <span class="fu">transition_reveal</span>(Year),</span>
-<span id="cb115-22"><a href="chapter-19-chill-model-comparison.html#cb115-22" tabindex="-1"></a>  <span class="at">fps =</span> <span class="dv">10</span></span>
-<span id="cb115-23"><a href="chapter-19-chill-model-comparison.html#cb115-23" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## `geom_line()`: Each group consists of only one observation.
-## ℹ Do you need to adjust the group aesthetic?
-## 
-## Rendering [-----------------------------------] at 2.6 fps ~ eta: 38s
-## 
-## Rendering [&gt;----------------------------------] at 2.6 fps ~ eta: 37s
-## 
-## Rendering [&gt;----------------------------------] at 2.6 fps ~ eta: 36s
-## 
-## Rendering [=&gt;---------------------------------] at 2.6 fps ~ eta: 36s
-## 
-## Rendering [=&gt;---------------------------------] at 2.8 fps ~ eta: 34s
-## 
-## Rendering [==&gt;--------------------------------] at 2.6 fps ~ eta: 36s
-## 
-## Rendering [==&gt;--------------------------------] at 2.6 fps ~ eta: 35s
-## 
-## Rendering [===&gt;-------------------------------] at 2.6 fps ~ eta: 34s
-## 
-## Rendering [===&gt;-------------------------------] at 2.6 fps ~ eta: 33s
-## 
-## Rendering [====&gt;------------------------------] at 2.6 fps ~ eta: 33s
-## 
-## Rendering [====&gt;------------------------------] at 2.6 fps ~ eta: 32s
-## 
-## Rendering [=====&gt;-----------------------------] at 2.6 fps ~ eta: 33s
-## 
-## Rendering [=====&gt;-----------------------------] at 2.5 fps ~ eta: 33s
-## 
-## Rendering [=====&gt;-----------------------------] at 2.6 fps ~ eta: 32s
-## 
-## Rendering [======&gt;----------------------------] at 2.6 fps ~ eta: 31s
-## 
-## Rendering [=======&gt;---------------------------] at 2.6 fps ~ eta: 30s
-## 
-## Rendering [=======&gt;---------------------------] at 2.5 fps ~ eta: 30s
-## 
-## Rendering [========&gt;--------------------------] at 2.5 fps ~ eta: 30s
-## 
-## Rendering [========&gt;--------------------------] at 2.5 fps ~ eta: 29s
-## 
-## Rendering [=========&gt;-------------------------] at 2.5 fps ~ eta: 28s
-## 
-## Rendering [==========&gt;------------------------] at 2.5 fps ~ eta: 28s
-## 
-## Rendering [==========&gt;------------------------] at 2.5 fps ~ eta: 27s
-## 
-## Rendering [===========&gt;-----------------------] at 2.5 fps ~ eta: 27s
-## 
-## Rendering [===========&gt;-----------------------] at 2.4 fps ~ eta: 27s
-## 
-## Rendering [============&gt;----------------------] at 2.4 fps ~ eta: 26s
-## 
-## Rendering [=============&gt;---------------------] at 2.4 fps ~ eta: 25s
-## 
-## Rendering [=============&gt;---------------------] at 2.3 fps ~ eta: 26s
-## 
-## Rendering [==============&gt;--------------------] at 2.3 fps ~ eta: 25s
-## 
-## Rendering [==============&gt;--------------------] at 2.3 fps ~ eta: 24s
-## 
-## Rendering [===============&gt;-------------------] at 2.3 fps ~ eta: 24s
-## 
-## Rendering [===============&gt;-------------------] at 2.3 fps ~ eta: 23s
-## 
-## Rendering [================&gt;------------------] at 2.3 fps ~ eta: 22s
-## 
-## Rendering [=================&gt;-----------------] at 2.3 fps ~ eta: 22s
-## 
-## Rendering [=================&gt;-----------------] at 2.3 fps ~ eta: 21s
-## 
-## Rendering [==================&gt;----------------] at 2.3 fps ~ eta: 20s
-## 
-## Rendering [==================&gt;----------------] at 2.3 fps ~ eta: 19s
-## 
-## Rendering [===================&gt;---------------] at 2.3 fps ~ eta: 19s
-## 
-## Rendering [===================&gt;---------------] at 2.3 fps ~ eta: 18s
-## 
-## Rendering [====================&gt;--------------] at 2.3 fps ~ eta: 18s
-## 
-## Rendering [====================&gt;--------------] at 2.3 fps ~ eta: 17s
-## 
-## Rendering [=====================&gt;-------------] at 2.3 fps ~ eta: 16s
-## 
-## Rendering [=====================&gt;-------------] at 2.3 fps ~ eta: 15s
-## 
-## Rendering [======================&gt;------------] at 2.3 fps ~ eta: 15s
-## 
-## Rendering [======================&gt;------------] at 2.3 fps ~ eta: 14s
-## 
-## Rendering [=======================&gt;-----------] at 2.4 fps ~ eta: 14s
-## 
-## Rendering [=======================&gt;-----------] at 2.4 fps ~ eta: 13s
-## 
-## Rendering [========================&gt;----------] at 2.4 fps ~ eta: 12s
-## 
-## Rendering [=========================&gt;---------] at 2.4 fps ~ eta: 11s
-## 
-## Rendering [=========================&gt;---------] at 2.4 fps ~ eta: 10s
-## 
-## Rendering [==========================&gt;--------] at 2.4 fps ~ eta: 10s
-## 
-## Rendering [==========================&gt;--------] at 2.4 fps ~ eta:  9s
-## 
-## Rendering [===========================&gt;-------] at 2.4 fps ~ eta:  9s
-## 
-## Rendering [===========================&gt;-------] at 2.4 fps ~ eta:  8s
-## 
-## Rendering [============================&gt;------] at 2.4 fps ~ eta:  7s
-## 
-## Rendering [=============================&gt;-----] at 2.4 fps ~ eta:  6s
-## 
-## Rendering [=============================&gt;-----] at 2.4 fps ~ eta:  5s
-## 
-## Rendering [==============================&gt;----] at 2.4 fps ~ eta:  5s
-## 
-## Rendering [===============================&gt;---] at 2.4 fps ~ eta:  4s
-## 
-## Rendering [===============================&gt;---] at 2.5 fps ~ eta:  3s
-## 
-## Rendering [================================&gt;--] at 2.5 fps ~ eta:  3s
-## 
-## Rendering [================================&gt;--] at 2.5 fps ~ eta:  2s
-## 
-## Rendering [=================================&gt;-] at 2.5 fps ~ eta:  2s
-## 
-## Rendering [=================================&gt;-] at 2.5 fps ~ eta:  1s
-## 
-## Rendering [==================================&gt;] at 2.5 fps ~ eta:  0s
-## 
-## Rendering [===================================] at 2.5 fps ~ eta:  0s
-##                                                                      
-## </code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-112-1.gif" /><!-- --></p>
+<span id="cb115-12"><a href="chapter-19-chill-model-comparison.html#cb115-12" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb115-13"><a href="chapter-19-chill-model-comparison.html#cb115-13" tabindex="-1"></a>    <span class="at">x =</span> Year,</span>
+<span id="cb115-14"><a href="chapter-19-chill-model-comparison.html#cb115-14" tabindex="-1"></a>    <span class="at">y =</span> SWC,</span>
+<span id="cb115-15"><a href="chapter-19-chill-model-comparison.html#cb115-15" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">factor</span>(Metric, <span class="at">levels =</span> metrics),</span>
+<span id="cb115-16"><a href="chapter-19-chill-model-comparison.html#cb115-16" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">interaction</span>(SSP, Metric)   <span class="co"># &lt;- wichtig für Linien!</span></span>
+<span id="cb115-17"><a href="chapter-19-chill-model-comparison.html#cb115-17" tabindex="-1"></a>  )</span>
+<span id="cb115-18"><a href="chapter-19-chill-model-comparison.html#cb115-18" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb115-19"><a href="chapter-19-chill-model-comparison.html#cb115-19" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb115-20"><a href="chapter-19-chill-model-comparison.html#cb115-20" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>SSP, <span class="at">nrow =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb115-21"><a href="chapter-19-chill-model-comparison.html#cb115-21" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">labels =</span> model_labels) <span class="sc">+</span></span>
+<span id="cb115-22"><a href="chapter-19-chill-model-comparison.html#cb115-22" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb115-23"><a href="chapter-19-chill-model-comparison.html#cb115-23" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="dv">11</span>)</span>
+<span id="cb115-24"><a href="chapter-19-chill-model-comparison.html#cb115-24" tabindex="-1"></a></span>
+<span id="cb115-25"><a href="chapter-19-chill-model-comparison.html#cb115-25" tabindex="-1"></a>p_static</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -813,8 +666,7 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "section",
-    "scroll_highlight": true
+    "collapse": "section"
   }
 });
 });

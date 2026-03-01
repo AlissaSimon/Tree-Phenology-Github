@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 33 - Frost risk analysis | Tree Phenology Logbook</title>
-  <meta name="description" content="Chapter 33 - Frost risk analysis | Tree Phenology Logbook" />
+  <title>Chapter 33 - Frost risk analysis | _main.knit</title>
+  <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 33 - Frost risk analysis | Tree Phenology Logbook" />
+  <meta property="og:title" content="Chapter 33 - Frost risk analysis | _main.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 33 - Frost risk analysis | Tree Phenology Logbook" />
+  <meta name="twitter:title" content="Chapter 33 - Frost risk analysis | _main.knit" />
   
   
   
@@ -52,8 +52,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -127,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -306,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree Phenology Logbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -320,83 +319,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="developement-of-bloom-period" class="section level2 hasAnchor">
 <h2>Developement of bloom period<a href="chapter-33---frost-risk-analysis.html#developement-of-bloom-period" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.</strong></p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="chapter-33---frost-risk-analysis.html#cb186-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb186-2"><a href="chapter-33---frost-risk-analysis.html#cb186-2" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb186-3"><a href="chapter-33---frost-risk-analysis.html#cb186-3" tabindex="-1"></a></span>
-<span id="cb186-4"><a href="chapter-33---frost-risk-analysis.html#cb186-4" tabindex="-1"></a>Roter_raw <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
-<span id="cb186-5"><a href="chapter-33---frost-risk-analysis.html#cb186-5" tabindex="-1"></a></span>
-<span id="cb186-6"><a href="chapter-33---frost-risk-analysis.html#cb186-6" tabindex="-1"></a>Roter <span class="ot">&lt;-</span> Roter_raw <span class="sc">%&gt;%</span></span>
-<span id="cb186-7"><a href="chapter-33---frost-risk-analysis.html#cb186-7" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(First_bloom<span class="sc">:</span>Last_bloom,</span>
-<span id="cb186-8"><a href="chapter-33---frost-risk-analysis.html#cb186-8" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Stage&quot;</span>,</span>
-<span id="cb186-9"><a href="chapter-33---frost-risk-analysis.html#cb186-9" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;YEARMODA&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb186-10"><a href="chapter-33---frost-risk-analysis.html#cb186-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
-<span id="cb186-11"><a href="chapter-33---frost-risk-analysis.html#cb186-11" tabindex="-1"></a>         <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
-<span id="cb186-12"><a href="chapter-33---frost-risk-analysis.html#cb186-12" tabindex="-1"></a>         <span class="at">Day =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb186-13"><a href="chapter-33---frost-risk-analysis.html#cb186-13" tabindex="-1"></a>  <span class="fu">make_JDay</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="chapter-33---frost-risk-analysis.html#cb185-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb185-2"><a href="chapter-33---frost-risk-analysis.html#cb185-2" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb185-3"><a href="chapter-33---frost-risk-analysis.html#cb185-3" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="chapter-33---frost-risk-analysis.html#cb185-4" tabindex="-1"></a>Roter_raw <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
+<span id="cb185-5"><a href="chapter-33---frost-risk-analysis.html#cb185-5" tabindex="-1"></a></span>
+<span id="cb185-6"><a href="chapter-33---frost-risk-analysis.html#cb185-6" tabindex="-1"></a>Roter <span class="ot">&lt;-</span> Roter_raw <span class="sc">%&gt;%</span></span>
+<span id="cb185-7"><a href="chapter-33---frost-risk-analysis.html#cb185-7" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(First_bloom<span class="sc">:</span>Last_bloom,</span>
+<span id="cb185-8"><a href="chapter-33---frost-risk-analysis.html#cb185-8" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Stage&quot;</span>,</span>
+<span id="cb185-9"><a href="chapter-33---frost-risk-analysis.html#cb185-9" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;YEARMODA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb185-10"><a href="chapter-33---frost-risk-analysis.html#cb185-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb185-11"><a href="chapter-33---frost-risk-analysis.html#cb185-11" tabindex="-1"></a>         <span class="at">Month =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">5</span>, <span class="dv">6</span>)),</span>
+<span id="cb185-12"><a href="chapter-33---frost-risk-analysis.html#cb185-12" tabindex="-1"></a>         <span class="at">Day =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(YEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb185-13"><a href="chapter-33---frost-risk-analysis.html#cb185-13" tabindex="-1"></a>  <span class="fu">make_JDay</span>()</span></code></pre></div>
 <p><strong>Illustration 1 – Bloom dates over time (lines + trend)</strong></p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="chapter-33---frost-risk-analysis.html#cb187-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter, <span class="fu">aes</span>(Year, JDay, <span class="at">col =</span> Stage)) <span class="sc">+</span></span>
-<span id="cb187-2"><a href="chapter-33---frost-risk-analysis.html#cb187-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb187-3"><a href="chapter-33---frost-risk-analysis.html#cb187-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb187-4"><a href="chapter-33---frost-risk-analysis.html#cb187-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb187-5"><a href="chapter-33---frost-risk-analysis.html#cb187-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb187-6"><a href="chapter-33---frost-risk-analysis.html#cb187-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
-<span id="cb187-7"><a href="chapter-33---frost-risk-analysis.html#cb187-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Development of bloom dates – Roter Boskoop&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="chapter-33---frost-risk-analysis.html#cb186-1" tabindex="-1"></a><span class="fu">ggplot</span>(Roter, <span class="fu">aes</span>(Year, JDay, <span class="at">col =</span> Stage)) <span class="sc">+</span></span>
+<span id="cb186-2"><a href="chapter-33---frost-risk-analysis.html#cb186-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb186-3"><a href="chapter-33---frost-risk-analysis.html#cb186-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb186-4"><a href="chapter-33---frost-risk-analysis.html#cb186-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb186-5"><a href="chapter-33---frost-risk-analysis.html#cb186-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb186-6"><a href="chapter-33---frost-risk-analysis.html#cb186-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb186-7"><a href="chapter-33---frost-risk-analysis.html#cb186-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Development of bloom dates – Roter Boskoop&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <p><strong>Illustration 2 – Bloom duration ribbon</strong></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chapter-33---frost-risk-analysis.html#cb189-1" tabindex="-1"></a>Ribbon_Roter <span class="ot">&lt;-</span> Roter <span class="sc">%&gt;%</span></span>
-<span id="cb189-2"><a href="chapter-33---frost-risk-analysis.html#cb189-2" tabindex="-1"></a>  <span class="fu">select</span>(Year, Stage, JDay) <span class="sc">%&gt;%</span></span>
-<span id="cb189-3"><a href="chapter-33---frost-risk-analysis.html#cb189-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Stage, <span class="at">values_from =</span> JDay)</span>
-<span id="cb189-4"><a href="chapter-33---frost-risk-analysis.html#cb189-4" tabindex="-1"></a></span>
-<span id="cb189-5"><a href="chapter-33---frost-risk-analysis.html#cb189-5" tabindex="-1"></a><span class="fu">ggplot</span>(Ribbon_Roter, <span class="fu">aes</span>(Year)) <span class="sc">+</span></span>
-<span id="cb189-6"><a href="chapter-33---frost-risk-analysis.html#cb189-6" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> First_bloom,</span>
-<span id="cb189-7"><a href="chapter-33---frost-risk-analysis.html#cb189-7" tabindex="-1"></a>                  <span class="at">ymax =</span> Last_bloom),</span>
-<span id="cb189-8"><a href="chapter-33---frost-risk-analysis.html#cb189-8" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
-<span id="cb189-9"><a href="chapter-33---frost-risk-analysis.html#cb189-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Full_bloom), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb189-10"><a href="chapter-33---frost-risk-analysis.html#cb189-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb189-11"><a href="chapter-33---frost-risk-analysis.html#cb189-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb189-12"><a href="chapter-33---frost-risk-analysis.html#cb189-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
-<span id="cb189-13"><a href="chapter-33---frost-risk-analysis.html#cb189-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bloom period duration – Roter Boskoop&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="chapter-33---frost-risk-analysis.html#cb188-1" tabindex="-1"></a>Ribbon_Roter <span class="ot">&lt;-</span> Roter <span class="sc">%&gt;%</span></span>
+<span id="cb188-2"><a href="chapter-33---frost-risk-analysis.html#cb188-2" tabindex="-1"></a>  <span class="fu">select</span>(Year, Stage, JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb188-3"><a href="chapter-33---frost-risk-analysis.html#cb188-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Stage, <span class="at">values_from =</span> JDay)</span>
+<span id="cb188-4"><a href="chapter-33---frost-risk-analysis.html#cb188-4" tabindex="-1"></a></span>
+<span id="cb188-5"><a href="chapter-33---frost-risk-analysis.html#cb188-5" tabindex="-1"></a><span class="fu">ggplot</span>(Ribbon_Roter, <span class="fu">aes</span>(Year)) <span class="sc">+</span></span>
+<span id="cb188-6"><a href="chapter-33---frost-risk-analysis.html#cb188-6" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> First_bloom,</span>
+<span id="cb188-7"><a href="chapter-33---frost-risk-analysis.html#cb188-7" tabindex="-1"></a>                  <span class="at">ymax =</span> Last_bloom),</span>
+<span id="cb188-8"><a href="chapter-33---frost-risk-analysis.html#cb188-8" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-9"><a href="chapter-33---frost-risk-analysis.html#cb188-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Full_bloom), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb188-10"><a href="chapter-33---frost-risk-analysis.html#cb188-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb188-11"><a href="chapter-33---frost-risk-analysis.html#cb188-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-12"><a href="chapter-33---frost-risk-analysis.html#cb188-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-13"><a href="chapter-33---frost-risk-analysis.html#cb188-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bloom period duration – Roter Boskoop&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <p><strong>Illustration 3 – Bloom timing distribution (boxplots by decade)</strong></p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="chapter-33---frost-risk-analysis.html#cb190-1" tabindex="-1"></a>Roter<span class="sc">$</span>Decade <span class="ot">&lt;-</span> <span class="fu">floor</span>(Roter<span class="sc">$</span>Year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span></span>
-<span id="cb190-2"><a href="chapter-33---frost-risk-analysis.html#cb190-2" tabindex="-1"></a></span>
-<span id="cb190-3"><a href="chapter-33---frost-risk-analysis.html#cb190-3" tabindex="-1"></a><span class="fu">ggplot</span>(Roter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stage <span class="sc">==</span> <span class="st">&quot;Full_bloom&quot;</span>),</span>
-<span id="cb190-4"><a href="chapter-33---frost-risk-analysis.html#cb190-4" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="fu">factor</span>(Decade), JDay)) <span class="sc">+</span></span>
-<span id="cb190-5"><a href="chapter-33---frost-risk-analysis.html#cb190-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb190-6"><a href="chapter-33---frost-risk-analysis.html#cb190-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb190-7"><a href="chapter-33---frost-risk-analysis.html#cb190-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day of full bloom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb190-8"><a href="chapter-33---frost-risk-analysis.html#cb190-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Decade&quot;</span>) <span class="sc">+</span></span>
-<span id="cb190-9"><a href="chapter-33---frost-risk-analysis.html#cb190-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of full bloom dates by decade&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chapter-33---frost-risk-analysis.html#cb189-1" tabindex="-1"></a>Roter<span class="sc">$</span>Decade <span class="ot">&lt;-</span> <span class="fu">floor</span>(Roter<span class="sc">$</span>Year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb189-2"><a href="chapter-33---frost-risk-analysis.html#cb189-2" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="chapter-33---frost-risk-analysis.html#cb189-3" tabindex="-1"></a><span class="fu">ggplot</span>(Roter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Stage <span class="sc">==</span> <span class="st">&quot;Full_bloom&quot;</span>),</span>
+<span id="cb189-4"><a href="chapter-33---frost-risk-analysis.html#cb189-4" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="fu">factor</span>(Decade), JDay)) <span class="sc">+</span></span>
+<span id="cb189-5"><a href="chapter-33---frost-risk-analysis.html#cb189-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb189-6"><a href="chapter-33---frost-risk-analysis.html#cb189-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb189-7"><a href="chapter-33---frost-risk-analysis.html#cb189-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian day of full bloom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb189-8"><a href="chapter-33---frost-risk-analysis.html#cb189-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Decade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb189-9"><a href="chapter-33---frost-risk-analysis.html#cb189-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of full bloom dates by decade&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 </div>
 <div id="occurence-of-frost-events" class="section level2 hasAnchor">
 <h2>Occurence of frost events<a href="chapter-33---frost-risk-analysis.html#occurence-of-frost-events" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.</strong></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="chapter-33---frost-risk-analysis.html#cb191-1" tabindex="-1"></a>CKA_weather <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
-<span id="cb191-2"><a href="chapter-33---frost-risk-analysis.html#cb191-2" tabindex="-1"></a></span>
-<span id="cb191-3"><a href="chapter-33---frost-risk-analysis.html#cb191-3" tabindex="-1"></a>frost_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb191-4"><a href="chapter-33---frost-risk-analysis.html#cb191-4" tabindex="-1"></a>  <span class="at">lower =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">0</span>),</span>
-<span id="cb191-5"><a href="chapter-33---frost-risk-analysis.html#cb191-5" tabindex="-1"></a>  <span class="at">upper =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
-<span id="cb191-6"><a href="chapter-33---frost-risk-analysis.html#cb191-6" tabindex="-1"></a>  <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb191-7"><a href="chapter-33---frost-risk-analysis.html#cb191-7" tabindex="-1"></a>)</span>
-<span id="cb191-8"><a href="chapter-33---frost-risk-analysis.html#cb191-8" tabindex="-1"></a></span>
-<span id="cb191-9"><a href="chapter-33---frost-risk-analysis.html#cb191-9" tabindex="-1"></a>frost_model <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb191-10"><a href="chapter-33---frost-risk-analysis.html#cb191-10" tabindex="-1"></a>  <span class="fu">step_model</span>(x, frost_df)</span>
-<span id="cb191-11"><a href="chapter-33---frost-risk-analysis.html#cb191-11" tabindex="-1"></a></span>
-<span id="cb191-12"><a href="chapter-33---frost-risk-analysis.html#cb191-12" tabindex="-1"></a>hourly <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(CKA_weather, <span class="at">latitude =</span> <span class="fl">50.6</span>)</span>
-<span id="cb191-13"><a href="chapter-33---frost-risk-analysis.html#cb191-13" tabindex="-1"></a></span>
-<span id="cb191-14"><a href="chapter-33---frost-risk-analysis.html#cb191-14" tabindex="-1"></a>frost <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(hourly,</span>
-<span id="cb191-15"><a href="chapter-33---frost-risk-analysis.html#cb191-15" tabindex="-1"></a>                      <span class="at">models =</span> <span class="fu">c</span>(<span class="at">frost =</span> frost_model))</span>
-<span id="cb191-16"><a href="chapter-33---frost-risk-analysis.html#cb191-16" tabindex="-1"></a></span>
-<span id="cb191-17"><a href="chapter-33---frost-risk-analysis.html#cb191-17" tabindex="-1"></a><span class="fu">ggplot</span>(frost, <span class="fu">aes</span>(End_year, frost)) <span class="sc">+</span></span>
-<span id="cb191-18"><a href="chapter-33---frost-risk-analysis.html#cb191-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb191-19"><a href="chapter-33---frost-risk-analysis.html#cb191-19" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb191-20"><a href="chapter-33---frost-risk-analysis.html#cb191-20" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb191-21"><a href="chapter-33---frost-risk-analysis.html#cb191-21" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frost hours per year&quot;</span>) <span class="sc">+</span></span>
-<span id="cb191-22"><a href="chapter-33---frost-risk-analysis.html#cb191-22" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="chapter-33---frost-risk-analysis.html#cb190-1" tabindex="-1"></a>CKA_weather <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb190-2"><a href="chapter-33---frost-risk-analysis.html#cb190-2" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="chapter-33---frost-risk-analysis.html#cb190-3" tabindex="-1"></a>frost_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb190-4"><a href="chapter-33---frost-risk-analysis.html#cb190-4" tabindex="-1"></a>  <span class="at">lower =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">0</span>),</span>
+<span id="cb190-5"><a href="chapter-33---frost-risk-analysis.html#cb190-5" tabindex="-1"></a>  <span class="at">upper =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
+<span id="cb190-6"><a href="chapter-33---frost-risk-analysis.html#cb190-6" tabindex="-1"></a>  <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb190-7"><a href="chapter-33---frost-risk-analysis.html#cb190-7" tabindex="-1"></a>)</span>
+<span id="cb190-8"><a href="chapter-33---frost-risk-analysis.html#cb190-8" tabindex="-1"></a></span>
+<span id="cb190-9"><a href="chapter-33---frost-risk-analysis.html#cb190-9" tabindex="-1"></a>frost_model <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb190-10"><a href="chapter-33---frost-risk-analysis.html#cb190-10" tabindex="-1"></a>  <span class="fu">step_model</span>(x, frost_df)</span>
+<span id="cb190-11"><a href="chapter-33---frost-risk-analysis.html#cb190-11" tabindex="-1"></a></span>
+<span id="cb190-12"><a href="chapter-33---frost-risk-analysis.html#cb190-12" tabindex="-1"></a>hourly <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(CKA_weather, <span class="at">latitude =</span> <span class="fl">50.6</span>)</span>
+<span id="cb190-13"><a href="chapter-33---frost-risk-analysis.html#cb190-13" tabindex="-1"></a></span>
+<span id="cb190-14"><a href="chapter-33---frost-risk-analysis.html#cb190-14" tabindex="-1"></a>frost <span class="ot">&lt;-</span> <span class="fu">tempResponse</span>(hourly,</span>
+<span id="cb190-15"><a href="chapter-33---frost-risk-analysis.html#cb190-15" tabindex="-1"></a>                      <span class="at">models =</span> <span class="fu">c</span>(<span class="at">frost =</span> frost_model))</span>
+<span id="cb190-16"><a href="chapter-33---frost-risk-analysis.html#cb190-16" tabindex="-1"></a></span>
+<span id="cb190-17"><a href="chapter-33---frost-risk-analysis.html#cb190-17" tabindex="-1"></a><span class="fu">ggplot</span>(frost, <span class="fu">aes</span>(End_year, frost)) <span class="sc">+</span></span>
+<span id="cb190-18"><a href="chapter-33---frost-risk-analysis.html#cb190-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb190-19"><a href="chapter-33---frost-risk-analysis.html#cb190-19" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb190-20"><a href="chapter-33---frost-risk-analysis.html#cb190-20" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb190-21"><a href="chapter-33---frost-risk-analysis.html#cb190-21" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frost hours per year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-22"><a href="chapter-33---frost-risk-analysis.html#cb190-22" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <ul>
 <li>The plot shows how many frost hours occurred each year at Klein-Altendorf since 1958</li>
 <li>There is a lot of variation between years, with some years having many frost hours and others having fewer</li>
@@ -410,62 +409,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="spring-frost-and-frost-events" class="section level2 hasAnchor">
 <h2>Spring frost and frost events<a href="chapter-33---frost-risk-analysis.html#spring-frost-and-frost-events" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop’.</strong></p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="chapter-33---frost-risk-analysis.html#cb193-1" tabindex="-1"></a>frost_model_no_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb193-2"><a href="chapter-33---frost-risk-analysis.html#cb193-2" tabindex="-1"></a>  <span class="fu">step_model</span>(x, frost_df, <span class="at">summ =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb193-3"><a href="chapter-33---frost-risk-analysis.html#cb193-3" tabindex="-1"></a></span>
-<span id="cb193-4"><a href="chapter-33---frost-risk-analysis.html#cb193-4" tabindex="-1"></a>hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>frost <span class="ot">&lt;-</span> <span class="fu">frost_model_no_summ</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp)</span>
-<span id="cb193-5"><a href="chapter-33---frost-risk-analysis.html#cb193-5" tabindex="-1"></a></span>
-<span id="cb193-6"><a href="chapter-33---frost-risk-analysis.html#cb193-6" tabindex="-1"></a>Daily_frost_hours <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>frost,</span>
-<span id="cb193-7"><a href="chapter-33---frost-risk-analysis.html#cb193-7" tabindex="-1"></a>                               <span class="at">by =</span> <span class="fu">list</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>YEARMODA),</span>
-<span id="cb193-8"><a href="chapter-33---frost-risk-analysis.html#cb193-8" tabindex="-1"></a>                               <span class="at">FUN =</span> sum)</span>
-<span id="cb193-9"><a href="chapter-33---frost-risk-analysis.html#cb193-9" tabindex="-1"></a></span>
-<span id="cb193-10"><a href="chapter-33---frost-risk-analysis.html#cb193-10" tabindex="-1"></a>Daily_frost <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(CKA_weather)</span>
-<span id="cb193-11"><a href="chapter-33---frost-risk-analysis.html#cb193-11" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Frost_hours <span class="ot">&lt;-</span> Daily_frost_hours<span class="sc">$</span>x</span>
-<span id="cb193-12"><a href="chapter-33---frost-risk-analysis.html#cb193-12" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Frost_hours[Daily_frost<span class="sc">$</span>Frost_hours <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb193-13"><a href="chapter-33---frost-risk-analysis.html#cb193-13" tabindex="-1"></a></span>
-<span id="cb193-14"><a href="chapter-33---frost-risk-analysis.html#cb193-14" tabindex="-1"></a>Ribbon_Roter <span class="ot">&lt;-</span> Roter <span class="sc">%&gt;%</span></span>
-<span id="cb193-15"><a href="chapter-33---frost-risk-analysis.html#cb193-15" tabindex="-1"></a>  <span class="fu">select</span>(Year, Stage, JDay) <span class="sc">%&gt;%</span></span>
-<span id="cb193-16"><a href="chapter-33---frost-risk-analysis.html#cb193-16" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Stage, <span class="at">values_from =</span> JDay)</span>
-<span id="cb193-17"><a href="chapter-33---frost-risk-analysis.html#cb193-17" tabindex="-1"></a></span>
-<span id="cb193-18"><a href="chapter-33---frost-risk-analysis.html#cb193-18" tabindex="-1"></a><span class="fu">ggplot</span>(Ribbon_Roter, <span class="fu">aes</span>(Year)) <span class="sc">+</span></span>
-<span id="cb193-19"><a href="chapter-33---frost-risk-analysis.html#cb193-19" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> First_bloom,</span>
-<span id="cb193-20"><a href="chapter-33---frost-risk-analysis.html#cb193-20" tabindex="-1"></a>                  <span class="at">ymax =</span> Last_bloom),</span>
-<span id="cb193-21"><a href="chapter-33---frost-risk-analysis.html#cb193-21" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
-<span id="cb193-22"><a href="chapter-33---frost-risk-analysis.html#cb193-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Full_bloom)) <span class="sc">+</span></span>
-<span id="cb193-23"><a href="chapter-33---frost-risk-analysis.html#cb193-23" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> Daily_frost,</span>
-<span id="cb193-24"><a href="chapter-33---frost-risk-analysis.html#cb193-24" tabindex="-1"></a>             <span class="fu">aes</span>(Year, JDay, <span class="at">size =</span> Frost_hours),</span>
-<span id="cb193-25"><a href="chapter-33---frost-risk-analysis.html#cb193-25" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb193-26"><a href="chapter-33---frost-risk-analysis.html#cb193-26" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb193-27"><a href="chapter-33---frost-risk-analysis.html#cb193-27" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">75</span>, <span class="dv">140</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="chapter-33---frost-risk-analysis.html#cb192-1" tabindex="-1"></a>frost_model_no_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb192-2"><a href="chapter-33---frost-risk-analysis.html#cb192-2" tabindex="-1"></a>  <span class="fu">step_model</span>(x, frost_df, <span class="at">summ =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb192-3"><a href="chapter-33---frost-risk-analysis.html#cb192-3" tabindex="-1"></a></span>
+<span id="cb192-4"><a href="chapter-33---frost-risk-analysis.html#cb192-4" tabindex="-1"></a>hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>frost <span class="ot">&lt;-</span> <span class="fu">frost_model_no_summ</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp)</span>
+<span id="cb192-5"><a href="chapter-33---frost-risk-analysis.html#cb192-5" tabindex="-1"></a></span>
+<span id="cb192-6"><a href="chapter-33---frost-risk-analysis.html#cb192-6" tabindex="-1"></a>Daily_frost_hours <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>frost,</span>
+<span id="cb192-7"><a href="chapter-33---frost-risk-analysis.html#cb192-7" tabindex="-1"></a>                               <span class="at">by =</span> <span class="fu">list</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>YEARMODA),</span>
+<span id="cb192-8"><a href="chapter-33---frost-risk-analysis.html#cb192-8" tabindex="-1"></a>                               <span class="at">FUN =</span> sum)</span>
+<span id="cb192-9"><a href="chapter-33---frost-risk-analysis.html#cb192-9" tabindex="-1"></a></span>
+<span id="cb192-10"><a href="chapter-33---frost-risk-analysis.html#cb192-10" tabindex="-1"></a>Daily_frost <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(CKA_weather)</span>
+<span id="cb192-11"><a href="chapter-33---frost-risk-analysis.html#cb192-11" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Frost_hours <span class="ot">&lt;-</span> Daily_frost_hours<span class="sc">$</span>x</span>
+<span id="cb192-12"><a href="chapter-33---frost-risk-analysis.html#cb192-12" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Frost_hours[Daily_frost<span class="sc">$</span>Frost_hours <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb192-13"><a href="chapter-33---frost-risk-analysis.html#cb192-13" tabindex="-1"></a></span>
+<span id="cb192-14"><a href="chapter-33---frost-risk-analysis.html#cb192-14" tabindex="-1"></a>Ribbon_Roter <span class="ot">&lt;-</span> Roter <span class="sc">%&gt;%</span></span>
+<span id="cb192-15"><a href="chapter-33---frost-risk-analysis.html#cb192-15" tabindex="-1"></a>  <span class="fu">select</span>(Year, Stage, JDay) <span class="sc">%&gt;%</span></span>
+<span id="cb192-16"><a href="chapter-33---frost-risk-analysis.html#cb192-16" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Stage, <span class="at">values_from =</span> JDay)</span>
+<span id="cb192-17"><a href="chapter-33---frost-risk-analysis.html#cb192-17" tabindex="-1"></a></span>
+<span id="cb192-18"><a href="chapter-33---frost-risk-analysis.html#cb192-18" tabindex="-1"></a><span class="fu">ggplot</span>(Ribbon_Roter, <span class="fu">aes</span>(Year)) <span class="sc">+</span></span>
+<span id="cb192-19"><a href="chapter-33---frost-risk-analysis.html#cb192-19" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> First_bloom,</span>
+<span id="cb192-20"><a href="chapter-33---frost-risk-analysis.html#cb192-20" tabindex="-1"></a>                  <span class="at">ymax =</span> Last_bloom),</span>
+<span id="cb192-21"><a href="chapter-33---frost-risk-analysis.html#cb192-21" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
+<span id="cb192-22"><a href="chapter-33---frost-risk-analysis.html#cb192-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Full_bloom)) <span class="sc">+</span></span>
+<span id="cb192-23"><a href="chapter-33---frost-risk-analysis.html#cb192-23" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> Daily_frost,</span>
+<span id="cb192-24"><a href="chapter-33---frost-risk-analysis.html#cb192-24" tabindex="-1"></a>             <span class="fu">aes</span>(Year, JDay, <span class="at">size =</span> Frost_hours),</span>
+<span id="cb192-25"><a href="chapter-33---frost-risk-analysis.html#cb192-25" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb192-26"><a href="chapter-33---frost-risk-analysis.html#cb192-26" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb192-27"><a href="chapter-33---frost-risk-analysis.html#cb192-27" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">75</span>, <span class="dv">140</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 </div>
 <div id="trend-of-risk" class="section level2 hasAnchor">
 <h2>Trend of risk<a href="chapter-33---frost-risk-analysis.html#trend-of-risk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend</strong></p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="chapter-33---frost-risk-analysis.html#cb194-1" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase <span class="ot">&lt;-</span> <span class="st">&quot;Before bloom&quot;</span></span>
-<span id="cb194-2"><a href="chapter-33---frost-risk-analysis.html#cb194-2" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase[</span>
-<span id="cb194-3"><a href="chapter-33---frost-risk-analysis.html#cb194-3" tabindex="-1"></a>  Daily_frost<span class="sc">$</span>JDay <span class="sc">&gt;=</span> Ribbon_Roter<span class="sc">$</span>First_bloom[</span>
-<span id="cb194-4"><a href="chapter-33---frost-risk-analysis.html#cb194-4" tabindex="-1"></a>    <span class="fu">match</span>(Daily_frost<span class="sc">$</span>Year, Ribbon_Roter<span class="sc">$</span>Year)</span>
-<span id="cb194-5"><a href="chapter-33---frost-risk-analysis.html#cb194-5" tabindex="-1"></a>  ]] <span class="ot">&lt;-</span> <span class="st">&quot;During bloom&quot;</span></span>
-<span id="cb194-6"><a href="chapter-33---frost-risk-analysis.html#cb194-6" tabindex="-1"></a></span>
-<span id="cb194-7"><a href="chapter-33---frost-risk-analysis.html#cb194-7" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase[</span>
-<span id="cb194-8"><a href="chapter-33---frost-risk-analysis.html#cb194-8" tabindex="-1"></a>  Daily_frost<span class="sc">$</span>JDay <span class="sc">&gt;</span></span>
-<span id="cb194-9"><a href="chapter-33---frost-risk-analysis.html#cb194-9" tabindex="-1"></a>    Ribbon_Roter<span class="sc">$</span>Last_bloom[</span>
-<span id="cb194-10"><a href="chapter-33---frost-risk-analysis.html#cb194-10" tabindex="-1"></a>      <span class="fu">match</span>(Daily_frost<span class="sc">$</span>Year, Ribbon_Roter<span class="sc">$</span>Year)</span>
-<span id="cb194-11"><a href="chapter-33---frost-risk-analysis.html#cb194-11" tabindex="-1"></a>    ]] <span class="ot">&lt;-</span> <span class="st">&quot;After bloom&quot;</span></span>
-<span id="cb194-12"><a href="chapter-33---frost-risk-analysis.html#cb194-12" tabindex="-1"></a></span>
-<span id="cb194-13"><a href="chapter-33---frost-risk-analysis.html#cb194-13" tabindex="-1"></a>Bloom_frost <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Daily_frost<span class="sc">$</span>Frost_hours,</span>
-<span id="cb194-14"><a href="chapter-33---frost-risk-analysis.html#cb194-14" tabindex="-1"></a>                         <span class="at">by =</span> <span class="fu">list</span>(Daily_frost<span class="sc">$</span>Year,</span>
-<span id="cb194-15"><a href="chapter-33---frost-risk-analysis.html#cb194-15" tabindex="-1"></a>                                   Daily_frost<span class="sc">$</span>Bloom_phase),</span>
-<span id="cb194-16"><a href="chapter-33---frost-risk-analysis.html#cb194-16" tabindex="-1"></a>                         <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb194-17"><a href="chapter-33---frost-risk-analysis.html#cb194-17" tabindex="-1"></a></span>
-<span id="cb194-18"><a href="chapter-33---frost-risk-analysis.html#cb194-18" tabindex="-1"></a>DuringBloom <span class="ot">&lt;-</span> Bloom_frost[</span>
-<span id="cb194-19"><a href="chapter-33---frost-risk-analysis.html#cb194-19" tabindex="-1"></a>  Bloom_frost<span class="sc">$</span>Group<span class="fl">.2</span> <span class="sc">==</span> <span class="st">&quot;During bloom&quot;</span>,]</span>
-<span id="cb194-20"><a href="chapter-33---frost-risk-analysis.html#cb194-20" tabindex="-1"></a></span>
-<span id="cb194-21"><a href="chapter-33---frost-risk-analysis.html#cb194-21" tabindex="-1"></a><span class="fu">library</span>(Kendall)</span>
-<span id="cb194-22"><a href="chapter-33---frost-risk-analysis.html#cb194-22" tabindex="-1"></a><span class="fu">Kendall</span>(DuringBloom<span class="sc">$</span>Group<span class="fl">.1</span>, DuringBloom<span class="sc">$</span>x)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="chapter-33---frost-risk-analysis.html#cb193-1" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase <span class="ot">&lt;-</span> <span class="st">&quot;Before bloom&quot;</span></span>
+<span id="cb193-2"><a href="chapter-33---frost-risk-analysis.html#cb193-2" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase[</span>
+<span id="cb193-3"><a href="chapter-33---frost-risk-analysis.html#cb193-3" tabindex="-1"></a>  Daily_frost<span class="sc">$</span>JDay <span class="sc">&gt;=</span> Ribbon_Roter<span class="sc">$</span>First_bloom[</span>
+<span id="cb193-4"><a href="chapter-33---frost-risk-analysis.html#cb193-4" tabindex="-1"></a>    <span class="fu">match</span>(Daily_frost<span class="sc">$</span>Year, Ribbon_Roter<span class="sc">$</span>Year)</span>
+<span id="cb193-5"><a href="chapter-33---frost-risk-analysis.html#cb193-5" tabindex="-1"></a>  ]] <span class="ot">&lt;-</span> <span class="st">&quot;During bloom&quot;</span></span>
+<span id="cb193-6"><a href="chapter-33---frost-risk-analysis.html#cb193-6" tabindex="-1"></a></span>
+<span id="cb193-7"><a href="chapter-33---frost-risk-analysis.html#cb193-7" tabindex="-1"></a>Daily_frost<span class="sc">$</span>Bloom_phase[</span>
+<span id="cb193-8"><a href="chapter-33---frost-risk-analysis.html#cb193-8" tabindex="-1"></a>  Daily_frost<span class="sc">$</span>JDay <span class="sc">&gt;</span></span>
+<span id="cb193-9"><a href="chapter-33---frost-risk-analysis.html#cb193-9" tabindex="-1"></a>    Ribbon_Roter<span class="sc">$</span>Last_bloom[</span>
+<span id="cb193-10"><a href="chapter-33---frost-risk-analysis.html#cb193-10" tabindex="-1"></a>      <span class="fu">match</span>(Daily_frost<span class="sc">$</span>Year, Ribbon_Roter<span class="sc">$</span>Year)</span>
+<span id="cb193-11"><a href="chapter-33---frost-risk-analysis.html#cb193-11" tabindex="-1"></a>    ]] <span class="ot">&lt;-</span> <span class="st">&quot;After bloom&quot;</span></span>
+<span id="cb193-12"><a href="chapter-33---frost-risk-analysis.html#cb193-12" tabindex="-1"></a></span>
+<span id="cb193-13"><a href="chapter-33---frost-risk-analysis.html#cb193-13" tabindex="-1"></a>Bloom_frost <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Daily_frost<span class="sc">$</span>Frost_hours,</span>
+<span id="cb193-14"><a href="chapter-33---frost-risk-analysis.html#cb193-14" tabindex="-1"></a>                         <span class="at">by =</span> <span class="fu">list</span>(Daily_frost<span class="sc">$</span>Year,</span>
+<span id="cb193-15"><a href="chapter-33---frost-risk-analysis.html#cb193-15" tabindex="-1"></a>                                   Daily_frost<span class="sc">$</span>Bloom_phase),</span>
+<span id="cb193-16"><a href="chapter-33---frost-risk-analysis.html#cb193-16" tabindex="-1"></a>                         <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb193-17"><a href="chapter-33---frost-risk-analysis.html#cb193-17" tabindex="-1"></a></span>
+<span id="cb193-18"><a href="chapter-33---frost-risk-analysis.html#cb193-18" tabindex="-1"></a>DuringBloom <span class="ot">&lt;-</span> Bloom_frost[</span>
+<span id="cb193-19"><a href="chapter-33---frost-risk-analysis.html#cb193-19" tabindex="-1"></a>  Bloom_frost<span class="sc">$</span>Group<span class="fl">.2</span> <span class="sc">==</span> <span class="st">&quot;During bloom&quot;</span>,]</span>
+<span id="cb193-20"><a href="chapter-33---frost-risk-analysis.html#cb193-20" tabindex="-1"></a></span>
+<span id="cb193-21"><a href="chapter-33---frost-risk-analysis.html#cb193-21" tabindex="-1"></a><span class="fu">library</span>(Kendall)</span>
+<span id="cb193-22"><a href="chapter-33---frost-risk-analysis.html#cb193-22" tabindex="-1"></a><span class="fu">Kendall</span>(DuringBloom<span class="sc">$</span>Group<span class="fl">.1</span>, DuringBloom<span class="sc">$</span>x)</span></code></pre></div>
 <pre><code>## tau = 0.0333, 2-sided pvalue =0.74038</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="chapter-33---frost-risk-analysis.html#cb196-1" tabindex="-1"></a><span class="fu">lm</span>(DuringBloom<span class="sc">$</span>x <span class="sc">~</span> DuringBloom<span class="sc">$</span>Group<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="chapter-33---frost-risk-analysis.html#cb195-1" tabindex="-1"></a><span class="fu">lm</span>(DuringBloom<span class="sc">$</span>x <span class="sc">~</span> DuringBloom<span class="sc">$</span>Group<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = DuringBloom$x ~ DuringBloom$Group.1)
@@ -536,8 +535,7 @@ gitbook.start({
     "options": null
   },
   "toc": {
-    "collapse": "section",
-    "scroll_highlight": true
+    "collapse": "section"
   }
 });
 });
